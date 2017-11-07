@@ -47,6 +47,6 @@ class Student(User):
     def __init__(self, login, password, name, surname, phone_number):
         super().__init__(login, password, name, surname, phone_number)
         self.rank = "student"
-
-ziomus = Mentor("ziomus", "ziomus", "Ziomus", "Ziomus", "r435234523")
-print(ziomus)
+#
+# ziomus = Mentor("ziomus", "ziomus", "Ziomus", "Ziomus", "r435234523")
+# print(ziomus)
