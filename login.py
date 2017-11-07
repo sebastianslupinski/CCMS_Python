@@ -1,3 +1,4 @@
+
 import getpass
 
 class User:
@@ -33,5 +34,7 @@ def read_csv():
             data = line.split(",")
             user_list.append(User(data[0], data[1], data[2]))
 
-read_csv()
-login()
+# read_csv()
+# login()
+hu = User(*[2,3,4])
+print(hu)
