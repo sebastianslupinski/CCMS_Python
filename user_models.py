@@ -7,7 +7,7 @@ class User:
         self.name = name
         self.phone_number = phone_number
         self.surname = surname
-        self.email = name + '.' + surname + '@codecool.com'
+        self.email = name.lower() + '.' + surname.lower() + '@codecool.com'
 
     def __str__(self):
 
@@ -47,3 +47,6 @@ class Student(User):
     def __init__(self, login, password, name, surname, phone_number):
         super().__init__(login, password, name, surname, phone_number)
         self.rank = "student"
+
+ziomus = Mentor("ziomus", "ziomus", "Ziomus", "Ziomus", "r435234523")
+print(ziomus)
