@@ -1,1 +1,0 @@
-rank,login,password,name,surname,phone_number,email,None
