@@ -15,3 +15,10 @@ class ViewMentor:
     def get_user_input(message):
         return input(message)
 
+    @classmethod
+    def select_edit_option(cls):
+        edit_commands = ('Change name', 'Change surname', 'Change password', 'Change phone number')
+        for option in edit_commands:
+            print(str(edit_commands.index(option) + 1) + "----->" + option)
+        choosen_option = cls.get_user_input('Choose: ')
+        return choosen_option

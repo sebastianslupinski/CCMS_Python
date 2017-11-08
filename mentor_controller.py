@@ -21,8 +21,15 @@ class MentorController:
     @staticmethod
     def edit_student(UserDataBase):
         user = UserDataBase.pick_user_by_login(ViewMentor.get_user_input('Input login of student: '))
-        user.change_attribute_value()
-
+        edit_option = ViewMentor.select_edit_option()
+        if edit_option == '1':
+            user.change_attribute_value('name', ViewMentor.get_user_input('Input new name: '))
+        elif edit_option == '2':
+            user.change_attribute_value('surname', ViewMentor.get_user_input('Input new surname: '))
+        elif edit_option == '3':
+            user.change_attribute_value('password', ViewMentor.get_user_input('Input new password: '))
+        elif edit_option == '4':
+            user.change_attribute_value('phone_number', ViewMentor.get_user_input('Input new phone number: '))
 
 u = UserDataBase()
 print(MentorController.edit_student(u))
