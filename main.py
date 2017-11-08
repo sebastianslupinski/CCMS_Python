@@ -8,6 +8,14 @@ import getpass
 
 class RootController:
 
+    def __init__(self):
+        self.user_database = UserDataBase()
+        self.view = RootControllerView
+        self.student = StudentController()
+        self.mentor = MentorController()
+        self.employee = EmployeeController()
+        self.manager = ManagerController()
+
     def login(self):
         self.view.greet_user()
         while True:
@@ -18,19 +26,20 @@ class RootController:
                 if user.password == password:
                     return user
 
-
-    def __init__(self):
-        self.user_database = UserDataBase()
-        self.view = RootControllerView
-        self.student = StudentController()
-        self.mentor = MentorController()
-        self.employee = EmployeeController()
-        self.manager = ManagerController()
-
-    def start(self):
+    def check_rank(self):
         user_rank = self.login().rank
         if user_rank == "manager":
             user = self.manager
+        elif user_rank == "mentor":
+            user = self.mentor
+        elif user_rank == "student":
+            user = self.student
+        elif user_rank == "employee":
+            user = self.employee
+        return user
+
+    def start(self):
+        user = self.check_rank()
         user.display_menu()
         
 

@@ -2,7 +2,6 @@ class ViewMentor:
 
     @staticmethod
     def display_menu():
-
         print("")
 
     @staticmethod
