@@ -12,4 +12,4 @@ class EmployeesContainer:
 
 
     def remove_employee(self, index):
-        self.mentor_list.pop(index)
+        self.employee_list.pop(index)
