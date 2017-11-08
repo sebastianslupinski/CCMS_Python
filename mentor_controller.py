@@ -34,5 +34,19 @@ class MentorController:
     def show_students_list(UserDataBase):
         ViewMentor.display_all_students(UserDataBase)
 
+    @staticmethod
+    def get_student_list(UserDataBase):
+
+        students = ''
+        counter = 0
+        students_list = UserDataBase.student_container.get_student_list()
+
+        for student in students_list :
+            students += (str(counter) + '.' + student.__str__()) + '\n'
+            counter += 1
+
+        return students
 
 
+u = UserDataBase()
+print(MentorController.get_student_list(u))

@@ -1,5 +1,6 @@
+
 import student_container
-import user_database
+from user_database import UserDataBase
 
 class ViewMentor:
 
@@ -30,6 +31,10 @@ class ViewMentor:
         choosen_option = cls.get_user_input('Choose: ')
         return choosen_option
 
-    def display_all_students(user_database):
+    def display_all_students(MentorController):
 
-        print(user_database.student_container.get_student_list())
+        print(MentorController.get_student_list(UserDataBase))
+
+    @staticmethod
+    def get_user_input(message):
+        return input(message)
