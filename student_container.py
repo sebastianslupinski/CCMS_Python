@@ -12,4 +12,4 @@ class StudentContainer:
         pass
 
     def remove_student(self, index):
-        self.item_list.pop(index)
+        self.student_list.pop(index)
