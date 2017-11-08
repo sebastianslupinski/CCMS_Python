@@ -1,3 +1,5 @@
 class ManagerController:
 
-    pass
+    @staticmethod
+    def display_menu():
+        print("")

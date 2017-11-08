@@ -35,7 +35,7 @@ class Manager(User):
 
     def __init__(self, login, password, name, surname, phone_number):
 
-        super().__init__(name, login, password, surname, phone_number)
+        super().__init__(login, password, name, surname, phone_number)
         self.rank = "manager"
 
 

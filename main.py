@@ -28,7 +28,12 @@ class RootController:
         self.manager = ManagerController()
 
     def start(self):
-        user = self.login()
+        user_rank = self.login().rank
+        if user_rank == "manager":
+            user = self.manager
+        user.display_menu()
+        
+
 
 s = RootController()
 s.start()

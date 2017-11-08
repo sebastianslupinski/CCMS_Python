@@ -16,7 +16,7 @@ class UserDataBase:
 
 
     def read_from_csv(self, filename='user_data.csv'):
-        with open(filename, newline='') as csv_file:
+        with open('user_data.csv') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             for row in csv_reader:
                 rank = row[0]

@@ -1,6 +1,11 @@
 class ViewMentor:
 
     @staticmethod
+    def display_menu():
+
+        print("")
+
+    @staticmethod
     def input_student_info():
 
         login = input("Please enter student's login: ")
