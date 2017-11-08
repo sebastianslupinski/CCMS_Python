@@ -9,17 +9,18 @@ class User:
         self.surname = surname
         self.email = name.lower() + '.' + surname.lower() + '@codecool.com'
 
-    def change_name(self, new_name):
-        self.name = new_name
+    def change_attribute_value(self, atribute_type, new_atribute):
+        if atribute_type == 'name':
+            self.name = new_atribute
 
-    def change_surname(self, new_surname):
-        self.surname = new_surname
+        elif atribute_type == 'surname':
+            self.surname = new_atribute
 
-    def change_password(self, new_password):
-        self.password = new_password
+        elif atribute_type == 'phone_number':
+            self.phone_number = new_atribute
 
-    def change_phone_number(self, new_phone_number):
-        self.phone_number = new_phone_number
+        elif atribute_type == 'password':
+            self.password = new_atribute
 
     def __str__(self):
 
@@ -59,6 +60,3 @@ class Student(User):
     def __init__(self, login, password, name, surname, phone_number):
         super().__init__(login, password, name, surname, phone_number)
         self.rank = "student"
-#
-# ziomus = Mentor("ziomus", "ziomus", "Ziomus", "Ziomus", "r435234523")
-# print(ziomus)
