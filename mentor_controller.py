@@ -19,6 +19,4 @@ class MentorController:
 
 u = UserDataBase()
 MentorController.add_student(u)
-print(u.student_container)
-print(u.mentor_container)
-print(u.employee_container)
+ViewMentor.display_all_students(u)
