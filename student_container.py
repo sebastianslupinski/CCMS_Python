@@ -1,3 +1,5 @@
+from user_models import Student
+
 class StudentContainer:
 
     def __init__(self):
