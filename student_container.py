@@ -13,15 +13,8 @@ class StudentContainer:
         pass
 
     def remove_student(self, index):
-        self.item_list.pop(index)
+        self.student_list.pop(index)
 
     def get_student_list(self):
 
-        students = ''
-        counter = 0
-
-        for student in self.student_list:
-            students += (str(counter) + '.' + student.__str__()) + '\n'
-            counter += 1
-
-        return students
+        return self.student_list
