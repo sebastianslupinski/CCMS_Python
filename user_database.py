@@ -33,7 +33,14 @@ class UserDataBase:
                     self.student_container.student_list.append(user_models.Student(*row[1:]))
                     print(self.student_container.student_list) #for test purposes
 
+
     def write_to_csv(self, filename='user_data.csv', mode='w'):
         with open(filename, mode) as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow(self.user_list)
+
+    def pick_user_by_login(self, login):
+        for user in self.user_list:
+            if user.login == login:
+                return user
+

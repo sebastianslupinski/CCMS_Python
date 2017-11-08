@@ -1,3 +1,5 @@
+import student_container
+import user_database
 class ViewMentor:
 
     @staticmethod
@@ -7,8 +9,11 @@ class ViewMentor:
         password = input("Please enter password: ")
         name = input("Please enter student's name: ")
         surname = input("Please enter student's surname: ")
-        phone_number = input("Please enter student's phone number")
+        phone_number = input("Please enter student's phone number: ")
 
         return login, password, name, surname, phone_number
 
-    
+    @staticmethod
+    def display_all_students(user_database):
+
+        print(user_database.student_container.get_student_list())
