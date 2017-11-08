@@ -32,3 +32,8 @@ class UserDataBase:
                     self.user_list.append(user_models.Student(*row[1:]))
                     self.student_container.student_list.append(user_models.Student(*row[1:]))
                     print(self.student_container.student_list) #for test purposes
+
+    def pick_user_by_login(self, login):
+        for user in self.user_list:
+            if user.login == login:
+                return user
