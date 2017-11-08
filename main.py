@@ -26,8 +26,8 @@ class RootController:
                 if user.password == password:
                     return user
 
-    def check_rank(self):
-        user_rank = self.login().rank
+    def get_controler(self, user):
+        user_rank = user.rank
         if user_rank == "manager":
             user = self.manager
         elif user_rank == "mentor":
@@ -39,8 +39,9 @@ class RootController:
         return user
 
     def start(self):
-        user = self.check_rank()
-        user.display_menu()
+        user = self.login()
+        user_controller = self.get_controler(user)
+        user_controller.display_menu(user)
         
 
 
