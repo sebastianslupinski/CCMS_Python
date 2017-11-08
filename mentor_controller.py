@@ -16,9 +16,3 @@ class MentorController:
 
         new_student = MentorController.create_student()
         UserDataBase.student_container.add_student(new_student)
-
-u = UserDataBase()
-MentorController.add_student(u)
-print(u.student_container)
-print(u.mentor_container)
-print(u.employee_container)
