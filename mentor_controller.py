@@ -3,6 +3,7 @@ from view_mentor import ViewMentor
 from student_container import StudentContainer
 from user_database import UserDataBase
 
+
 class MentorController:
 
     @staticmethod
@@ -17,8 +18,11 @@ class MentorController:
         new_student = MentorController.create_student()
         UserDataBase.student_container.add_student(new_student)
 
+    @staticmethod
+    def edit_student(UserDataBase):
+        user = UserDataBase.pick_user_by_login(ViewMentor.get_user_input('Input login of student: '))
+        user.change_attribute_value()
+
+
 u = UserDataBase()
-MentorController.add_student(u)
-print(u.student_container)
-print(u.mentor_container)
-print(u.employee_container)
+print(MentorController.edit_student(u))

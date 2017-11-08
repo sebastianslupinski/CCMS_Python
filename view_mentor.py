@@ -11,4 +11,7 @@ class ViewMentor:
 
         return login, password, name, surname, phone_number
 
-    
+    @staticmethod
+    def get_user_input(message):
+        return input(message)
+
