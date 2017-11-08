@@ -1,5 +1,6 @@
 import student_container
 import user_database
+
 class ViewMentor:
 
     @staticmethod
@@ -17,3 +18,7 @@ class ViewMentor:
     def display_all_students(user_database):
 
         print(user_database.student_container.get_student_list())
+
+    @staticmethod
+    def get_user_input(message):
+        return input(message)

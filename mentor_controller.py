@@ -17,6 +17,11 @@ class MentorController:
         new_student = MentorController.create_student()
         UserDataBase.student_container.add_student(new_student)
 
+    @staticmethod
+    def show_students_list(UserDataBase):
+        ViewMentor.display_all_students(UserDataBase)
+
+
 u = UserDataBase()
 MentorController.add_student(u)
-ViewMentor.display_all_students(u)
+MentorController.display_all_students(u)

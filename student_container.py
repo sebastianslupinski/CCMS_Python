@@ -23,6 +23,5 @@ class StudentContainer:
         for student in self.student_list:
             students += (str(counter) + '.' + student.__str__()) + '\n'
             counter += 1
-        
 
         return students
