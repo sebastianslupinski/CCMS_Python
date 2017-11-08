@@ -1,6 +1,7 @@
 from user_models import Student
 from view_mentor import ViewMentor
 from student_container import StudentContainer
+from user_database import UserDataBase
 
 class MentorController:
 
@@ -9,9 +10,15 @@ class MentorController:
 
         login, password, name, surname, phone_number = ViewMentor.input_student_info()
         return Student(login, password, name, surname, phone_number)
-    @staticmethod
-    def add_student
 
-container = StudentContainer()
-MentorController.add_student()
-print(container.student_list)
+    @staticmethod
+    def add_student(UserDataBase):
+
+        new_student = MentorController.create_student()
+        UserDataBase.student_container.add_student(new_student)
+
+u = UserDataBase()
+MentorController.add_student(u)
+print(u.student_container)
+print(u.mentor_container)
+print(u.employee_container)

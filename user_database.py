@@ -11,8 +11,9 @@ class UserDataBase:
         self.user_list = []
         self.student_container = StudentContainer()
         self.mentor_container = MentorContainer()
-        self.employee_container = EmployeesContainer
+        self.employee_container = EmployeesContainer()
         self.read_from_csv()
+
 
     def read_from_csv(self, filename='user_data.csv'):
         with open(filename, newline='') as csv_file:
@@ -31,6 +32,3 @@ class UserDataBase:
                     self.user_list.append(user_models.Student(*row[1:]))
                     self.student_container.student_list.append(user_models.Student(*row[1:]))
                     print(self.student_container.student_list) #for test purposes
-
-u = UserDataBase()
-u.read_from_csv()
