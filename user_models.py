@@ -9,6 +9,18 @@ class User:
         self.surname = surname
         self.email = name.lower() + '.' + surname.lower() + '@codecool.com'
 
+    def change_name(self, new_name):
+        self.name = new_name
+
+    def change_surname(self, new_surname):
+        self.surname = new_surname
+
+    def change_password(self, new_password):
+        self.password = new_password
+
+    def change_phone_number(self, new_phone_number):
+        self.phone_number = new_phone_number
+
     def __str__(self):
 
         full_info = []
