@@ -1,12 +1,21 @@
-from user_models import Student
+from student_view import StudentView
 
 class StudentController:
 
+    def start(self):
+        while True:
+            user_choice = StudentView.display_student_menu()
+            if user_choice == '1':
+                self.view_grades()
+            elif user_choice == '2':
+                self.submit_assignment()
+            elif user_choice == '3':
+                break
 
     @staticmethod
-    def submit_assignment(assignment):
-        pass
+    def submit_assignment():
+        StudentView.display_work()
 
     @staticmethod
     def view_grades():
-        pass
+        StudentView.display_work()
