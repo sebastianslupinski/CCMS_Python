@@ -45,3 +45,20 @@ class UserDataBase:
             if user.login == login:
                 return user
 
+    def update_user_list(self):
+        for user in self.student_container:
+            if user not in self.user_list:
+                self.user_list.append(user)
+        for user in self.mentor_container:
+            if user not in self.user_list:
+                self.user_list.append(user)
+        for user in self.employee_container:
+            if user not in self.user_list:
+                self.user_list.append(user)
+
+    def validate_login(self, login):
+        self.update_user_list()
+        for user in self.user_list:
+            if user.login == login:
+                return False
+        return True
