@@ -42,9 +42,10 @@ class ViewManager:
                 try:
                     return int(phone_number)
                 except ValueError:
-                    print('Not a number input')
+                    print('Not a number input!')
             else:
-                continue
+                print('Invalid or too short input!')
+
 
     @staticmethod
     def display_all_mentors(mentors):
