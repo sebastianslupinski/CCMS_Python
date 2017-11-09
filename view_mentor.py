@@ -2,11 +2,21 @@
 import student_container
 from user_database import UserDataBase
 
+
 class ViewMentor:
 
-    @staticmethod
-    def display_menu():
-        print("")
+    @classmethod
+    def display_menu(cls):
+        
+        mentor_commands = ('Add new student', 'Show all students', 'Show group', 'Edit student', 'Go back')
+        while True:
+            for option in mentor_commands:
+                print(str(mentor_commands.index(option) + 1) + "----->" + option)
+            user_choice = ViewMentor.get_user_input('Choose option:')
+            if user_choice == "5":
+                break
+            if user_choice in ["1", "2", "3", "4", "5"]:
+                return user_choice
 
     @staticmethod
     def input_student_info():
@@ -40,6 +50,13 @@ class ViewMentor:
             print(str(edit_commands.index(option) + 1) + "----->" + option)
         choosen_option = cls.get_user_input('Choose: ')
         return choosen_option
+
+    @classmethod
+    def choose_group(cls):
+        while True:
+            group_choice = input("Choose group to show (a or b)")
+            if group_choice in ("a", "b"):
+                return group_choice
 
     def display_all_students(students):
 
