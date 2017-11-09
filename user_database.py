@@ -14,12 +14,12 @@ class UserDataBase:
         self.employee_container = EmployeesContainer()
         self.read_from_csv()
 
-
     def read_from_csv(self, filename='user_data.csv'):
         with open(filename) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             for row in csv_reader:
                 rank = row[0]
+                group = row[-1]
                 if rank == 'manager':
                     self.user_list.append(user_models.Manager(*row[1:]))
                 elif rank == 'employee':
@@ -34,6 +34,8 @@ class UserDataBase:
                     new_user = user_models.Student(*row[1:])
                     self.user_list.append(new_user)
                     self.student_container.student_list.append(new_user)
+                    if group == 'a' or group == 'b':
+                        self.student_container.add_student_to_group(new_user, group)
 
     def write_to_csv(self, filename='user_data.csv', mode='w'):
         with open(filename, mode) as csv_file:

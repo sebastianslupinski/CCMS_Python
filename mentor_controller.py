@@ -9,14 +9,16 @@ class MentorController:
     @staticmethod
     def create_student():
 
-        login, password, name, surname, phone_number = ViewMentor.input_student_info()
-        return Student(login, password, name, surname, phone_number)
+        login, password, name, surname, phone_number, group = ViewMentor.input_student_info()
+        return Student(login, password, name, surname, phone_number, group)
 
     @staticmethod
     def add_student(UserDataBase):
 
         new_student = MentorController.create_student()
         UserDataBase.student_container.add_student(new_student)
+        UserDataBase.student_container.add_student_to_group(new_student, new_student.group)
+
 
     @staticmethod
     def edit_student(UserDataBase):
@@ -50,3 +52,26 @@ class MentorController:
             counter += 1
 
         return students
+
+    @classmethod
+    def show_students_group(cls, UserDataBase, group):
+        group_to_show = cls.get_student_group(UserDataBase, group)
+        ViewMentor.display_group(group_to_show)
+
+    @staticmethod
+    def get_student_group(UserDataBase, group):
+
+        studends_in_group = ''
+        counter = 0
+        group_list = UserDataBase.student_container.get_student_group(group)
+
+        for student in group_list:
+            group += (str(counter) + '.' + student.__str__()) + '\n'
+            counter += 1
+
+        return group
+
+# u = UserDataBase()
+# MentorController.show_students_list(u)
+# MentorController.add_student(u)
+# MentorController.show_students_group(u, 'a')

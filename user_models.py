@@ -57,6 +57,7 @@ class Employee(User):
 
 class Student(User):
 
-    def __init__(self, login, password, name, surname, phone_number):
+    def __init__(self, login, password, name, surname, phone_number, group):
         super().__init__(login, password, name, surname, phone_number)
         self.rank = "student"
+        self.group = group
