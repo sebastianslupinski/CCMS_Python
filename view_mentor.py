@@ -6,17 +6,15 @@ from user_database import UserDataBase
 class ViewMentor:
 
     @classmethod
-    def display_menu(cls):
-        
+    def display_mentor_menu(cls):
         mentor_commands = ('Add new student', 'Show all students', 'Show group', 'Edit student', 'Go back')
-        while True:
-            for option in mentor_commands:
-                print(str(mentor_commands.index(option) + 1) + "----->" + option)
-            user_choice = ViewMentor.get_user_input('Choose option:')
-            if user_choice == "5":
-                break
-            if user_choice in ["1", "2", "3", "4", "5"]:
-                return user_choice
+        cls.display_menu(mentor_commands)
+        return cls.get_user_input('Choose: ')
+
+    @staticmethod
+    def display_menu(options):
+        for option in options:
+            print(str(options.index(option) + 1) + "----->" + option)
 
     @staticmethod
     def input_student_info():

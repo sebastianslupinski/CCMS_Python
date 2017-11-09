@@ -35,10 +35,11 @@ class UserDataBase:
                     if group == 'a' or group == 'b':
                         self.student_container.add_student_to_group(new_user, group)
 
-    def write_to_csv(self, filename='user_data.csv', mode='w'):
+    @classmethod
+    def write_to_csv(cls, filename='user_data.csv', mode='w'):
         with open(filename, mode) as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(self.user_list)
+            writer.writerow(cls.user_list)
 
     def pick_user_by_login(self, login):
         for user in self.user_list:
@@ -58,3 +59,21 @@ class UserDataBase:
     @classmethod
     def remove_user_from_db(cls, user):
         cls.user_list.remove(user)
+
+    @classmethod
+    def prepare_user_list(cls):
+        prepared_users_list = []
+        for user in cls.user_list:
+            user_data = [user.rank, user.login, user.password, user.name, user.surname, user.phone_number]
+            if user.rank == "student":
+                user_data.append(user.group)
+            prepared_users_list.append(user_data)
+        return prepared_users_list
+
+    @classmethod
+    def write_to_csv(cls, filename='user_data.csv', mode='w'):
+        print(cls.user_list)   ##########
+        user_list = cls.prepare_user_list()
+        with open(filename, mode, newline='') as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerows(user_list)

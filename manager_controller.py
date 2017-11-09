@@ -1,8 +1,6 @@
 from user_models import Mentor
 from manager_view import ViewManager
 from view_mentor import ViewMentor
-from mentor_container import MentorContainer
-from user_database import UserDataBase
 
 
 class ManagerController:
@@ -36,19 +34,24 @@ class ManagerController:
             self.mentor_container.remove_mentor(user)
 
     def create_mentor(self):
-
         login, password, name, surname, phone_number = ViewManager.input_mentor_info()
-
-        try:
-            phone_number = int(phone_number)
-        except ValueError:
-            ViewManager.custom_print('Enter numbers only!')
-
         return Mentor(login, password, name, surname, phone_number)
 
     def add_mentor(self):
         new_mentor = self.create_mentor()
         self.mentor_container.add_mentor(new_mentor)
+
+    def chose_edit_options(self, edit_option, user):
+        if edit_option == '1':
+            user.change_attribute_value('name', ViewManager.get_user_input('Input new name: ').capitalize())
+        elif edit_option == '2':
+            user.change_attribute_value('surname', ViewManager.get_user_input('Input new surname: ').capitalize())
+        elif edit_option == '3':
+            user.change_attribute_value('password', ViewManager.get_user_input('Input new password: '))
+        elif edit_option == '4':
+            user.change_attribute_value('phone_number', ViewManager.get_user_phone_number())
+        elif edit_option == '5':
+            pass
 
     def edit_mentor(self):
         user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
@@ -56,18 +59,8 @@ class ManagerController:
             ViewManager.custom_print('Wrong login name')
         else:
             edit_option = ViewManager.display_edit_option()
+            self.chose_edit_options(edit_option, user)
 
-            if edit_option == '1':
-                user.change_attribute_value('name', ViewManager.get_user_input('Input new name: ').capitalize())
-            elif edit_option == '2':
-                user.change_attribute_value('surname', ViewManager.get_user_input('Input new surname: ').capitalize())
-            elif edit_option == '3':
-                user.change_attribute_value('password', ViewManager.get_user_input('Input new password: '))
-            elif edit_option == '4':
-                user.change_attribute_value('phone_number', ViewManager.get_user_phone_number())
-            elif edit_option == '5':
-                pass
-            
     def convert_list(self, list):
         users = ''
         counter = 1
