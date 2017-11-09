@@ -50,8 +50,3 @@ class MentorController:
             counter += 1
 
         return students
-
-u = UserDataBase()
-MentorController.show_students_list(u)
-MentorController.edit_student(u)
-MentorController.show_students_list(u)

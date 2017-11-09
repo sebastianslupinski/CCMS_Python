@@ -4,7 +4,6 @@ from student_controller import StudentController
 from employee_controller import EmployeeController
 from root_controller_view import RootControllerView
 from user_database import UserDataBase
-import getpass
 
 class RootController:
 
@@ -22,7 +21,7 @@ class RootController:
             username = self.view.get_user_input("Type your username: \n")
             user = self.user_database.pick_user_by_login(username)
             if user:
-                password = self.view.get_user_input("Type your password: \n")
+                password = self.view.get_pass("Type your password: \n")
                 if user.password == password:
                     return user
 
@@ -41,7 +40,7 @@ class RootController:
     def start(self):
         user = self.login()
         user_controller = self.get_controler(user)
-        user_controller.display_menu(user)
+        user_controller.display_menu()
         
 
 
