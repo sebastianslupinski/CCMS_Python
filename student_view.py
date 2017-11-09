@@ -20,9 +20,8 @@ class StudentView:
                  UU\ 
                 <><>''')
 
-
     @classmethod
-    def display_manager_menu(cls):
+    def display_student_menu(cls):
         student_commands = ('Display grades', 'Submit assignment','Go back')
         cls.display_menu(student_commands)
         return cls.get_user_input('Choose: ')
