@@ -34,3 +34,10 @@ class ViewManager:
         choosen_option = cls.get_user_input('Choose: ')
         return choosen_option
 
+    @staticmethod
+    def display_all_mentors(mentors):
+        print(mentors)
+
+    @staticmethod
+    def custom_print(message):
+        print(message)

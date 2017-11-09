@@ -1,5 +1,6 @@
 from user_models import Mentor
 from manager_view import ViewManager
+from view_mentor import ViewMentor
 from mentor_container import MentorContainer
 from user_database import UserDataBase
 
@@ -51,11 +52,12 @@ class ManagerController:
 
     @staticmethod
     def edit_mentor(database):
-        user = database.pick_user_by_login(ViewManager.get_user_input('Input login of mentor: '))
-        if not user or not isinstance(Mentor, user):
+        user = database.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
+        if not user:
             ViewManager.custom_print('Wrong login name')
-        edit_option = ViewManager.select_edit_option()
-        while True:
+        else:
+            edit_option = ViewManager.select_edit_option()
+
             if edit_option == '1':
                 user.change_attribute_value('name', ViewManager.get_user_input('Input new name: ').capitalize())
             elif edit_option == '2':
@@ -65,9 +67,42 @@ class ManagerController:
             elif edit_option == '4':
                 try:
                     ManagerController.validate_phone_number(user)
-                    continue
                 except ValueError:
                     print('Enter numbers only!')
-                    continue
             elif edit_option == '5':
-                break
+                pass
+            
+    def convert_list(self, list):
+        users = ''
+        counter = 1
+
+        for user in list:
+            users += (str(counter) + '.' + user.__str__()) + '\n'
+            counter += 1
+        return users
+
+
+    def prepare_student_list(self):
+        students_list = self.student_container.get_student_list()
+        return self.convert_list(students_list)
+
+    def show_students_list(self):
+        students = self.prepare_student_list()
+        ViewMentor.display_all_students(students)
+
+
+    def prepare_mentor_list(self):
+        mentor_list = self.mentor_container.get_mentor_list()
+        return self.convert_list(mentor_list)
+
+    def show_mentor_list(self):
+        mentors = self.prepare_mentor_list()
+        ViewManager.display_all_mentors(mentors)
+
+
+u = UserDataBase()
+manager = ManagerController(u.mentor_container, u.student_container)
+manager.show_mentor_list(u.mentor_container)
+manager.edit_mentor(u.mentor_container)
+manager.show_mentor_list(u.mentor_container)
+
