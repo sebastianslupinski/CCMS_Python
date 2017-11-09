@@ -8,7 +8,7 @@ class ManagerController:
 
 
     @classmethod
-    def manager_menu(cls):
+    def display_menu(cls):
         ViewManager.display_manager_menu()
         user_choice = ViewManager.get_user_input()
 

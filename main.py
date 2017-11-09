@@ -40,7 +40,7 @@ class RootController:
     def start(self):
         user = self.login()
         user_controller = self.get_controler(user)
-        user_controller.display_menu(user)
+        user_controller.display_menu()
         
 
 
