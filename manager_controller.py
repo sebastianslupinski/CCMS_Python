@@ -42,12 +42,6 @@ class ManagerController:
         new_mentor = self.create_mentor()
         self.mentor_container.add_mentor(new_mentor)
 
-    @staticmethod
-    def validate_phone_number(user):
-        user.change_attribute_value('phone_number', int(ViewManager.get_user_input('Input new phone number: ')))
-        if len(ViewManager.get_user_input) > 9:
-            ViewManager.custom_print('Phone number too long!')
-
     def edit_mentor(self):
         user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
         if not user:
@@ -62,17 +56,13 @@ class ManagerController:
             elif edit_option == '3':
                 user.change_attribute_value('password', ViewManager.get_user_input('Input new password: '))
             elif edit_option == '4':
-                try:
-                    user.change_attribute_value('phone_number', int(ViewManager.get_user_input('Input new phone number: ')))
-                except ValueError:
-                    ViewManager.custom_print('Enter numbers only!')
+                user.change_attribute_value('phone_number', ViewManager.get_user_phone_number())
             elif edit_option == '5':
                 pass
             
     def convert_list(self, list):
         users = ''
         counter = 1
-
         for user in list:
             users += (str(counter) + '.' + user.__str__()) + '\n'
             counter += 1
@@ -93,9 +83,3 @@ class ManagerController:
     def show_mentor_list(self):
         mentors = self.prepare_mentor_list()
         ViewManager.display_all_mentors(mentors)
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> ab1d465c0e6590e914b6e061f0cb45377e9aee82

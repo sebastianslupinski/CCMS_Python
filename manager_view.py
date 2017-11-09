@@ -12,14 +12,14 @@ class ViewManager:
         cls.display_menu(manager_commands)
         return cls.get_user_input('Choose: ')
 
-    @staticmethod
-    def input_mentor_info():
+    @classmethod
+    def input_mentor_info(cls):
 
         login = input("Please enter mentor's login: ")
         password = input("Please enter password: ")
         name = input("Please enter mentor's name: ")
         surname = input("Please enter mentors's surname: ")
-        phone_number = input("Please enter mentors's phone number: ")
+        phone_number = cls.get_user_phone_number()
 
         return login, password, name, surname, phone_number
 
@@ -33,6 +33,18 @@ class ViewManager:
         edit_commands = ('Change name', 'Change surname', 'Change password', 'Change phone number', 'Go back')
         cls.display_menu(edit_commands)
         return cls.get_user_input('Choose: ')
+
+    @classmethod
+    def get_user_phone_number(cls):
+        while True:
+            phone_number = cls.get_user_input('Please enter mentors phone number: ')
+            if len(phone_number) == 9:
+                try:
+                    return int(phone_number)
+                except ValueError:
+                    print('Not a number input')
+            else:
+                continue
 
     @staticmethod
     def display_all_mentors(mentors):
