@@ -46,8 +46,3 @@ class MentorController:
 
         return students
 
-u = UserDataBase()
-mentor = MentorController()
-mentor.show_students_list(u)
-MentorController.edit_student(u)
-mentor.show_students_list(u)
