@@ -1,3 +1,6 @@
+from user_database import UserDataBase
+
+
 class MentorContainer:
 
     def __init__(self):
@@ -5,6 +8,9 @@ class MentorContainer:
 
     def add_mentor(self, user):
         self.mentor_list.append(user)
+        UserDataBase.add_user_to_db(user)
+        print(user)
+        print(UserDataBase.user_list)
 
     def edit_mentor(self):
         pass

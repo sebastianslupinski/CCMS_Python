@@ -12,8 +12,8 @@ class ManagerController:
         self.student_container = student_container
 
     def start(self):
-        user_choice = ViewManager.display_manager_menu()
         while True:
+            user_choice = ViewManager.display_manager_menu()
             if user_choice == '1':
                 self.add_mentor()
             elif user_choice == '2':
@@ -21,29 +21,32 @@ class ManagerController:
             elif user_choice == '3':
                 self.mentor_container.remove_mentor()
             elif user_choice == '4':
-                '''show mentor list'''
-                pass
+                self.show_mentor_list()
             elif user_choice == '5':
-                '''show student list'''
-                pass
+                self.show_students_list()
             elif user_choice == '6':
                 break
 
-    @staticmethod
-    def create_mentor():
+    def create_mentor(self):
+
         login, password, name, surname, phone_number = ViewManager.input_mentor_info()
+
+        try:
+            phone_number = int(phone_number)
+        except ValueError:
+            ViewManager.custom_print('Enter numbers only!')
 
         return Mentor(login, password, name, surname, phone_number)
 
     def add_mentor(self):
-        new_mentor = ManagerController.create_mentor()
+        new_mentor = self.create_mentor()
         self.mentor_container.add_mentor(new_mentor)
 
     @staticmethod
     def validate_phone_number(user):
         user.change_attribute_value('phone_number', int(ViewManager.get_user_input('Input new phone number: ')))
         if len(ViewManager.get_user_input) > 9:
-            print('Phone number too long!')
+            ViewManager.custom_print('Phone number too long!')
 
     def edit_mentor(self):
         user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
@@ -60,9 +63,9 @@ class ManagerController:
                 user.change_attribute_value('password', ViewManager.get_user_input('Input new password: '))
             elif edit_option == '4':
                 try:
-                    ManagerController.validate_phone_number(user)
+                    user.change_attribute_value('phone_number', int(ViewManager.get_user_input('Input new phone number: ')))
                 except ValueError:
-                    print('Enter numbers only!')
+                    ViewManager.custom_print('Enter numbers only!')
             elif edit_option == '5':
                 pass
             

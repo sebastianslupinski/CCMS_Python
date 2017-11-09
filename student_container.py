@@ -1,4 +1,5 @@
 from user_models import Student
+from user_database import UserDataBase
 
 
 class StudentContainer:
@@ -10,6 +11,9 @@ class StudentContainer:
 
     def add_student(self, user):
         self.student_list.append(user)
+        UserDataBase.add_user_to_db(user)
+        print(user)
+        print(UserDataBase.user_list)
 
     def add_student_to_group(self, user, group):
         if group == 'a':

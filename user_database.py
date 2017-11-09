@@ -2,11 +2,11 @@ import csv
 import user_models
 
 
-
 class UserDataBase:
 
+    user_list = []
+
     def __init__(self, student_container, mentor_container, employee_container):
-        self.user_list = []
         self.student_container = student_container
         self.mentor_container = mentor_container
         self.employee_container = employee_container
@@ -45,3 +45,6 @@ class UserDataBase:
             if user.login == login:
                 return user
 
+    @classmethod
+    def add_user_to_db(cls, user):
+        cls.user_list.append(user)

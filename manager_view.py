@@ -7,7 +7,7 @@ class ViewManager:
 
     @classmethod
     def display_manager_menu(cls):
-        manager_commands = ('Create new mentor', 'Edit existing mentor', 'Delete mentor', 'Show mentor list'
+        manager_commands = ('Create new mentor', 'Edit existing mentor', 'Delete mentor', 'Show mentor list',
                             'Show student list', 'Go back')
         cls.display_menu(manager_commands)
         return cls.get_user_input('Choose: ')
