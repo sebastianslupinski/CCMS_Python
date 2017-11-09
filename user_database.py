@@ -1,17 +1,14 @@
 import csv
 import user_models
-from student_container import StudentContainer
-from mentor_container import MentorContainer
-from employee_container import EmployeesContainer
 
 
 class UserDataBase:
 
-    def __init__(self):
+    def __init__(self, student_container, mentor_container, employee_container):
         self.user_list = []
-        self.student_container = StudentContainer()
-        self.mentor_container = MentorContainer()
-        self.employee_container = EmployeesContainer()
+        self.student_container = student_container
+        self.mentor_container = mentor_container
+        self.employee_container = employee_container
         self.read_from_csv()
 
     def read_from_csv(self, filename='user_data.csv'):

@@ -6,19 +6,22 @@ from user_database import UserDataBase
 
 class ManagerController:
 
+    def __init__(self, mentor_container, student_container):
+        self.mentor_container = mentor_container
+        self.student_container = student_container
 
-    @classmethod
-    def display_menu(cls):
+
+    def start(self):
         ViewManager.display_manager_menu()
-        user_choice = ViewManager.get_user_input()
+        user_choice = ViewManager.get_user_input('Choose option:')
 
         while True:
             if user_choice == '1':
-                cls.add_mentor(UserDataBase)
+                self.add_mentor(self.mentor_container)
             elif user_choice == '2':
-                cls.edit_mentor(UserDataBase)
+                self.edit_mentor(self.mentor_container)
             elif user_choice == '3':
-                MentorContainer.remove_mentor() #do rozwinięcia
+                self.mentor_container.remove_mentor() #do rozwinięcia
             elif user_choice == '4':
                 '''show mentor list'''
                 pass
@@ -27,7 +30,6 @@ class ManagerController:
                 pass
             elif user_choice == '6':
                 break
-
 
 
     @staticmethod
@@ -42,8 +44,16 @@ class ManagerController:
         database.mentor_container.add_mentor(new_mentor)
 
     @staticmethod
+    def validate_phone_number(user):
+        user.change_attribute_value('phone_number', int(ViewManager.get_user_input('Input new phone number: ')))
+        if len(ViewManager.get_user_input) > 9:
+            print('Phone number too long!')
+
+    @staticmethod
     def edit_mentor(database):
         user = database.pick_user_by_login(ViewManager.get_user_input('Input login of mentor: '))
+        if not user or not isinstance(Mentor, user):
+            ViewManager.custom_print('Wrong login name')
         edit_option = ViewManager.select_edit_option()
         while True:
             if edit_option == '1':
@@ -54,13 +64,10 @@ class ManagerController:
                 user.change_attribute_value('password', ViewManager.get_user_input('Input new password: '))
             elif edit_option == '4':
                 try:
-                    user.change_attribute_value('phone_number', int(ViewManager.get_user_input('Input new phone number: ')))
-                    if len(ViewManager.get_user_input) > 9:
-                        print('Phone number too long!')
+                    ManagerController.validate_phone_number(user)
                     continue
                 except ValueError:
                     print('Enter numbers only!')
                     continue
             elif edit_option == '5':
                 break
-

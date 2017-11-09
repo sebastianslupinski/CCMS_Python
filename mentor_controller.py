@@ -6,6 +6,9 @@ from user_database import UserDataBase
 
 class MentorController:
 
+    def __init__(self, student_container):
+        self.student_container = student_container
+
     @staticmethod
     def create_student():
 
