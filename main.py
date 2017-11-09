@@ -8,13 +8,14 @@ from employee_container import EmployeeContainer
 from mentor_container import MentorContainer
 from student_container import StudentContainer
 
+
 class RootController:
 
     def __init__(self):
         self.view = RootControllerView
         self.student_container = StudentContainer()
         self.mentor_container = MentorContainer()
-        self.employee_container = EmployeeContainer()                
+        self.employee_container = EmployeeContainer()
         self.manager = ManagerController(self.mentor_container, self.student_container)
         self.mentor = MentorController(self.student_container)
         self.student = StudentController()
@@ -48,13 +49,11 @@ class RootController:
         user_controller = self.get_controler(user)
         user_controller.start()
         UserDataBase.write_to_csv()
-        
 
 
-s = RootController()
-s.start()
+def main():
+    s = RootController()
+    s.start()
 
-
-
-
-
+if __name__ == '__main__':
+    main()
