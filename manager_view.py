@@ -1,5 +1,6 @@
+from root_controller_view import RootControllerView
 
-class ViewManager:
+class ViewManager(RootControllerView):
 
     @staticmethod
     def get_user_input(message):
@@ -8,9 +9,9 @@ class ViewManager:
     @classmethod
     def display_manager_menu(cls):
         manager_commands = ('Create new mentor', 'Edit existing mentor', 'Delete mentor', 'Show mentor list',
-                            'Show student list', 'Go back')
+                            'Show student list')
         cls.display_menu(manager_commands)
-        return cls.get_user_input('Choose: ')
+        return cls.getch()
 
     @classmethod
     def input_mentor_info(cls):
@@ -27,6 +28,7 @@ class ViewManager:
     def display_menu(options):
         for option in options:
             print(str(options.index(option) + 1) + "----->" + option)
+        print("\n9----->Log out\n0----->Quit")
 
     @classmethod
     def display_edit_option(cls):
