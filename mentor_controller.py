@@ -63,7 +63,9 @@ class MentorController:
         user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
         if not user:
             ViewMentor.custom_print('Wrong login name')
+            ViewMentor.getch()
         else:
+            ViewMentor.clear_terminal()
             edit_option = ViewMentor.select_edit_option()
             self.chose_edit_options(edit_option, user)
 

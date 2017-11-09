@@ -54,7 +54,7 @@ class RootController:
             user = self.login()
             user_controller = self.get_controler(user)
             close_cms = user_controller.start()
-            if close_cms == False:
+            if close_cms is False:
                 continue
             UserDataBase.write_to_csv()
             self.view.clear_terminal()

@@ -4,6 +4,12 @@ import os
 
 class RootControllerView:
 
+    @classmethod
+    def get_user_input(cls, message=""):
+        if message:
+            return input(message)
+        return cls.getch()
+
     @staticmethod
     def clear_terminal():
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -23,10 +29,6 @@ class RootControllerView:
     @staticmethod
     def greet_user():
         print("Welcome to CcMS")
-
-    @staticmethod
-    def get_user_input(message):
-        return input(message)
 
     @staticmethod
     def custom_print(message):

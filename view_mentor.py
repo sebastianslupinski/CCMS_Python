@@ -50,15 +50,11 @@ class ViewMentor(RootControllerView):
 
         return login, password, name, surname, phone_number, group
 
-    @staticmethod
-    def get_user_input(message):
-        return input(message)
-
     @classmethod
     def select_edit_option(cls):
         edit_commands = ('Change name', 'Change surname', 'Change password', 'Change phone number')
         cls.display_menu(edit_commands)
-        return cls.get_user_input('Choose: ')
+        return cls.getch()
 
     @classmethod
     def choose_group(cls):
@@ -77,6 +73,3 @@ class ViewMentor(RootControllerView):
     def display_group(group):
         print(group)
 
-    @staticmethod
-    def custom_print(message):
-        print(message)
