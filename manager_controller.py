@@ -100,9 +100,4 @@ class ManagerController:
         ViewManager.display_all_mentors(mentors)
 
 
-u = UserDataBase()
-manager = ManagerController(u.mentor_container, u.student_container)
-manager.show_mentor_list(u.mentor_container)
-manager.edit_mentor(u.mentor_container)
-manager.show_mentor_list(u.mentor_container)
 
