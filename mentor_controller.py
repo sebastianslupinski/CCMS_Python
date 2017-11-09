@@ -71,7 +71,7 @@ class MentorController:
 
         return group
 
-# u = UserDataBase()
-# MentorController.show_students_list(u)
-# MentorController.add_student(u)
-# MentorController.show_students_group(u, 'a')
+u = UserDataBase()
+MentorController.show_students_list(u)
+MentorController.add_student(u)
+MentorController.show_students_group(u, 'a')

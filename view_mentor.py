@@ -40,12 +40,6 @@ class ViewMentor:
             print(str(edit_commands.index(option) + 1) + "----->" + option)
         choosen_option = cls.get_user_input('Choose: ')
         return choosen_option
-<<<<<<< a14ffaa78942c4104d2ad9ba6d57ee8670a88e4c
-    
-    @staticmethod
-    def display_all_students(students):
-        print(students)
-=======
 
     def display_all_students(students):
 
@@ -54,7 +48,6 @@ class ViewMentor:
     def display_group(group):
 
         print(group)
->>>>>>> create student groups and methods connected with them
 
     @staticmethod
     def custom_print(message):
