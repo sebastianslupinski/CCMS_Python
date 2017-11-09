@@ -3,7 +3,6 @@ class EmployeeContainer:
     def __init__(self):
         self.employee_list = []
 
-
     def add_employee(self, user):
         self.employee_list.append(user)
 
