@@ -34,11 +34,13 @@ class MentorController:
             elif edit_option == '4':
                 user.change_attribute_value('phone_number', ViewMentor.get_user_input('Input new phone number: '))
 
-    def show_students_list(self, UserDataBase):
-        students = self.get_student_list(UserDataBase)
+    @classmethod
+    def show_students_list(cls, UserDataBase):
+        students = cls.get_student_list(UserDataBase)
         ViewMentor.display_all_students(students)
 
-    def get_student_list(self, UserDataBase):
+    @staticmethod
+    def get_student_list(UserDataBase):
         students = ''
         counter = 1
         students_list = UserDataBase.student_container.get_student_list()
@@ -50,7 +52,6 @@ class MentorController:
         return students
 
 u = UserDataBase()
-mentor = MentorController()
-mentor.show_students_list(u)
+MentorController.show_students_list(u)
 MentorController.edit_student(u)
-mentor.show_students_list(u)
+MentorController.show_students_list(u)
