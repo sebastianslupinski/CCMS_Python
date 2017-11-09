@@ -16,8 +16,18 @@ class ViewMentor:
         name = input("Please enter student's name: ")
         surname = input("Please enter student's surname: ")
         phone_number = input("Please enter student's phone number: ")
+        
+        while True:
 
-        return login, password, name, surname, phone_number
+            group = input("Please enter a group 'a' or 'b': ")
+
+            if group.lower() == 'a' or group.lower() == 'b':
+                break
+            else:
+                print("There is no group like this")
+                continue
+
+        return login, password, name, surname, phone_number, group
 
     @staticmethod
     def get_user_input(message):
@@ -30,10 +40,14 @@ class ViewMentor:
             print(str(edit_commands.index(option) + 1) + "----->" + option)
         choosen_option = cls.get_user_input('Choose: ')
         return choosen_option
-    
-    @staticmethod
+
     def display_all_students(students):
+
         print(students)
+
+    def display_group(group):
+
+        print(group)
 
     @staticmethod
     def custom_print(message):

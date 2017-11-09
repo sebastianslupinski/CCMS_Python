@@ -1,4 +1,4 @@
-class EmployeesContainer:
+class EmployeeContainer:
 
     def __init__(self):
         self.employee_list = []
