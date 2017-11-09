@@ -55,7 +55,7 @@ class UserDataBase:
             if user.login == login:
                 return False
         return True
-    
+
     @classmethod
     def remove_user_from_db(cls, user):
         cls.user_list.remove(user)
@@ -72,7 +72,6 @@ class UserDataBase:
 
     @classmethod
     def write_to_csv(cls, filename='user_data.csv', mode='w'):
-        print(cls.user_list)   ##########
         user_list = cls.prepare_user_list()
         with open(filename, mode, newline='') as csv_file:
             writer = csv.writer(csv_file)

@@ -46,10 +46,13 @@ class ViewManager:
             else:
                 print('Invalid or too short input!')
 
-
     @staticmethod
     def display_all_mentors(mentors):
         print(mentors)
+
+    @staticmethod
+    def display_all_students(students):
+        print(students)
 
     @staticmethod
     def custom_print(message):
