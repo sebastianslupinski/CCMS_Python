@@ -36,5 +36,5 @@ class ViewMentor:
         print(students)
 
     @staticmethod
-    def get_user_input(message):
-        return input(message)
+    def custom_print(message):
+        print(message)
