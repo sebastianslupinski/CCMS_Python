@@ -12,8 +12,6 @@ class StudentContainer:
     def add_student(self, user):
         self.student_list.append(user)
         UserDataBase.add_user_to_db(user)
-        print(user)
-        print(UserDataBase.user_list)
 
     def add_student_to_group(self, user, group):
         if group == 'a':
@@ -24,18 +22,17 @@ class StudentContainer:
     def edit_student(self):
         pass
 
-    def remove_student(self, index):
-        self.student_list.pop(index)
+    def remove_student(self, user):
+        self.student_list.remove(user)
+        UserDataBase.remove_user_from_db(user)
 
     def get_student_list(self):
-
         return self.student_list
 
     def get_student_group(self, group):
-
         if group == 'a':
             return self.group_a
-        
+
         elif group == 'b':
             return self.group_b
 

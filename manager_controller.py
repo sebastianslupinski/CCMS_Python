@@ -50,8 +50,6 @@ class ManagerController:
             user.change_attribute_value('password', ViewManager.get_user_input('Input new password: '))
         elif edit_option == '4':
             user.change_attribute_value('phone_number', ViewManager.get_user_phone_number())
-        elif edit_option == '5':
-            pass
 
     def edit_mentor(self):
         self.show_mentor_list()
