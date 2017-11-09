@@ -11,3 +11,11 @@ class MentorContainer:
 
     def remove_mentor(self, index):
         self.mentor_list.pop(index)
+
+    def get_mentor_list(self):
+        return self.mentor_list
+
+    def pick_mentor_by_login(self, login):
+        for mentor in self.mentor_list:
+            if mentor.login == login:
+                return mentor
