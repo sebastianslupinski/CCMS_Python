@@ -1,15 +1,3 @@
-# import mentor_container
-# import user_database
-
-
-class ViewMentor:
-
-    @staticmethod
-    def display_menu():
-        print("")
-
-    @staticmethod
-    def input_student_info():
 
 class ViewManager:
 
@@ -19,7 +7,6 @@ class ViewManager:
 
     @staticmethod
     def input_mentor_info():
-
 
         login = input("Please enter mentor's login: ")
         password = input("Please enter password: ")
