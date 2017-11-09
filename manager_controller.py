@@ -8,9 +8,9 @@ class ManagerController:
 
 
     @classmethod
-    def display_menu(cls):
+    def start(cls):
         ViewManager.display_manager_menu()
-        user_choice = ViewManager.get_user_input()
+        user_choice = ViewManager.get_user_input("Choose an option: ")
 
         while True:
             if user_choice == '1':

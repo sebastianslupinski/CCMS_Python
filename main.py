@@ -4,16 +4,20 @@ from student_controller import StudentController
 from employee_controller import EmployeeController
 from root_controller_view import RootControllerView
 from user_database import UserDataBase
+from employee_container import EmployeesContainer
+from mentor_container import MentorContainer
+from student_container import StudentContainer
 
 class RootController:
 
     def __init__(self):
         self.user_database = UserDataBase()
         self.view = RootControllerView
+        self.manager = ManagerController(MentorContainer(), StudentContainer())
+        self.mentor = MentorController(StudentContainer())
         self.student = StudentController()
-        self.mentor = MentorController()
-        self.employee = EmployeeController()
-        self.manager = ManagerController()
+        self.employee = EmployeeController(StudentContainer())
+
 
     def login(self):
         self.view.greet_user()
@@ -40,7 +44,7 @@ class RootController:
     def start(self):
         user = self.login()
         user_controller = self.get_controler(user)
-        user_controller.display_menu()
+        user_controller.start()
         
 
 
