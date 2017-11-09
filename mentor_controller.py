@@ -11,7 +11,7 @@ class MentorController:
 
     def start(self):
         while True:
-            user_choice = ViewMentor.display_menu()
+            user_choice = ViewMentor.display_mentor_menu()
             if user_choice == '1':
                 self.add_student()
             elif user_choice == '2':

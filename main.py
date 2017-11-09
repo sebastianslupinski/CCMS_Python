@@ -47,6 +47,7 @@ class RootController:
         user = self.login()
         user_controller = self.get_controler(user)
         user_controller.start()
+        UserDataBase.write_to_csv()
         
 
 
