@@ -54,6 +54,7 @@ class ManagerController:
             pass
 
     def edit_mentor(self):
+        self.show_mentor_list()
         user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
         if not user:
             ViewManager.custom_print('Wrong login name')
