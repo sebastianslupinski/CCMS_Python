@@ -11,18 +11,15 @@ class ManagerController:
         self.mentor_container = mentor_container
         self.student_container = student_container
 
-
     def start(self):
-        ViewManager.display_manager_menu()
-        user_choice = ViewManager.get_user_input('Choose option:')
-
+        user_choice = ViewManager.display_manager_menu()
         while True:
             if user_choice == '1':
-                self.add_mentor(self.mentor_container)
+                self.add_mentor()
             elif user_choice == '2':
-                self.edit_mentor(self.mentor_container)
+                self.edit_mentor()
             elif user_choice == '3':
-                self.mentor_container.remove_mentor() #do rozwinięcia
+                self.mentor_container.remove_mentor()
             elif user_choice == '4':
                 '''show mentor list'''
                 pass
@@ -32,17 +29,15 @@ class ManagerController:
             elif user_choice == '6':
                 break
 
-
     @staticmethod
     def create_mentor():
         login, password, name, surname, phone_number = ViewManager.input_mentor_info()
 
         return Mentor(login, password, name, surname, phone_number)
 
-    @staticmethod
-    def add_mentor(database):
+    def add_mentor(self):
         new_mentor = ManagerController.create_mentor()
-        database.mentor_container.add_mentor(new_mentor)
+        self.mentor_container.add_mentor(new_mentor)
 
     @staticmethod
     def validate_phone_number(user):
@@ -50,13 +45,12 @@ class ManagerController:
         if len(ViewManager.get_user_input) > 9:
             print('Phone number too long!')
 
-    @staticmethod
-    def edit_mentor(database):
-        user = database.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
+    def edit_mentor(self):
+        user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
         if not user:
             ViewManager.custom_print('Wrong login name')
         else:
-            edit_option = ViewManager.select_edit_option()
+            edit_option = ViewManager.display_edit_option()
 
             if edit_option == '1':
                 user.change_attribute_value('name', ViewManager.get_user_input('Input new name: ').capitalize())
@@ -81,7 +75,6 @@ class ManagerController:
             counter += 1
         return users
 
-
     def prepare_student_list(self):
         students_list = self.student_container.get_student_list()
         return self.convert_list(students_list)
@@ -90,7 +83,6 @@ class ManagerController:
         students = self.prepare_student_list()
         ViewMentor.display_all_students(students)
 
-
     def prepare_mentor_list(self):
         mentor_list = self.mentor_container.get_mentor_list()
         return self.convert_list(mentor_list)
@@ -98,11 +90,3 @@ class ManagerController:
     def show_mentor_list(self):
         mentors = self.prepare_mentor_list()
         ViewManager.display_all_mentors(mentors)
-
-
-u = UserDataBase()
-manager = ManagerController(u.mentor_container, u.student_container)
-manager.show_mentor_list(u.mentor_container)
-manager.edit_mentor(u.mentor_container)
-manager.show_mentor_list(u.mentor_container)
-

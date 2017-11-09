@@ -9,10 +9,8 @@ class ViewManager:
     def display_manager_menu(cls):
         manager_commands = ('Create new mentor', 'Edit existing mentor', 'Delete mentor', 'Show mentor list'
                             'Show student list', 'Go back')
-        for option in manager_commands:
-            print(str(manager_commands.index(option) + 1) + "----->" + option)
-        chosen_option = cls.get_user_input('Choose: ')
-        return chosen_option
+        cls.display_menu(manager_commands)
+        return cls.get_user_input('Choose: ')
 
     @staticmethod
     def input_mentor_info():
@@ -25,14 +23,16 @@ class ViewManager:
 
         return login, password, name, surname, phone_number
 
+    @staticmethod
+    def display_menu(options):
+        for option in options:
+            print(str(options.index(option) + 1) + "----->" + option)
 
     @classmethod
-    def select_edit_option(cls):
+    def display_edit_option(cls):
         edit_commands = ('Change name', 'Change surname', 'Change password', 'Change phone number', 'Go back')
-        for option in edit_commands:
-            print(str(edit_commands.index(option) + 1) + "----->" + option)
-        choosen_option = cls.get_user_input('Choose: ')
-        return choosen_option
+        cls.display_menu(edit_commands)
+        return cls.get_user_input('Choose: ')
 
     @staticmethod
     def display_all_mentors(mentors):
