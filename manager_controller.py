@@ -71,36 +71,34 @@ class ManagerController:
                     print('Enter numbers only!')
             elif edit_option == '5':
                 pass
+            
+    def convert_list(self, list):
+        users = ''
+        counter = 1
 
-    def show_students_list(self, student_container):
-        students = self.get_student_list(student_container)
+        for user in list:
+            users += (str(counter) + '.' + user.__str__()) + '\n'
+            counter += 1
+        return users
+
+
+    def prepare_student_list(self):
+        students_list = self.student_container.get_student_list()
+        return self.convert_list(students_list)
+
+    def show_students_list(self):
+        students = self.prepare_student_list()
         ViewMentor.display_all_students(students)
 
-    def get_student_list(self, student_container):
-        students = ''
-        counter = 1
-        students_list = student_container.get_student_list()
 
-        for student in students_list:
-            students += (str(counter) + '.' + student.__str__()) + '\n'
-            counter += 1
+    def prepare_mentor_list(self):
+        mentor_list = self.mentor_container.get_mentor_list()
+        return self.convert_list(mentor_list)
 
-        return students
-
-    def show_mentor_list(self, mentor_container):
-        mentors = self.get_mentor_list(mentor_container)
+    def show_mentor_list(self):
+        mentors = self.prepare_mentor_list()
         ViewManager.display_all_mentors(mentors)
 
-    def get_mentor_list(self, mentor_container):
-        mentors = ''
-        counter = 1
-        mentor_list = mentor_container.get_mentor_list()
-
-        for mentor in mentor_list:
-            mentors += (str(counter) + '.' + mentor.__str__()) + '\n'
-            counter += 1
-
-        return mentors
 
 u = UserDataBase()
 manager = ManagerController(u.mentor_container, u.student_container)
