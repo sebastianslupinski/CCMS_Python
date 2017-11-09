@@ -54,3 +54,7 @@ class UserDataBase:
             if user.login == login:
                 return False
         return True
+    
+    @classmethod
+    def remove_user_from_db(cls, user):
+        cls.user_list.remove(user)

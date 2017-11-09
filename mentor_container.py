@@ -9,14 +9,10 @@ class MentorContainer:
     def add_mentor(self, user):
         self.mentor_list.append(user)
         UserDataBase.add_user_to_db(user)
-        print(user)
-        print(UserDataBase.user_list)
 
-    def edit_mentor(self):
-        pass
-
-    def remove_mentor(self, index):
-        self.mentor_list.pop(index)
+    def remove_mentor(self, user):
+        self.mentor_list.remove(user)
+        UserDataBase.remove_user_from_db(user)
 
     def get_mentor_list(self):
         return self.mentor_list
