@@ -30,10 +30,10 @@ class ViewMentor:
             print(str(edit_commands.index(option) + 1) + "----->" + option)
         choosen_option = cls.get_user_input('Choose: ')
         return choosen_option
-
-    def display_all_students(MentorController):
-
-        print(MentorController.get_student_list(UserDataBase))
+    
+    @staticmethod
+    def display_all_students(students):
+        print(students)
 
     @staticmethod
     def get_user_input(message):
