@@ -93,3 +93,9 @@ class ManagerController:
     def show_mentor_list(self):
         mentors = self.prepare_mentor_list()
         ViewManager.display_all_mentors(mentors)
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> ab1d465c0e6590e914b6e061f0cb45377e9aee82

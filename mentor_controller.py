@@ -10,16 +10,18 @@ class MentorController:
         self.student_container = student_container
 
     def start(self):
-        user_choice = ViewMentor.display_menu()
-        if user_choice == '1':
-            self.add_student(self.student_container)
-        elif user_choice == '2':
-            self.show_students_list()
+        while True:
             user_choice = ViewMentor.display_menu()
-        elif user_choice == '3':
-            self.show_students_group(ViewMentor.choose_group())
-        elif user_choice == '4':
-            self.edit_student()
+            if user_choice == '1':
+                self.add_student()
+            elif user_choice == '2':
+                self.show_students_list()
+            elif user_choice == '3':
+                self.show_students_group(ViewMentor.choose_group())
+            elif user_choice == '4':
+                self.edit_student()
+            elif user_choice == '5':
+                break
 
     def create_student(self):
 
@@ -50,10 +52,10 @@ class MentorController:
 
     def show_students_list(self):
 
-        students = self.student_container.get_student_list()
+        students = self.prepare_student_list()
         ViewMentor.display_all_students(students)
 
-    def get_student_list(self):
+    def prepare_student_list(self):
 
         students = ''
         counter = 1
