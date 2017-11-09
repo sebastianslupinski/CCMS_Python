@@ -52,6 +52,7 @@ class MentorController:
             user.change_attribute_value('phone_number', ViewMentor.get_user_phone_number())
 
     def edit_student(self):
+        self.show_students_list()
         user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
         if not user:
             ViewMentor.custom_print('Wrong login name')

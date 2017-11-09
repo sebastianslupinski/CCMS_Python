@@ -10,6 +10,5 @@ class EmployeeContainer:
     def edit_employee(self):
         pass
 
-
     def remove_employee(self, index):
         self.employee_list.pop(index)
