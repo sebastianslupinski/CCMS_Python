@@ -1,4 +1,5 @@
 from employee_view import EmployeeView
+from user_controller import UserController
 
 
 class EmployeeController:
@@ -10,23 +11,7 @@ class EmployeeController:
         while True:
             user_choice = EmployeeView.display_employee_menu()
             if user_choice == '1':
-                self.show_students_list()
+                student_list = self.student_container.get_student_list()
+                UserController.show_user_list(student_list)
             elif user_choice == '2':
                 break
-
-    def show_students_list(self):
-
-        students = self.prepare_student_list()
-        EmployeeView.display_all_students(students)
-
-    def prepare_student_list(self):
-
-        students = ''
-        counter = 1
-        students_list = self.student_container.get_student_list()
-
-        for student in students_list:
-            students += (str(counter) + '.' + student.__str__()) + '\n'
-            counter += 1
-
-        return students
