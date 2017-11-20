@@ -48,3 +48,23 @@ class View:
         for option in options:
             print(str(options.index(option) + 1) + "----->" + option)
         print("\n9----->Log out\n0----->Quit")
+
+    @classmethod
+    def get_user_phone_number(cls):
+        phone_number_valid = False
+        while not phone_number_valid:
+            phone_number = cls.get_user_input('Please enter mentors phone number: ')
+            if cls.validate_phone_number(phone_number) is True:
+                phone_number_valid = True
+            else:
+                print('Invalid or too short input!')
+        return phone_number
+
+    @classmethod
+    def validate_phone_number(cls, phone_number):
+        MAX_LEN_PHONE_NUMBER = 9
+        if len(phone_number) == MAX_LEN_PHONE_NUMBER:
+            for number in phone_number:
+                if not number.isdigit():
+                    return False
+            return True

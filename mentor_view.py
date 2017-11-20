@@ -12,18 +12,6 @@ class ViewMentor(View):
         return cls.getch()
 
     @classmethod
-    def get_user_phone_number(cls):
-        while True:
-            phone_number = cls.get_user_input('Please enter mentors phone number: ')
-            if len(phone_number) == 9:
-                try:
-                    return int(phone_number)
-                except ValueError:
-                    print('Not a number input!')
-            else:
-                print('Invalid or too short input!')
-
-    @classmethod
     def input_student_info(cls):
 
         login = input("Please enter student's login: ")
