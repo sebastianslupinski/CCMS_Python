@@ -38,3 +38,7 @@ class View:
     @staticmethod
     def get_pass(message):
         return getpass.getpass(message)
+
+    @staticmethod
+    def display_user_table(users):
+        print(users)

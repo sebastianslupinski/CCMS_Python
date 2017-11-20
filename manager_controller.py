@@ -21,16 +21,19 @@ class ManagerController:
             elif user_choice == '3':
                 self.delete_mentor()
             elif user_choice == '4':
-                UserController.show_mentor_list(self.mentor_container.get_mentor_list())
+                mentor_list = self.mentor_container.get_mentor_list()
+                UserController.show_user_list(mentor_list)
             elif user_choice == '5':
-                UserController.show_students_list(self.student_container.get_student_list())
+                student_list = self.student_container.get_student_list()
+                UserController.show_user_list(student_list)
             elif user_choice == '9':
                 return False
             elif user_choice == '0':
                 return True
 
     def delete_mentor(self):
-        UserController.show_mentor_list(self.mentor_container.get_mentor_list())
+        mentor_list = self.mentor_container.get_mentor_list()
+        UserController.show_user_list(mentor_list)
         user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
         if not user:
             ViewManager.custom_print('Wrong login name')
@@ -56,7 +59,8 @@ class ManagerController:
             user.change_attribute_value('phone_number', ViewManager.get_user_phone_number())
 
     def edit_mentor(self):
-        UserController.show_mentor_list(self.mentor_container.get_mentor_list())
+        mentor_list = self.mentor_container.get_mentor_list()
+        UserController.show_user_list(mentor_list)
         user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
         if not user:
             ViewManager.custom_print('Wrong login name')

@@ -48,12 +48,3 @@ class ViewManager(View):
                     print('Not a number input!')
             else:
                 print('Invalid or too short input!')
-
-    @staticmethod
-    def display_all_mentors(mentors):
-        print(mentors)
-
-    @staticmethod
-    def display_all_students(students):
-        print(students)
-

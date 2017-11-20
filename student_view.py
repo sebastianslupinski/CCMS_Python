@@ -1,4 +1,7 @@
-class StudentView:
+from view import View
+
+
+class StudentView(View):
 
     @staticmethod
     def get_user_input(message):
