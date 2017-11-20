@@ -1,6 +1,7 @@
 from user_models import Student
 from view_mentor import ViewMentor
 from user_database import UserDataBase
+from user_controller import UserController
 
 
 class MentorController:
@@ -15,15 +16,13 @@ class MentorController:
             if user_choice == '1':
                 self.add_student()
             elif user_choice == '2':
-                self.show_students_list()
-                print("Press any key to continue...")
-                ViewMentor.getch()
+                student_list = self.student_container.get_student_list()
+                UserController.show_user_list(student_list)
             elif user_choice == '3':
                 self.delete_student()
             elif user_choice == '4':
-                self.show_students_group(ViewMentor.choose_group())
-                print("Press any key to continue...")
-                ViewMentor.getch()
+                group_list = self.student_container.get_student_group(ViewMentor.choose_group())
+                UserController.show_user_list(group_list)
             elif user_choice == '5':
                 self.edit_student()
             elif user_choice == '9':
@@ -32,7 +31,8 @@ class MentorController:
                 return True
 
     def delete_student(self):
-        self.show_students_list()
+        student_list = self.student_container.get_student_list()
+        UserController.show_user_list(student_list)
         user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of mentor: '))
         if not user:
             ViewMentor.custom_print('Wrong login name')
@@ -59,7 +59,8 @@ class MentorController:
             user.change_attribute_value('phone_number', ViewMentor.get_user_phone_number())
 
     def edit_student(self):
-        self.show_students_list()
+        student_list = self.student_container.get_student_list()
+        UserController.show_user_list(student_list)
         user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
         if not user:
             ViewMentor.custom_print('Wrong login name')
@@ -68,29 +69,3 @@ class MentorController:
             ViewMentor.clear_terminal()
             edit_option = ViewMentor.select_edit_option()
             self.chose_edit_options(edit_option, user)
-
-    def show_students_list(self):
-        ViewMentor.clear_terminal()
-        students = self.prepare_student_list()
-        ViewMentor.display_all_students(students)
-
-    def prepare_student_list(self):
-        students_list = self.student_container.get_student_list()
-        return self.convert_list(students_list)
-
-    def show_students_group(self, group):
-        ViewMentor.clear_terminal()
-        group_to_show = self.get_student_group(group)
-        ViewMentor.display_group(group_to_show)
-
-    def get_student_group(self, group):
-        group_list = self.student_container.get_student_group(group)
-        return self.convert_list(group_list)
-
-    def convert_list(self, list):
-        users = ''
-        counter = 1
-        for user in list:
-            users += (str(counter) + '.' + user.__str__()) + '\n'
-            counter += 1
-        return users
