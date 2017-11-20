@@ -42,3 +42,9 @@ class View:
     @staticmethod
     def display_user_table(users):
         print(users)
+
+    @staticmethod
+    def display_menu(options):
+        for option in options:
+            print(str(options.index(option) + 1) + "----->" + option)
+        print("\n9----->Log out\n0----->Quit")

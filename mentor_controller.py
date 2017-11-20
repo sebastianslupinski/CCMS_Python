@@ -1,5 +1,5 @@
 from user_models import Student
-from view_mentor import ViewMentor
+from mentor_view import ViewMentor
 from user_database import UserDataBase
 from user_controller import UserController
 

@@ -47,13 +47,13 @@ class RootController:
         return user
 
     def start(self):
-        close_cms = False
-        while not close_cms:
+        program_running = True
+        while program_running:
             self.view.clear_terminal()
             user = self.login()
             user_controller = self.get_controler(user)
-            close_cms = user_controller.start()
-            if close_cms is False:
+            program_running = user_controller.start()
+            if program_running is True:
                 continue
             UserDataBase.write_to_csv()
             self.view.clear_terminal()

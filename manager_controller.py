@@ -1,6 +1,5 @@
 from user_models import Mentor
 from manager_view import ViewManager
-from view_mentor import ViewMentor
 from user_controller import UserController
 
 
@@ -12,7 +11,7 @@ class ManagerController:
 
     def start(self):
         while True:
-            ViewMentor.clear_terminal()
+            ViewManager.clear_terminal()
             user_choice = ViewManager.display_manager_menu()
             if user_choice == '1':
                 self.add_mentor()
@@ -27,9 +26,9 @@ class ManagerController:
                 student_list = self.student_container.get_student_list()
                 UserController.show_user_list(student_list)
             elif user_choice == '9':
-                return False
-            elif user_choice == '0':
                 return True
+            elif user_choice == '0':
+                return False
 
     def delete_mentor(self):
         mentor_list = self.mentor_container.get_mentor_list()

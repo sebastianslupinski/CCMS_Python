@@ -3,10 +3,6 @@ from view import View
 
 class ViewManager(View):
 
-    @staticmethod
-    def get_user_input(message):
-        return input(message)
-
     @classmethod
     def display_manager_menu(cls):
         manager_commands = ('Create new mentor', 'Edit existing mentor', 'Delete mentor', 'Show mentor list',
@@ -24,12 +20,6 @@ class ViewManager(View):
         phone_number = cls.get_user_phone_number()
 
         return login, password, name, surname, phone_number
-
-    @staticmethod
-    def display_menu(options):
-        for option in options:
-            print(str(options.index(option) + 1) + "----->" + option)
-        print("\n9----->Log out\n0----->Quit")
 
     @classmethod
     def display_edit_option(cls):
