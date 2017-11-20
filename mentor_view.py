@@ -23,12 +23,6 @@ class ViewMentor(View):
             else:
                 print('Invalid or too short input!')
 
-    @staticmethod
-    def display_menu(options):
-        for option in options:
-            print(str(options.index(option) + 1) + "----->" + option)
-        print("\n9----->Log out\n0----->Quit")
-
     @classmethod
     def input_student_info(cls):
 
@@ -64,12 +58,3 @@ class ViewMentor(View):
             group_choice = ViewMentor.getch()
             if group_choice in ("a", "b"):
                 return group_choice
-
-    @staticmethod
-    def display_all_students(students):
-        print(students)
-
-    @staticmethod
-    def display_group(group):
-        print(group)
-

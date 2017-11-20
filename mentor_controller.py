@@ -26,9 +26,9 @@ class MentorController:
             elif user_choice == '5':
                 self.edit_student()
             elif user_choice == '9':
-                return False
-            elif user_choice == '0':
                 return True
+            elif user_choice == '0':
+                return False
 
     def delete_student(self):
         student_list = self.student_container.get_student_list()

@@ -1,5 +1,6 @@
 from student_view import StudentView
 
+
 class StudentController:
 
     def start(self):
@@ -9,8 +10,10 @@ class StudentController:
                 self.view_grades()
             elif user_choice == '2':
                 self.submit_assignment()
-            elif user_choice == '3':
-                break
+            elif user_choice == '9':
+                return True
+            elif user_choice == '0':
+                return False
 
     @staticmethod
     def submit_assignment():
