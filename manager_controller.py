@@ -11,6 +11,7 @@ class ManagerController:
 
     def start(self):
         while True:
+            ViewMentor.clear_terminal()
             user_choice = ViewManager.display_manager_menu()
             if user_choice == '1':
                 self.add_mentor()
@@ -22,8 +23,10 @@ class ManagerController:
                 self.show_mentor_list()
             elif user_choice == '5':
                 self.show_students_list()
-            elif user_choice == '6':
-                break
+            elif user_choice == '9':
+                return False
+            elif user_choice == '0':
+                return True
 
     def delete_mentor(self):
         self.show_mentor_list()
@@ -73,13 +76,19 @@ class ManagerController:
         return self.convert_list(students_list)
 
     def show_students_list(self):
+        ViewMentor.clear_terminal()
         students = self.prepare_student_list()
         ViewMentor.display_all_students(students)
+        print("Press any key to continue...")
+        ViewMentor.getch()
 
     def prepare_mentor_list(self):
         mentor_list = self.mentor_container.get_mentor_list()
         return self.convert_list(mentor_list)
 
     def show_mentor_list(self):
+        ViewMentor.clear_terminal()
         mentors = self.prepare_mentor_list()
         ViewManager.display_all_mentors(mentors)
+        print("Press any key to continue...")
+        ViewMentor.getch()

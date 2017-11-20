@@ -22,7 +22,7 @@ class StudentView:
 
     @classmethod
     def display_student_menu(cls):
-        student_commands = ('Display grades', 'Submit assignment','Go back')
+        student_commands = ('Display grades', 'Submit assignment', 'Go back')
         cls.display_menu(student_commands)
         return cls.get_user_input('Choose: ')
 

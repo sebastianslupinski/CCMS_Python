@@ -1,14 +1,15 @@
 import student_container
 from user_database import UserDataBase
+from root_controller_view import RootControllerView
 
 
-class ViewMentor:
+class ViewMentor(RootControllerView):
 
     @classmethod
     def display_mentor_menu(cls):
-        mentor_commands = ('Add new student', 'Show all students', 'Remove student', 'Show group', 'Edit student', 'Go back')
+        mentor_commands = ('Add new student', 'Show all students', 'Remove student', 'Show group', 'Edit student')
         cls.display_menu(mentor_commands)
-        return cls.get_user_input('Choose: ')
+        return cls.getch()
 
     @classmethod
     def get_user_phone_number(cls):
@@ -26,6 +27,7 @@ class ViewMentor:
     def display_menu(options):
         for option in options:
             print(str(options.index(option) + 1) + "----->" + option)
+        print("\n9----->Log out\n0----->Quit")
 
     @classmethod
     def input_student_info(cls):
@@ -48,20 +50,18 @@ class ViewMentor:
 
         return login, password, name, surname, phone_number, group
 
-    @staticmethod
-    def get_user_input(message):
-        return input(message)
-
     @classmethod
     def select_edit_option(cls):
         edit_commands = ('Change name', 'Change surname', 'Change password', 'Change phone number')
         cls.display_menu(edit_commands)
-        return cls.get_user_input('Choose: ')
+        return cls.getch()
 
     @classmethod
     def choose_group(cls):
         while True:
-            group_choice = input("Choose group to show (a or b)")
+            cls.clear_terminal()
+            print("Choose group to show (a or b)")
+            group_choice = ViewMentor.getch()
             if group_choice in ("a", "b"):
                 return group_choice
 
@@ -73,6 +73,3 @@ class ViewMentor:
     def display_group(group):
         print(group)
 
-    @staticmethod
-    def custom_print(message):
-        print(message)

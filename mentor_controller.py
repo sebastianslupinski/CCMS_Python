@@ -10,19 +10,26 @@ class MentorController:
 
     def start(self):
         while True:
+            ViewMentor.clear_terminal()
             user_choice = ViewMentor.display_mentor_menu()
             if user_choice == '1':
                 self.add_student()
             elif user_choice == '2':
                 self.show_students_list()
+                print("Press any key to continue...")
+                ViewMentor.getch()
             elif user_choice == '3':
                 self.delete_student()
             elif user_choice == '4':
                 self.show_students_group(ViewMentor.choose_group())
+                print("Press any key to continue...")
+                ViewMentor.getch()
             elif user_choice == '5':
                 self.edit_student()
-            elif user_choice == '6':
-                break
+            elif user_choice == '9':
+                return False
+            elif user_choice == '0':
+                return True
 
     def delete_student(self):
         self.show_students_list()
@@ -56,11 +63,14 @@ class MentorController:
         user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
         if not user:
             ViewMentor.custom_print('Wrong login name')
+            ViewMentor.getch()
         else:
+            ViewMentor.clear_terminal()
             edit_option = ViewMentor.select_edit_option()
             self.chose_edit_options(edit_option, user)
 
     def show_students_list(self):
+        ViewMentor.clear_terminal()
         students = self.prepare_student_list()
         ViewMentor.display_all_students(students)
 
@@ -69,6 +79,7 @@ class MentorController:
         return self.convert_list(students_list)
 
     def show_students_group(self, group):
+        ViewMentor.clear_terminal()
         group_to_show = self.get_student_group(group)
         ViewMentor.display_group(group_to_show)
 

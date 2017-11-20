@@ -23,14 +23,17 @@ class RootController:
         self.user_database = UserDataBase(self.student_container, self.mentor_container, self.employee_container)
 
     def login(self):
-        self.view.greet_user()
         while True:
+            self.view.greet_user()
             username = self.view.get_user_input("Type your username: \n")
             user = self.user_database.pick_user_by_login(username)
             if user:
+                self.view.clear_terminal()
                 password = self.view.get_pass("Type your password: \n")
                 if user.password == password:
                     return user
+            self.view.clear_terminal()
+            
 
     def get_controler(self, user):
         user_rank = user.rank
@@ -45,10 +48,16 @@ class RootController:
         return user
 
     def start(self):
-        user = self.login()
-        user_controller = self.get_controler(user)
-        user_controller.start()
-        UserDataBase.write_to_csv()
+        close_cms = False
+        while not close_cms:
+            self.view.clear_terminal()
+            user = self.login()
+            user_controller = self.get_controler(user)
+            close_cms = user_controller.start()
+            if close_cms is False:
+                continue
+            UserDataBase.write_to_csv()
+            self.view.clear_terminal()
 
 
 def main():
