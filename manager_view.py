@@ -1,6 +1,7 @@
-from root_controller_view import RootControllerView
+from view import View
 
-class ViewManager(RootControllerView):
+
+class ViewManager(View):
 
     @staticmethod
     def get_user_input(message):

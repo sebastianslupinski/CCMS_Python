@@ -2,7 +2,7 @@ from mentor_controller import MentorController
 from manager_controller import ManagerController
 from student_controller import StudentController
 from employee_controller import EmployeeController
-from root_controller_view import RootControllerView
+from view import View
 from user_database import UserDataBase
 from employee_container import EmployeeContainer
 from mentor_container import MentorContainer
@@ -12,7 +12,7 @@ from student_container import StudentContainer
 class RootController:
 
     def __init__(self):
-        self.view = RootControllerView
+        self.view = View()
         self.student_container = StudentContainer()
         self.mentor_container = MentorContainer()
         self.employee_container = EmployeeContainer()
@@ -33,7 +33,6 @@ class RootController:
                 if user.password == password:
                     return user
             self.view.clear_terminal()
-            
 
     def get_controler(self, user):
         user_rank = user.rank

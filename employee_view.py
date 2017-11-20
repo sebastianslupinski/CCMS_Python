@@ -1,5 +1,7 @@
+from view import View
 
-class EmployeeView():
+
+class EmployeeView(View):
 
     @classmethod
     def display_employee_menu(cls):

@@ -2,7 +2,7 @@ import getpass
 import os
 
 
-class RootControllerView:
+class View:
 
     @classmethod
     def get_user_input(cls, message=""):

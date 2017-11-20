@@ -1,9 +1,9 @@
 import student_container
 from user_database import UserDataBase
-from root_controller_view import RootControllerView
+from view import View
 
 
-class ViewMentor(RootControllerView):
+class ViewMentor(View):
 
     @classmethod
     def display_mentor_menu(cls):
