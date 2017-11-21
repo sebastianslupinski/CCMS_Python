@@ -7,7 +7,9 @@ class ViewMentor(View):
 
     @classmethod
     def display_mentor_menu(cls):
-        mentor_commands = ('Add new student', 'Show all students', 'Remove student', 'Show group', 'Edit student')
+        mentor_commands = (
+            'Add new student', 'Show all students', 'Remove student', 'Show group',
+            'Edit student', 'Create new assignment', 'Grade assignment', 'Check attendance')
         cls.display_menu(mentor_commands)
         return cls.getch()
 

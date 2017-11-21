@@ -2,6 +2,7 @@ from user_models import Student
 from mentor_view import ViewMentor
 from user_database import UserDataBase
 from user_controller import UserController
+from assignment_model import *
 
 
 class MentorController:
@@ -25,6 +26,15 @@ class MentorController:
                 UserController.show_user_list(group_list)
             elif user_choice == '5':
                 self.edit_student()
+            elif user_choice == '6':
+                AssignmentsModel.create_assignment(
+                    ViewMentor.get_user_input("For which class do you want to create an assignment:\n"),
+                    ViewMentor.get_user_input("Type assignment title:\n"),
+                    ViewMentor.get_user_input("Type assignment description:\n"))
+            elif user_choice == '7':
+                AssignmentsModel.grade()  
+            elif user_choice == '8':
+                self.check_attendance()                          
             elif user_choice == '9':
                 return True
             elif user_choice == '0':
