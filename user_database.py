@@ -36,12 +36,6 @@ class UserDataBase:
                         self.student_container.add_student_to_group(new_user, group)
 
     @classmethod
-    def write_to_csv(cls, filename='user_data.csv', mode='w'):
-        with open(filename, mode) as csv_file:
-            writer = csv.writer(csv_file)
-            writer.writerow(cls.user_list)
-
-    @classmethod
     def pick_user_by_login(cls, login):
         for user in cls.user_list:
             if user.login == login:
