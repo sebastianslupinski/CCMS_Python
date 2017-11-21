@@ -42,15 +42,14 @@ class ViewMentor(View):
         return cls.getch()
 
     @classmethod
-    def choose_group(cls):
+    def choose_group(cls, groups):
 
         choosing_group = True
 
         while choosing_group:
             
             cls.clear_terminal()
-            print("Choose group to show (a or b)")
-            group_choice = ViewMentor.getch()
-            if group_choice in ("a", "b"):
+            group_choice = cls.get_user_input("Choose group to show" + " (" + ", ".join(groups) + ")")
+            if group_choice in groups:
                 return group_choice
 

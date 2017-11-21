@@ -8,6 +8,7 @@ class StudentContainer:
         self.student_list = []
         self.group_a = []
         self.group_b = []
+        self.groups = ["a", "b"]
 
     def add_student(self, user):
         self.student_list.append(user)

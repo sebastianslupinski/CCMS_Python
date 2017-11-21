@@ -28,7 +28,7 @@ class MentorController(UserController):
             elif user_choice == '3':
                 self.delete_student()
             elif user_choice == '4':
-                group_list = self.student_container.get_student_group(ViewMentor.choose_group())
+                group_list = self.student_container.get_student_group(ViewMentor.choose_group(self.student_container.groups))
                 self.show_user_list(group_list)
             elif user_choice == '5':
                 self.edit_student()
@@ -38,8 +38,8 @@ class MentorController(UserController):
                     ViewMentor.get_user_input("Type assignment title:\n"),
                     ViewMentor.get_user_input("Type assignment description:\n"))
             elif user_choice == '7':
-                # self.assignment_model.get_assignments_by_group(ViewMentor.choose_group())
-                ViewMentor.custom_print(self.assignment_model.get_assignments_by_group(ViewMentor.choose_group()))
+                # self.assignment_model.get_assignments_by_group(ViewMentor.choose_group(self.student_container.groups))
+                ViewMentor.custom_print(self.assignment_model.get_assignments_by_group(ViewMentor.choose_group(self.student_container.groups)))
                 time.sleep(2)
             elif user_choice == '8':
                 self.check_attendance()                          
