@@ -68,3 +68,18 @@ class View:
                 if not number.isdigit():
                     return False
             return True
+
+    @staticmethod
+    def valid_data(message):
+
+        data_validation = False
+        while data_validation is False:
+
+            user_input = input(message)
+
+            if " " in user_input or "," in user_input:
+                continue
+            else:
+                data_validation = True
+
+        return user_input

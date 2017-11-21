@@ -13,10 +13,12 @@ class ViewManager(View):
     @classmethod
     def input_mentor_info(cls):
 
-        login = input("Please enter mentor's login: ")
-        password = input("Please enter password: ")
-        name = input("Please enter mentor's name: ")
-        surname = input("Please enter mentors's surname: ")
+        print("You are creating new user, remember you can't use ',' or spaces and phone number must be 9-digits")
+
+        login = View.valid_data("Please enter mentor's login: ")
+        password = View.valid_data("Please enter password: ")
+        name = View.valid_data("Please enter mentor's name: ")
+        surname = View.valid_data("Please enter mentors's surname: ")
         phone_number = cls.get_user_phone_number()
 
         return login, password, name, surname, phone_number
