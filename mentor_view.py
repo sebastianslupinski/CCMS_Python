@@ -53,3 +53,4 @@ class ViewMentor(View):
             group_choice = ViewMentor.getch()
             if group_choice in ("a", "b"):
                 return group_choice
+

@@ -1,7 +1,9 @@
 from user_models import Student
 from mentor_view import ViewMentor
 from user_controller import UserController
-from assignment_model import *
+from assignment_model import Assignment
+from assignment_model import AssignmentsModel
+import time
 
 
 class MentorController(UserController):
@@ -36,7 +38,9 @@ class MentorController(UserController):
                     ViewMentor.get_user_input("Type assignment title:\n"),
                     ViewMentor.get_user_input("Type assignment description:\n"))
             elif user_choice == '7':
-                AssignmentsModel.grade()  
+                # self.assignment_model.get_assignments_by_group(ViewMentor.choose_group())
+                ViewMentor.custom_print(self.assignment_model.get_assignments_by_group(ViewMentor.choose_group()))
+                time.sleep(2)
             elif user_choice == '8':
                 self.check_attendance()                          
             elif user_choice == '9':
