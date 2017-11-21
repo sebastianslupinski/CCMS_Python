@@ -50,12 +50,6 @@ class UserDataBase:
     def add_user_to_db(cls, user):
         cls.user_list.append(user)
 
-    def validate_login(self, login):
-        for user in self.user_list:
-            if user.login == login:
-                return False
-        return True
-
     @classmethod
     def remove_user_from_db(cls, user):
         cls.user_list.remove(user)

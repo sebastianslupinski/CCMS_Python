@@ -21,7 +21,7 @@ class ViewMentor(View):
         name = View.valid_data("Please enter student's name: ")
         surname = View.valid_data("Please enter student's surname: ")
         phone_number = cls.get_user_phone_number()
-        
+
         while True:
 
             group = input("Please enter a group 'a' or 'b': ")
