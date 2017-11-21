@@ -20,20 +20,7 @@ class ViewMentor(View):
         name = View.valid_data("Please enter student's name: ")
         surname = View.valid_data("Please enter student's surname: ")
         phone_number = cls.get_user_phone_number()
-
-        choosing_group = True
-
-        while choosing_group:
-
-            group = input("Please enter a group 'a' or 'b': ")
-
-            if group.lower() == 'a' or group.lower() == 'b':
-                choosing_group = False
-            else:
-                print("There is no group like this")
-                continue
-
-        return password, name, surname, phone_number, group
+        return password, name, surname, phone_number
 
     @classmethod
     def select_edit_option(cls):
@@ -42,14 +29,17 @@ class ViewMentor(View):
         return cls.getch()
 
     @classmethod
-    def choose_group(cls):
+    def choose_group(cls, classes):
 
         choosing_group = True
 
         while choosing_group:
             
             cls.clear_terminal()
-            print("Choose group to show (a or b)")
+            print(classes)
             group_choice = ViewMentor.getch()
             if group_choice in ("a", "b"):
                 return group_choice
+
+
+    

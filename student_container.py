@@ -6,18 +6,19 @@ class StudentContainer:
 
     def __init__(self):
         self.student_list = []
-        self.group_a = []
-        self.group_b = []
+        self.list_of_classes = {}
 
     def add_student(self, user):
         self.student_list.append(user)
         UserDataBase.add_user_to_db(user)
 
     def add_student_to_group(self, user, group):
-        if group == 'a':
-            self.group_a.append(user)
-        elif group == 'b':
-            self.group_b.append(user)
+        if group in self.list_of_classes.keys():
+            for key in self.list_of_classes:
+                if key == group:
+                    self.list_of_classes[key].append(user)
+        else:
+            self.list_of_classes[group] = [user]
 
     def edit_student(self):
         pass
@@ -30,10 +31,8 @@ class StudentContainer:
         return self.student_list
 
     def get_student_group(self, group):
-        if group == 'a':
-            return self.group_a
-        elif group == 'b':
-            return self.group_b
+        if group in self.list_of_classes.keys():
+            return self.list_of_classes[group]
 
     def pick_student_by_login(self, login):
         for user in self.student_list:

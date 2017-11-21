@@ -26,7 +26,7 @@ class MentorController(UserController):
             elif user_choice == '3':
                 self.delete_student()
             elif user_choice == '4':
-                group_list = self.student_container.get_student_group(ViewMentor.choose_group())
+                group_list = self.student_container.get_student_group(ViewMentor.choose_group(self.prepare_classes()))
                 self.show_user_list(group_list)
             elif user_choice == '5':
                 self.edit_student()
@@ -55,7 +55,8 @@ class MentorController(UserController):
 
     def create_student(self):
         login = self.create_new_login()
-        password, name, surname, phone_number, group = ViewMentor.input_student_info()
+        password, name, surname, phone_number = ViewMentor.input_student_info()
+        group = ViewMentor.choose_group(self.prepare_classes())
         return Student(login, password, name, surname, phone_number, group)
 
     def add_student(self):
@@ -84,3 +85,7 @@ class MentorController(UserController):
             ViewMentor.clear_terminal()
             edit_option = ViewMentor.select_edit_option()
             self.chose_edit_options(edit_option, user)
+
+    def prepare_classes(self):
+        classes = self.student_container.list_of_classes.keys()
+        return classes
