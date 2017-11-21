@@ -23,7 +23,11 @@ class RootController:
         self.user_database = UserDataBase(self.student_container, self.mentor_container, self.employee_container)
 
     def login(self):
-        while True:
+
+        login_procces = True
+
+        while login_procces:
+
             self.view.greet_user()
             username = self.view.get_user_input("Type your username: \n")
             user = self.user_database.pick_user_by_login(username)
@@ -47,8 +51,11 @@ class RootController:
         return user
 
     def start(self):
+
         program_running = True
+
         while program_running:
+            
             self.view.clear_terminal()
             user = self.login()
             user_controller = self.get_controler(user)

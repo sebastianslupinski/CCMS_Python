@@ -8,7 +8,11 @@ class EmployeeController(UserController):
         self.student_container = student_container
 
     def start(self):
-        while True:
+        
+        user_controller_is_running = True
+        
+        while user_controller_is_running:
+
             user_choice = EmployeeView.display_employee_menu()
             if user_choice == '1':
                 student_list = self.student_container.get_student_list()

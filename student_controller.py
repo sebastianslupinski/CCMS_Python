@@ -4,7 +4,11 @@ from student_view import StudentView
 class StudentController:
 
     def start(self):
-        while True:
+
+        user_controller_is_running = True
+
+        while user_controller_is_running:
+
             user_choice = StudentView.display_student_menu()
             if user_choice == '1':
                 self.view_grades()
