@@ -1,5 +1,6 @@
 import getpass
 import os
+import time
 
 
 class View:
@@ -13,6 +14,19 @@ class View:
     @staticmethod
     def clear_terminal():
         os.system('cls' if os.name == 'nt' else 'clear')
+
+    @staticmethod
+    def display_notification(notification, wait=None):
+        if notification:
+            View.clear_terminal()
+            print(notification)
+            if wait:
+                time.sleep(wait)
+                View.clear_terminal()
+            else:
+                print("Press any key...\n")
+                View.getch()
+                View.clear_terminal()
 
     @staticmethod
     def getch():
@@ -53,11 +67,11 @@ class View:
     def get_user_phone_number(cls):
         phone_number_valid = False
         while not phone_number_valid:
-            phone_number = cls.get_user_input("Please enter user phone number: ")
+            phone_number = cls.get_user_input("Please enter user's phone number: ")
             if cls.validate_phone_number(phone_number) is True:
                 phone_number_valid = True
             else:
-                print('Invalid or too short input!')
+                cls.display_notification('Invalid or too short input!')
         return phone_number
 
     @classmethod

@@ -3,7 +3,6 @@ from mentor_view import ViewMentor
 from user_controller import UserController
 from assignment_model import Assignment
 from assignment_model import AssignmentsModel
-import time
 
 
 class MentorController(UserController):
@@ -19,6 +18,8 @@ class MentorController(UserController):
         while user_controller_is_running:
 
             ViewMentor.clear_terminal()
+            ViewMentor.display_notification(self.notification, self.notification_visibility_time)
+            self.notification = None
             user_choice = ViewMentor.display_mentor_menu()
             if user_choice == '1':
                 self.add_student()
@@ -42,7 +43,7 @@ class MentorController(UserController):
             elif user_choice == '7':
                 # self.assignment_model.get_assignments_by_group(ViewMentor.choose_group(self.student_container.groups))
                 ViewMentor.custom_print(self.assignment_model.get_assignments_by_group(ViewMentor.choose_group(self.student_container.groups)))
-                time.sleep(2)
+                ViewMentor.getch()
             elif user_choice == '8':
                 self.check_attendance()                          
             elif user_choice == '9':
@@ -55,13 +56,15 @@ class MentorController(UserController):
         self.show_user_list(student_list)
         user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
         if not user:
-            ViewMentor.custom_print('Wrong login name')
+            ViewMentor.display_notification('Wrong login name')
         else:
             self.student_container.remove_student(user)
+            self.notification = "Student removed"
 
     def create_student(self):
         login = self.create_new_login()
         password, name, surname, phone_number, group = ViewMentor.input_student_info()
+        self.notification = "Student added"
         return Student(login, password, name, surname, phone_number, group)
 
     def add_student(self):
@@ -70,14 +73,19 @@ class MentorController(UserController):
         self.student_container.add_student_to_group(new_student, new_student.group)
 
     def chose_edit_options(self, edit_option, user):
-            if edit_option == '1':
-                user.change_attribute_value('name', ViewMentor.get_user_input('Input new name: '))
-            elif edit_option == '2':
-                user.change_attribute_value('surname', ViewMentor.get_user_input('Input new surname: '))
-            elif edit_option == '3':
-                user.change_attribute_value('password', ViewMentor.get_user_input('Input new password: '))
-            elif edit_option == '4':
-                user.change_attribute_value('phone_number', ViewMentor.get_user_phone_number())
+        ViewMentor.clear_terminal()
+        if edit_option == '1':
+            user.change_attribute_value('name', ViewMentor.get_user_input('Input new name: '))
+            ViewMentor.display_notification("Name changed", self.notification_visibility_time)
+        elif edit_option == '2':
+            user.change_attribute_value('surname', ViewMentor.get_user_input('Input new surname: '))
+            ViewMentor.display_notification("Surname changed", self.notification_visibility_time)
+        elif edit_option == '3':
+            user.change_attribute_value('password', ViewMentor.get_user_input('Input new password: '))
+            ViewMentor.display_notification("Password changed", self.notification_visibility_time)
+        elif edit_option == '4':
+            user.change_attribute_value('phone_number', ViewMentor.get_user_phone_number())
+            ViewMentor.display_notification("Phone number changed", self.notification_visibility_time)
 
     def edit_student(self):
         student_list = self.student_container.get_student_list()
