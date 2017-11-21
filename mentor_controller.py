@@ -5,7 +5,7 @@ from user_controller import UserController
 from assignment_model import *
 
 
-class MentorController:
+class MentorController(UserController):
 
     def __init__(self, student_container):
         self.student_container = student_container
@@ -19,12 +19,12 @@ class MentorController:
                 self.add_student()
             elif user_choice == '2':
                 student_list = self.student_container.get_student_list()
-                UserController.show_user_list(student_list)
+                self.show_user_list(student_list)
             elif user_choice == '3':
                 self.delete_student()
             elif user_choice == '4':
                 group_list = self.student_container.get_student_group(ViewMentor.choose_group())
-                UserController.show_user_list(group_list)
+                self.show_user_list(group_list)
             elif user_choice == '5':
                 self.edit_student()
             elif user_choice == '6':
@@ -43,7 +43,7 @@ class MentorController:
 
     def delete_student(self):
         student_list = self.student_container.get_student_list()
-        UserController.show_user_list(student_list)
+        self.show_user_list(student_list)
         user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of mentor: '))
         if not user:
             ViewMentor.custom_print('Wrong login name')
@@ -71,7 +71,7 @@ class MentorController:
 
     def edit_student(self):
         student_list = self.student_container.get_student_list()
-        UserController.show_user_list(student_list)
+        self.show_user_list(student_list)
         user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
         if not user:
             ViewMentor.custom_print('Wrong login name')

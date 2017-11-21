@@ -3,7 +3,7 @@ from manager_view import ViewManager
 from user_controller import UserController
 
 
-class ManagerController:
+class ManagerController(UserController):
 
     def __init__(self, mentor_container, student_container):
         self.mentor_container = mentor_container
@@ -21,10 +21,10 @@ class ManagerController:
                 self.delete_mentor()
             elif user_choice == '4':
                 mentor_list = self.mentor_container.get_mentor_list()
-                UserController.show_user_list(mentor_list)
+                self.show_user_list(mentor_list)
             elif user_choice == '5':
                 student_list = self.student_container.get_student_list()
-                UserController.show_user_list(student_list)
+                self.show_user_list(student_list)
             elif user_choice == '9':
                 return True
             elif user_choice == '0':
@@ -32,7 +32,7 @@ class ManagerController:
 
     def delete_mentor(self):
         mentor_list = self.mentor_container.get_mentor_list()
-        UserController.show_user_list(mentor_list)
+        self.show_user_list(mentor_list)
         user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
         if not user:
             ViewManager.custom_print('Wrong login name')
@@ -59,7 +59,7 @@ class ManagerController:
 
     def edit_mentor(self):
         mentor_list = self.mentor_container.get_mentor_list()
-        UserController.show_user_list(mentor_list)
+        self.show_user_list(mentor_list)
         user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
         if not user:
             ViewManager.custom_print('Wrong login name')
