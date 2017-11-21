@@ -1,6 +1,5 @@
 from user_models import Student
 from mentor_view import ViewMentor
-from user_database import UserDataBase
 from user_controller import UserController
 from assignment_model import *
 
@@ -51,7 +50,8 @@ class MentorController(UserController):
             self.student_container.remove_student(user)
 
     def create_student(self):
-        login, password, name, surname, phone_number, group = ViewMentor.input_student_info()
+        login = self.create_new_login()
+        password, name, surname, phone_number, group = ViewMentor.input_student_info()
         return Student(login, password, name, surname, phone_number, group)
 
     def add_student(self):

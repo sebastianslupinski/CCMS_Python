@@ -40,7 +40,8 @@ class ManagerController(UserController):
             self.mentor_container.remove_mentor(user)
 
     def create_mentor(self):
-        login, password, name, surname, phone_number = ViewManager.input_mentor_info()
+        login = self.create_new_login()
+        password, name, surname, phone_number = ViewManager.input_mentor_info()
         return Mentor(login, password, name, surname, phone_number)
 
     def add_mentor(self):

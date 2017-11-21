@@ -72,6 +72,7 @@ class View:
     @staticmethod
     def valid_data(message):
 
+        MIN_LOGIN_LENGHT = 3
         data_validation = False
         while data_validation is False:
 
@@ -79,7 +80,14 @@ class View:
 
             if " " in user_input or "," in user_input:
                 continue
+            elif len(user_input) < MIN_LOGIN_LENGHT:
+                continue
             else:
                 data_validation = True
 
         return user_input
+
+    @classmethod
+    def validate_login(cls):
+        print("You are creating new user, remember you can't use ',' or spaces and phone number must be 9-digits")
+        return cls.valid_data("Please enter new user login: ")
