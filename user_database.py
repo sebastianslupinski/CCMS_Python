@@ -41,18 +41,21 @@ class UserDataBase:
             writer = csv.writer(csv_file)
             writer.writerow(cls.user_list)
 
-    def pick_user_by_login(self, login):
-        for user in self.user_list:
+    @classmethod
+    def pick_user_by_login(cls, login):
+        for user in cls.user_list:
             if user.login == login:
                 return user
 
     @classmethod
     def add_user_to_db(cls, user):
         cls.user_list.append(user)
+        cls.write_to_csv()
 
     @classmethod
     def remove_user_from_db(cls, user):
         cls.user_list.remove(user)
+        cls.write_to_csv()
 
     @classmethod
     def prepare_user_list(cls):

@@ -14,9 +14,6 @@ class ViewMentor(View):
     @classmethod
     def input_student_info(cls):
 
-        print("You are creating new user, remember you can't use ',' or spaces and phone number must be 9-digits")
-
-        login = View.valid_data("Please enter student's login: ")
         password = View.valid_data("Please enter password: ")
         name = View.valid_data("Please enter student's name: ")
         surname = View.valid_data("Please enter student's surname: ")
@@ -32,7 +29,7 @@ class ViewMentor(View):
                 print("There is no group like this")
                 continue
 
-        return login, password, name, surname, phone_number, group
+        return password, name, surname, phone_number, group
 
     @classmethod
     def select_edit_option(cls):
