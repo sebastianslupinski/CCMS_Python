@@ -9,6 +9,7 @@ class MentorController:
 
     def __init__(self, student_container):
         self.student_container = student_container
+        self.assignment_model = AssignmentsModel(student_container)
 
     def start(self):
         while True:
@@ -27,7 +28,7 @@ class MentorController:
             elif user_choice == '5':
                 self.edit_student()
             elif user_choice == '6':
-                AssignmentsModel.create_assignment(
+                self.assignment_model.create_assignment(
                     ViewMentor.get_user_input("For which class do you want to create an assignment:\n"),
                     ViewMentor.get_user_input("Type assignment title:\n"),
                     ViewMentor.get_user_input("Type assignment description:\n"))

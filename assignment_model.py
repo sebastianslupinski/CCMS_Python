@@ -1,4 +1,5 @@
 import csv
+import pickle
 from student_container import StudentContainer
 
 
@@ -14,59 +15,55 @@ class Assignment:
 
 class AssignmentsModel:
 
-    @staticmethod
-    def read_from_file(file_name):
-        assignment_table = list(csv.reader(open(file_name, 'r', encoding="utf8"), delimiter=','))
-        return assignment_table
+    def __init__(self, student_container):
+        self.student_container = student_container
 
-    @classmethod
-    def create_assignment(cls, group, title, description):
+    def read_from_file(self, file_name):
+        assignments = []
+        while True:
+            with open(file_name, "rb") as file:
+                try:
+                    assignments.append(pickle.load(file))
+                except EOFError:
+                    break
+        return assignments
+
+    def create_assignment(self, group, title, description):
         group_assignment = []
-        logins = cls.get_group_logins(group)
+        logins = self.get_group_logins(group)
         for login in logins:
             group_assignment.append(Assignment(title, login, description, "", None))
-        assignment_list = cls.get_assignment_list()
+        assignment_list = self.read_from_file('assignment_data.csv')
         if not assignment_list:
             assignment_list = []
         assignment_list.extend(group_assignment)
-        cls.save_to_file(assignment_list)
+        self.save_to_file(assignment_list)
 
-    @staticmethod
-    def save_to_file(assignments):
-        with open('assignment_data.csv', 'w') as csv_file:
-            writer = csv.writer(csv_file)
-            writer.writerow(assignments.title)
+    def save_to_file(self, assignments):
+        with open('assignment_data.csv', 'wb') as file:
+            for assignment in assignments:
+                pickle.dump(assignment, file)
 
-    @staticmethod
-    def get_group_logins(group):
+    def get_group_logins(self, group):
         logins = []
-        for student in StudentContainer().get_student_group(group):
+        for student in self.student_container.get_student_group(group):
             logins.append(student.login)
         return logins
 
-    @classmethod
-    def get_assignment_list(cls):
-        assignment_list = []
-        for assignment in cls.read_from_file('assignment_data.csv'):
-            assignment_list.append(Assignment(*assignment))
-        return assignment_list
-
-    @classmethod
-    def get_assignments_by_login(cls, login):
+    def get_assignments_by_login(self, login):
         personal_asssignments = []
-        for assignment in cls.get_assignment_list():
+        for assignment in self.get_assignment_list():
             if login == assignment.login:
                 personal_asssignments.append(assignment)
         return personal_asssignments
 
-    @classmethod
-    def get_assignments_by_title(cls, title, login):
+    def get_assignments_by_title(self, title, login):
         assignments_with_title = []
-        for assignment in cls.get_assignments_by_login(login):
+        for assignment in self.get_assignments_by_login(login):
             if title == assignment.title:
                 assignments_with_title.append(assignment)
         return assignments_with_title
-
+    
 
 
 

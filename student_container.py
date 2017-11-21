@@ -32,7 +32,6 @@ class StudentContainer:
     def get_student_group(self, group):
         if group == 'a':
             return self.group_a
-
         elif group == 'b':
             return self.group_b
 
