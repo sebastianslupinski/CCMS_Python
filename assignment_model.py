@@ -19,14 +19,11 @@ class AssignmentsModel:
         self.student_container = student_container
 
     def read_from_file(self, file_name):
-        assignments = []
-        while True:
-            with open(file_name, "rb") as file:
-                try:
-                    assignments.append(pickle.load(file))
-                except EOFError:
-                    break
-        return assignments
+        assignment_table = list(csv.reader(open(file_name, 'r'), delimiter=','))
+        objects = []
+        for item in assignment_table:
+            objects.append(Assignment(*item))
+        return objects
 
     def create_assignment(self, group, title, description):
         group_assignment = []
@@ -40,9 +37,14 @@ class AssignmentsModel:
         self.save_to_file(assignment_list)
 
     def save_to_file(self, assignments):
-        with open('assignment_data.csv', 'wb') as file:
+        with open('assignment_data.csv', 'w') as file:
             for assignment in assignments:
-                pickle.dump(assignment, file)
+                file.write(
+                    assignment.title + "," +
+                    assignment.login + "," +
+                    assignment.description + "," +
+                    assignment.answer + "," +
+                    str(assignment.grade) + "\n")
 
     def get_group_logins(self, group):
         logins = []
