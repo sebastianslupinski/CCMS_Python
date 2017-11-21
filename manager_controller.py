@@ -10,7 +10,11 @@ class ManagerController(UserController):
         self.student_container = student_container
 
     def start(self):
-        while True:
+
+        user_controller_is_running = True
+
+        while user_controller_is_running:
+
             ViewManager.clear_terminal()
             user_choice = ViewManager.display_manager_menu()
             if user_choice == '1':

@@ -21,12 +21,14 @@ class ViewMentor(View):
         surname = View.valid_data("Please enter student's surname: ")
         phone_number = cls.get_user_phone_number()
 
-        while True:
+        choosing_group = True
+
+        while choosing_group:
 
             group = input("Please enter a group 'a' or 'b': ")
 
             if group.lower() == 'a' or group.lower() == 'b':
-                break
+                choosing_group = False
             else:
                 print("There is no group like this")
                 continue
@@ -41,7 +43,11 @@ class ViewMentor(View):
 
     @classmethod
     def choose_group(cls):
-        while True:
+
+        choosing_group = True
+
+        while choosing_group:
+            
             cls.clear_terminal()
             print("Choose group to show (a or b)")
             group_choice = ViewMentor.getch()

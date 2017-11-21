@@ -11,7 +11,11 @@ class MentorController(UserController):
         self.assignment_model = AssignmentsModel(student_container)
 
     def start(self):
-        while True:
+
+        user_controller_is_running = True
+
+        while user_controller_is_running:
+
             ViewMentor.clear_terminal()
             user_choice = ViewMentor.display_mentor_menu()
             if user_choice == '1':
