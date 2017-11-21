@@ -25,11 +25,13 @@ class MentorController(UserController):
             elif user_choice == '2':
                 student_list = self.student_container.get_student_list()
                 self.show_user_list(student_list)
+                ViewMentor.getch()
             elif user_choice == '3':
                 self.delete_student()
             elif user_choice == '4':
                 group_list = self.student_container.get_student_group(ViewMentor.choose_group(self.student_container.groups))
                 self.show_user_list(group_list)
+                ViewMentor.getch()
             elif user_choice == '5':
                 self.edit_student()
             elif user_choice == '6':
@@ -51,7 +53,7 @@ class MentorController(UserController):
     def delete_student(self):
         student_list = self.student_container.get_student_list()
         self.show_user_list(student_list)
-        user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of mentor: '))
+        user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
         if not user:
             ViewMentor.custom_print('Wrong login name')
         else:
@@ -68,14 +70,14 @@ class MentorController(UserController):
         self.student_container.add_student_to_group(new_student, new_student.group)
 
     def chose_edit_options(self, edit_option, user):
-        if edit_option == '1':
-            user.change_attribute_value('name', ViewMentor.get_user_input('Input new name: '))
-        elif edit_option == '2':
-            user.change_attribute_value('surname', ViewMentor.get_user_input('Input new surname: '))
-        elif edit_option == '3':
-            user.change_attribute_value('password', ViewMentor.get_user_input('Input new password: '))
-        elif edit_option == '4':
-            user.change_attribute_value('phone_number', ViewMentor.get_user_phone_number())
+            if edit_option == '1':
+                user.change_attribute_value('name', ViewMentor.get_user_input('Input new name: '))
+            elif edit_option == '2':
+                user.change_attribute_value('surname', ViewMentor.get_user_input('Input new surname: '))
+            elif edit_option == '3':
+                user.change_attribute_value('password', ViewMentor.get_user_input('Input new password: '))
+            elif edit_option == '4':
+                user.change_attribute_value('phone_number', ViewMentor.get_user_phone_number())
 
     def edit_student(self):
         student_list = self.student_container.get_student_list()
@@ -85,6 +87,8 @@ class MentorController(UserController):
             ViewMentor.custom_print('Wrong login name')
             ViewMentor.getch()
         else:
-            ViewMentor.clear_terminal()
-            edit_option = ViewMentor.select_edit_option()
-            self.chose_edit_options(edit_option, user)
+            edit_option = None
+            while edit_option != "0":
+                ViewMentor.clear_terminal()
+                edit_option = ViewMentor.select_edit_option()
+                self.chose_edit_options(edit_option, user)

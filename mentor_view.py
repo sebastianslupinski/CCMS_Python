@@ -37,8 +37,10 @@ class ViewMentor(View):
 
     @classmethod
     def select_edit_option(cls):
-        edit_commands = ('Change name', 'Change surname', 'Change password', 'Change phone number')
-        cls.display_menu(edit_commands)
+        options = ('Change name', 'Change surname', 'Change password', 'Change phone number')
+        for option in options:
+            print(str(options.index(option) + 1) + "----->" + option)
+        print("\n0----->Back\n")
         return cls.getch()
 
     @classmethod
@@ -49,7 +51,7 @@ class ViewMentor(View):
         while choosing_group:
             
             cls.clear_terminal()
-            group_choice = cls.get_user_input("Choose group to show" + " (" + ", ".join(groups) + ")")
+            group_choice = cls.get_user_input("Choose group to show" + " (" + ", ".join(groups) + ")\n")
             if group_choice in groups:
                 return group_choice
 

@@ -53,7 +53,7 @@ class View:
     def get_user_phone_number(cls):
         phone_number_valid = False
         while not phone_number_valid:
-            phone_number = cls.get_user_input('Please enter mentors phone number: ')
+            phone_number = cls.get_user_input("Please enter user phone number: ")
             if cls.validate_phone_number(phone_number) is True:
                 phone_number_valid = True
             else:
@@ -89,5 +89,6 @@ class View:
 
     @classmethod
     def validate_login(cls):
+        cls.clear_terminal()
         print("You are creating new user, remember you can't use ',' or spaces and phone number must be 9-digits")
         return cls.valid_data("Please enter new user login: ")

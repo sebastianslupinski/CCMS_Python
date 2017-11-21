@@ -6,11 +6,10 @@ from user_models import User
 class UserController():
 
     @classmethod
-    def show_user_list(cls,user_list):
+    def show_user_list(cls, user_list):
         View.clear_terminal()
         users = cls.convert_list(user_list)
         View.display_user_table(users)
-        View.getch()
 
     @staticmethod
     def convert_list(list):
