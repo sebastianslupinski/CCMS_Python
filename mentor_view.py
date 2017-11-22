@@ -1,6 +1,7 @@
 import student_container
 from user_database import UserDataBase
 from view import View
+import string
 
 
 class ViewMentor(View):
@@ -51,7 +52,46 @@ class ViewMentor(View):
         while choosing_group:
             
             cls.clear_terminal()
-            group_choice = cls.get_user_input("Choose group to show" + " (" + ", ".join(groups) + ")\n")
+            group_choice = cls.get_user_input("Choose group" + " (" + ", ".join(groups) + ")\n")
             if group_choice in groups:
                 return group_choice
 
+    @staticmethod
+    def choose_title(assignment_by_group):
+
+        titles = set()
+        for assignment in assignment_by_group:
+            titles.add(assignment.title)
+
+        title_not_choosen = True
+        while title_not_choosen:
+            ViewMentor.clear_terminal()
+            for title in titles:
+                print(title)
+            choose = input("\nChoose title:\n")
+            if choose in titles:
+                return choose
+
+    @staticmethod
+    def choose_login(assignment_by_title):
+        login_not_choosen = True
+        while login_not_choosen:
+            ViewMentor.clear_terminal()
+            logins = []
+            for assignment in assignment_by_title:
+                if not assignment.grade:
+                    logins.append(assignment.login)
+                    print(assignment.login)
+            choose = input("\nChoose login:\n")
+            if choose in logins:
+                return choose
+
+    @staticmethod
+    def show_assignment_for_grade(assignment):
+        assignment_not_graded = True
+        while assignment_not_graded:
+            View.clear_terminal()
+            print(assignment)
+            grade = input("\nGrade assignment:\n")
+            if grade in ("1", "2", "3", "4", "5"):
+                return grade

@@ -36,16 +36,21 @@ class MentorController(UserController):
             elif user_choice == '5':
                 self.edit_student()
             elif user_choice == '6':
+                ViewMentor.clear_terminal()
                 self.assignment_model.create_assignment(
-                    ViewMentor.get_user_input("For which class do you want to create an assignment:\n"),
+                    ViewMentor.choose_group(self.student_container.groups),
                     ViewMentor.get_user_input("Type assignment title:\n"),
                     ViewMentor.get_user_input("Type assignment description:\n"))
+                self.notification = "Assignmnent created!"
             elif user_choice == '7':
-                # self.assignment_model.get_assignments_by_group(ViewMentor.choose_group(self.student_container.groups))
-                ViewMentor.custom_print(self.assignment_model.get_assignments_by_group(ViewMentor.choose_group(self.student_container.groups)))
-                ViewMentor.getch()
+                group = ViewMentor.choose_group(self.student_container.groups)
+                title = ViewMentor.choose_title(self.assignment_model.get_assignments_by_group(group))
+                login = ViewMentor.choose_login(self.assignment_model.get_assignments_by_title(group, title))
+                grade = ViewMentor.show_assignment_for_grade(self.assignment_model.get_assignment(group, title, login))
+                self.assignment_model.grade_assignment(self.assignment_model.get_assignment(group, title, login), grade)
+                self.notification = "Assignment graded!"
             elif user_choice == '8':
-                self.check_attendance()                          
+                self.check_attendance()                        
             elif user_choice == '9':
                 return True
             elif user_choice == '0':
@@ -59,12 +64,12 @@ class MentorController(UserController):
             ViewMentor.display_notification('Wrong login name')
         else:
             self.student_container.remove_student(user)
-            self.notification = "Student removed"
+            self.notification = "Student removed!"
 
     def create_student(self):
         login = self.create_new_login()
         password, name, surname, phone_number, group = ViewMentor.input_student_info()
-        self.notification = "Student added"
+        self.notification = "Student added!"
         return Student(login, password, name, surname, phone_number, group)
 
     def add_student(self):
