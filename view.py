@@ -1,5 +1,6 @@
 import getpass
 import os
+import time
 
 
 class View:
@@ -15,17 +16,30 @@ class View:
         os.system('cls' if os.name == 'nt' else 'clear')
 
     @staticmethod
+    def display_notification(notification, wait=None):
+        if notification:
+            View.clear_terminal()
+            print(notification)
+            if wait:
+                time.sleep(wait)
+                View.clear_terminal()
+            else:
+                print("Press any key...\n")
+                View.getch()
+                View.clear_terminal()
+
+    @staticmethod
     def getch():
-        # import sys, tty, termios
-        # fd = sys.stdin.fileno()
-        # old_settings = termios.tcgetattr(fd)
-        # try:
-        #     tty.setraw(sys.stdin.fileno())
-        #     ch = sys.stdin.read(1)
-        # finally:
-        #     termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        # return ch
-        return input("")
+        import sys, tty, termios
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
+        # return input("")
 
     @staticmethod
     def greet_user():
@@ -53,11 +67,11 @@ class View:
     def get_user_phone_number(cls):
         phone_number_valid = False
         while not phone_number_valid:
-            phone_number = cls.get_user_input('Please enter mentors phone number: ')
+            phone_number = cls.get_user_input("Please enter user's phone number: ")
             if cls.validate_phone_number(phone_number) is True:
                 phone_number_valid = True
             else:
-                print('Invalid or too short input!')
+                cls.display_notification('Invalid or too short input!')
         return phone_number
 
     @classmethod
@@ -72,7 +86,7 @@ class View:
     @staticmethod
     def valid_data(message):
 
-        MIN_LOGIN_LENGHT = 3
+        MIN_DATA_LENGHT = 3
         data_validation = False
         while data_validation is False:
 
@@ -89,5 +103,6 @@ class View:
 
     @classmethod
     def validate_login(cls):
+        cls.clear_terminal()
         print("You are creating new user, remember you can't use ',' or spaces and phone number must be 9-digits")
         return cls.valid_data("Please enter new user login: ")

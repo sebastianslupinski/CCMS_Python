@@ -92,8 +92,6 @@ class MentorController(UserController):
             new_group = ViewMentor.choose_group_to_add_student(self.prepare_classes())
             user.change_student_group(new_group)
         
-        
-
     def edit_student(self):
         student_list = self.student_container.get_student_list()
         self.show_user_list(student_list)

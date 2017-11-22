@@ -1,14 +1,14 @@
 import csv
-import pickle
 from student_container import StudentContainer
 
 
 class Assignment:
 
-    def __init__(self, title, login, description, answer, grade):
+    def __init__(self, title, login, description, group, answer, grade):
         self.title = title
         self.login = login
         self.description = description
+        self.group = group
         self.answer = ""
         self.grade = 0
 
@@ -20,16 +20,16 @@ class AssignmentsModel:
 
     def read_from_file(self, file_name):
         assignment_table = list(csv.reader(open(file_name, 'r'), delimiter=','))
-        objects = []
+        assignment_objects = []
         for item in assignment_table:
-            objects.append(Assignment(*item))
-        return objects
+            assignment_objects.append(Assignment(*item))
+        return assignment_objects
 
     def create_assignment(self, group, title, description):
         group_assignment = []
         logins = self.get_group_logins(group)
         for login in logins:
-            group_assignment.append(Assignment(title, login, description, "", None))
+            group_assignment.append(Assignment(title, login, description, group, "", None))
         assignment_list = self.read_from_file('assignment_data.csv')
         if not assignment_list:
             assignment_list = []
@@ -43,6 +43,7 @@ class AssignmentsModel:
                     assignment.title + "," +
                     assignment.login + "," +
                     assignment.description + "," +
+                    assignment.group + "," +
                     assignment.answer + "," +
                     str(assignment.grade) + "\n")
 
@@ -65,9 +66,13 @@ class AssignmentsModel:
             if title == assignment.title:
                 assignments_with_title.append(assignment)
         return assignments_with_title
-    
 
-
+    def get_assignments_by_group(self, group):
+        assignment_by_group = []
+        for assignment in self.read_from_file('assignment_data.csv'):
+            if group == assignment.group:
+                assignment_by_group.append(assignment)
+        return assignment_by_group
 
 
 
