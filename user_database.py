@@ -32,8 +32,7 @@ class UserDataBase:
                     new_user = user_models.Student(*row[1:])
                     self.user_list.append(new_user)
                     self.student_container.student_list.append(new_user)
-                    if group == 'a' or group == 'b':
-                        self.student_container.add_student_to_group(new_user, group)
+                    self.student_container.add_student_to_group(new_user, group)
 
     @classmethod
     def pick_user_by_login(cls, login):

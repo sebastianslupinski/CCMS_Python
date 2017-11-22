@@ -30,7 +30,7 @@ class MentorController(UserController):
             elif user_choice == '3':
                 self.delete_student()
             elif user_choice == '4':
-                group_list = self.student_container.get_student_group(ViewMentor.choose_group(self.student_container.groups))
+                group_list = self.student_container.get_student_group(ViewMentor.choose_group(self.prepare_classes()))
                 self.show_user_list(group_list)
                 ViewMentor.getch()
             elif user_choice == '5':
@@ -63,8 +63,9 @@ class MentorController(UserController):
 
     def create_student(self):
         login = self.create_new_login()
-        password, name, surname, phone_number, group = ViewMentor.input_student_info()
-        self.notification = "Student added"
+        password, name, surname, phone_number = ViewMentor.input_student_info()
+        group = ViewMentor.choose_group(self.prepare_classes())
+        self.notification = "Student removed"
         return Student(login, password, name, surname, phone_number, group)
 
     def add_student(self):
@@ -95,8 +96,10 @@ class MentorController(UserController):
             ViewMentor.custom_print('Wrong login name')
             ViewMentor.getch()
         else:
-            edit_option = None
-            while edit_option != "0":
-                ViewMentor.clear_terminal()
-                edit_option = ViewMentor.select_edit_option()
-                self.chose_edit_options(edit_option, user)
+            ViewMentor.clear_terminal()
+            edit_option = ViewMentor.select_edit_option()
+            self.chose_edit_options(edit_option, user)
+
+    def prepare_classes(self):
+        classes = sorted(list(self.student_container.list_of_classes.keys()))
+        return classes
