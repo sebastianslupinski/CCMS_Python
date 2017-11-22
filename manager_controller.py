@@ -5,7 +5,8 @@ from user_controller import UserController
 
 class ManagerController(UserController):
 
-    def __init__(self, mentor_container, student_container):
+    def __init__(self, mentor_container, student_container, user):
+        self.user = user
         self.mentor_container = mentor_container
         self.student_container = student_container
 

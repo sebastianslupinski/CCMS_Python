@@ -7,8 +7,9 @@ from assignment_model import AssignmentsModel
 
 class MentorController(UserController):
 
-    def __init__(self, student_container):
+    def __init__(self, student_container, user):
         self.student_container = student_container
+        self.user = user
         self.assignment_model = AssignmentsModel(student_container)
 
     def start(self):
@@ -46,10 +47,13 @@ class MentorController(UserController):
             elif user_choice == '7':
                 group = ViewMentor.choose_group(self.student_container.list_of_classes)
                 title = ViewMentor.choose_title(self.assignment_model.get_assignments_by_group(group))
-                login = ViewMentor.choose_login(self.assignment_model.get_assignments_by_title(group, title))
-                grade = ViewMentor.show_assignment_for_grade(self.assignment_model.get_assignment(group, title, login))
-                self.assignment_model.grade_assignment(self.assignment_model.get_assignment(group, title, login), grade)
-                self.notification = "Assignment graded!"
+                if title:
+                    login = ViewMentor.choose_login(self.assignment_model.get_assignments_by_title(group, title))
+                    grade = ViewMentor.show_assignment_for_grade(self.assignment_model.get_assignment(group, title, login))
+                    self.assignment_model.grade_assignment(self.assignment_model.get_assignment(group, title, login), grade)
+                    self.notification = "Assignment graded!"
+                else:
+                    self.notification = 'No assignments here'
             elif user_choice == '8':
                 self.check_attendance()                        
             elif user_choice == '9':

@@ -4,8 +4,9 @@ from user_controller import UserController
 
 class EmployeeController(UserController):
 
-    def __init__(self, student_container):
+    def __init__(self, student_container, user):
         self.student_container = student_container
+        self.user = user
 
     def start(self):
         

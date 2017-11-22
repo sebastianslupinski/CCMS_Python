@@ -16,10 +16,6 @@ class RootController:
         self.student_container = StudentContainer()
         self.mentor_container = MentorContainer()
         self.employee_container = EmployeeContainer()
-        self.manager = ManagerController(self.mentor_container, self.student_container)
-        self.mentor = MentorController(self.student_container)
-        self.student = StudentController()
-        self.employee = EmployeeController(self.student_container)
         self.user_database = UserDataBase(self.student_container, self.mentor_container, self.employee_container)
 
     def login(self):
@@ -41,13 +37,13 @@ class RootController:
     def get_controler(self, user):
         user_rank = user.rank
         if user_rank == "manager":
-            user = self.manager
+            user = ManagerController(self.mentor_container, self.student_container, user)
         elif user_rank == "mentor":
-            user = self.mentor
+            user = MentorController(self.student_container, user)
         elif user_rank == "student":
-            user = self.student
+            user = StudentController(self.student_container, user)
         elif user_rank == "employee":
-            user = self.employee
+            user = EmployeeController(self.student_container, user)
         return user
 
     def start(self):

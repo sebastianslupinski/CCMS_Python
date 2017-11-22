@@ -59,19 +59,19 @@ class ViewMentor(View):
 
     @staticmethod
     def choose_title(assignment_by_group):
+        if assignment_by_group:
+            titles = set()
+            for assignment in assignment_by_group:
+                titles.add(assignment.title)
 
-        titles = set()
-        for assignment in assignment_by_group:
-            titles.add(assignment.title)
-
-        title_not_choosen = True
-        while title_not_choosen:
-            ViewMentor.clear_terminal()
-            for title in titles:
-                print(title)
-            choose = input("\nChoose title:\n")
-            if choose in titles:
-                return choose
+            title_not_choosen = True
+            while title_not_choosen:
+                ViewMentor.clear_terminal()
+                for title in titles:
+                    print(title)
+                choose = input("\nChoose title:\n")
+                if choose in titles:
+                    return choose
 
     @staticmethod
     def choose_login(assignment_by_title):

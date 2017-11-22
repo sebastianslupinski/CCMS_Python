@@ -1,7 +1,15 @@
 from student_view import StudentView
+from user_database import UserDataBase
+from assignment_model import Assignment
+from assignment_model import AssignmentsModel
 
 
 class StudentController:
+
+    def __init__(self, student_container, user):
+        self.student_container = student_container
+        self.user = user
+        self.assignment_model = AssignmentsModel(student_container)
 
     def start(self):
 
@@ -20,9 +28,10 @@ class StudentController:
                 return False
 
     @staticmethod
-    def submit_assignment():
+    def view_grades():
         StudentView.display_work()
 
     @staticmethod
-    def view_grades():
+    def submit_assignment():
         StudentView.display_work()
+
