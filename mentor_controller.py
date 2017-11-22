@@ -31,30 +31,13 @@ class MentorController(UserController):
             elif user_choice == '3':
                 self.delete_student()
             elif user_choice == '4':
-                group = ViewMentor.choose_group(self.prepare_classes())
-                if group in self.prepare_classes():
-                    group_list = self.student_container.get_student_group(group)
-                    self.show_user_list(group_list)
-                    ViewMentor.getch()
+                self.show_group()
             elif user_choice == '5':
                 self.edit_student()
             elif user_choice == '6':
-                ViewMentor.clear_terminal()
-                self.assignment_model.create_assignment(
-                    ViewMentor.choose_group(self.student_container.list_of_classes),
-                    ViewMentor.get_user_input("Type assignment title:\n"),
-                    ViewMentor.get_user_input("Type assignment description:\n"))
-                self.notification = "Assignmnent created!"
+                self.create_assignment()
             elif user_choice == '7':
-                group = ViewMentor.choose_group(self.student_container.list_of_classes)
-                title = ViewMentor.choose_title(self.assignment_model.get_assignments_by_group(group))
-                if title:
-                    login = ViewMentor.choose_login(self.assignment_model.get_assignments_by_title(group, title))
-                    grade = ViewMentor.show_assignment_for_grade(self.assignment_model.get_assignment(group, title, login))
-                    self.assignment_model.grade_assignment(self.assignment_model.get_assignment(group, title, login), grade)
-                    self.notification = "Assignment graded!"
-                else:
-                    self.notification = 'No assignments here'
+                self.grade_assignment()
             elif user_choice == '8':
                 self.check_attendance()                        
             elif user_choice == '9':
@@ -99,10 +82,7 @@ class MentorController(UserController):
             user.change_attribute_value('phone_number', ViewMentor.get_user_phone_number())
             ViewMentor.display_notification("Phone number changed", self.notification_visibility_time)
         elif edit_option == '5':
-            new_group = ViewMentor.choose_group_to_add_student(self.prepare_classes())
-            self.student_container.remove_student_from_group(user)
-            user.change_student_group(new_group)
-            self.student_container.add_student_to_group(user, new_group)
+            self.change_student_group(user)
 
     def edit_student(self):
         student_list = self.student_container.get_student_list()
@@ -120,3 +100,36 @@ class MentorController(UserController):
     def prepare_classes(self):
         classes = sorted(list(self.student_container.list_of_classes.keys()))
         return classes
+
+    def show_group(self):
+        group = ViewMentor.choose_group(self.prepare_classes())
+        if group in self.prepare_classes():
+            group_list = self.student_container.get_student_group(group)
+            self.show_user_list(group_list)
+            ViewMentor.getch()
+
+    def create_assignment(self):
+        ViewMentor.clear_terminal()
+        self.assignment_model.create_assignment(
+            ViewMentor.choose_group(self.student_container.list_of_classes),
+            ViewMentor.get_user_input("Type assignment title:\n"),
+            ViewMentor.get_user_input("Type assignment description:\n"))
+        self.notification = "Assignmnent created!"
+
+    def grade_assignment(self):
+        group = ViewMentor.choose_group(self.student_container.list_of_classes)
+        title = ViewMentor.choose_title(self.assignment_model.get_assignments_by_group(group))
+        if title:
+            login = ViewMentor.choose_login(self.assignment_model.get_assignments_by_title(group, title))
+            grade = ViewMentor.show_assignment_for_grade(self.assignment_model.get_assignment(group, title, login))
+            self.assignment_model.grade_assignment(self.assignment_model.get_assignment(group, title, login), grade)
+            self.notification = "Assignment graded!"
+        else:
+            self.notification = 'No assignments here'
+
+    def change_student_group(self, user):
+        new_group = ViewMentor.choose_group_to_add_student(self.prepare_classes())
+        self.student_container.remove_student_from_group(user)
+        user.change_student_group(new_group)
+        self.student_container.add_student_to_group(user, new_group)
+
