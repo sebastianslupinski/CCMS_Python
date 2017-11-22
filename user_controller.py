@@ -11,7 +11,7 @@ class UserController():
     @classmethod
     def show_user_list(cls, user_list):
         View.clear_terminal()
-        users = cls.convert_list(user_list)
+        users = cls.prepare_user_table(user_list)
         View.display_user_table(users)
 
     @staticmethod
@@ -47,3 +47,10 @@ class UserController():
                 continue
             else:
                 return login
+    
+    @staticmethod
+    def prepare_user_table(users):
+        data = []
+        for user in users:
+            data.append(str(user))
+        return data

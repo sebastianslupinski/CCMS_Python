@@ -26,7 +26,7 @@ class User:
 
         full_info = []
 
-        full_info.append("{} | {} {} | {} | {}".format(self.login, self.name, self.surname, self.email, self.phone_number))
+        full_info.append("{} {} {} {} {}".format(self.login, self.name, self.surname, self.email, self.phone_number))
 
         return " ".join(full_info)
 
