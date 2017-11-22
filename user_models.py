@@ -61,3 +61,6 @@ class Student(User):
         super().__init__(login, password, name, surname, phone_number)
         self.rank = "student"
         self.group = group
+
+    def change_student_group(self, new_group):
+        self.group = new_group

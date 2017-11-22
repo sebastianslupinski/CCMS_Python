@@ -86,7 +86,7 @@ class View:
     @staticmethod
     def valid_data(message):
 
-        MIN_LOGIN_LENGHT = 3
+        MIN_DATA_LENGHT = 3
         data_validation = False
         while data_validation is False:
 

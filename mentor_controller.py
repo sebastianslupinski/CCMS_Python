@@ -34,6 +34,7 @@ class MentorController(UserController):
                 if group in self.prepare_classes():
                     group_list = self.student_container.get_student_group(group)
                     self.show_user_list(group_list)
+                    ViewMentor.getch()
             elif user_choice == '5':
                 self.edit_student()
             elif user_choice == '6':
@@ -76,17 +77,20 @@ class MentorController(UserController):
     def chose_edit_options(self, edit_option, user):
         ViewMentor.clear_terminal()
         if edit_option == '1':
-            user.change_attribute_value('name', ViewMentor.get_user_input('Input new name: '))
+            user.change_attribute_value('name', ViewMentor.valid_data('Input new name: '))
             ViewMentor.display_notification("Name changed", self.notification_visibility_time)
         elif edit_option == '2':
-            user.change_attribute_value('surname', ViewMentor.get_user_input('Input new surname: '))
+            user.change_attribute_value('surname', ViewMentor.valid_data('Input new surname: '))
             ViewMentor.display_notification("Surname changed", self.notification_visibility_time)
         elif edit_option == '3':
-            user.change_attribute_value('password', ViewMentor.get_user_input('Input new password: '))
+            user.change_attribute_value('password', ViewMentor.valid_data('Input new password: '))
             ViewMentor.display_notification("Password changed", self.notification_visibility_time)
         elif edit_option == '4':
             user.change_attribute_value('phone_number', ViewMentor.get_user_phone_number())
             ViewMentor.display_notification("Phone number changed", self.notification_visibility_time)
+        elif edit_option == '5':
+            new_group = ViewMentor.choose_group_to_add_student(self.prepare_classes())
+            user.change_student_group(new_group)
 
     def edit_student(self):
         student_list = self.student_container.get_student_list()
