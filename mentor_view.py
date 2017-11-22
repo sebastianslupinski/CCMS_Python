@@ -37,7 +37,7 @@ class ViewMentor(View):
 
         while choosing_group:
 
-            cls.clear_terminal()
+            View.clear_terminal()
             cls.display_groups(classes)
             group_choice = ViewMentor.getch()
             if group_choice in classes:
@@ -48,5 +48,5 @@ class ViewMentor(View):
 
         print("Available classes are: ")
         for group in classes:
-
             print(group, end=' ')
+        print('\n')
