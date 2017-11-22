@@ -24,7 +24,7 @@ class AssignmentsModel:
         self.assignment_list = []
 
     def read_from_file(self, file_name):
-        assignment_table = list(csv.reader(open(file_name, 'r'), delimiter=','))
+        assignment_table = list(csv.reader(open(file_name, 'r'), delimiter='|'))
         assignment_objects = []
         for item in assignment_table:
             assignment_objects.append(Assignment(*item))
@@ -46,11 +46,11 @@ class AssignmentsModel:
         with open('assignment_data.csv', 'w') as file:
             for assignment in assignments:
                 file.write(
-                    assignment.title + "," +
-                    assignment.login + "," +
-                    assignment.description + "," +
-                    assignment.group + "," +
-                    assignment.answer + "," +
+                    assignment.title + "|" +
+                    assignment.login + "|" +
+                    assignment.description + "|" +
+                    assignment.group + "|" +
+                    assignment.answer + "|" +
                     str(assignment.grade) + "\n")
 
     def get_group_logins(self, group):

@@ -14,7 +14,7 @@ class UserDataBase:
 
     def read_from_csv(self, filename='user_data.csv'):
         with open(filename) as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter=',')
+            csv_reader = csv.reader(csv_file, delimiter='|')
             for row in csv_reader:
                 rank = row[0]
                 group = row[-1]
@@ -64,5 +64,5 @@ class UserDataBase:
     def write_to_csv(cls, filename='user_data.csv', mode='w'):
         user_list = cls.prepare_user_list()
         with open(filename, mode, newline='') as csv_file:
-            writer = csv.writer(csv_file)
+            writer = csv.writer(csv_file, delimiter="|")
             writer.writerows(user_list)

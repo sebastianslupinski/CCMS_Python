@@ -36,7 +36,7 @@ class ViewMentor(View):
 
         cls.clear_terminal()
         cls.display_groups(classes)
-        group_choice = ViewMentor.get_user_input('')
+        group_choice = ViewMentor.get_user_input('\n')
         return group_choice
 
     @classmethod
