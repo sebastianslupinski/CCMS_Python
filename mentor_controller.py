@@ -71,36 +71,48 @@ class MentorController(UserController):
         ViewMentor.clear_terminal()
         if edit_option == '1':
             user.change_attribute_value('name', ViewMentor.valid_data('Input new name: '))
-            ViewMentor.display_notification("Name changed", self.notification_visibility_time)
+            self.notification = "Name changed"
         elif edit_option == '2':
             user.change_attribute_value('surname', ViewMentor.valid_data('Input new surname: '))
-            ViewMentor.display_notification("Surname changed", self.notification_visibility_time)
+            self.notification = "Surname changed"
         elif edit_option == '3':
             user.change_attribute_value('password', ViewMentor.valid_data('Input new password: '))
-            ViewMentor.display_notification("Password changed", self.notification_visibility_time)
+            self.notification = "Password changed"
         elif edit_option == '4':
             user.change_attribute_value('phone_number', ViewMentor.get_user_phone_number())
-            ViewMentor.display_notification("Phone number changed", self.notification_visibility_time)
+            self.notification = "Phone number changed"
         elif edit_option == '5':
             self.change_student_group(user)
+            self.notification = "Group changed"
 
     def edit_student(self):
         student_list = self.student_container.get_student_list()
-        self.show_user_list(student_list)
-        user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
-        if not user:
-            ViewMentor.custom_print('Wrong login name')
-            ViewMentor.getch()
-        else:
-            edit_option_selected = False
-            while not edit_option_selected:
-                ViewMentor.clear_terminal()
-                edit_option = ViewMentor.select_edit_option()
-                if edit_option in ("1", "2", "3", "4", "5"):
-                    self.chose_edit_options(edit_option, user)
-                    self.student_container.save_edited_data()
-                elif edit_option == "0":
+        if student_list:
+            login_is_correct = False
+            edit_option = None
+            while not login_is_correct:
+                if edit_option == "0":
                     break
+                ViewMentor.clear_terminal()
+                ViewMentor.display_notification(self.notification, self.notification_visibility_time)
+                self.show_user_list(student_list)
+                user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
+                if not user:
+                    ViewMentor.display_notification('Wrong login name')
+                else:
+                    edit_option_selected = False
+                    while not edit_option_selected:
+                        ViewMentor.display_notification(self.notification, self.notification_visibility_time)
+                        self.notification = None
+                        ViewMentor.clear_terminal()
+                        edit_option = ViewMentor.select_edit_option()
+                        if edit_option in ("1", "2", "3", "4", "5"):
+                            self.chose_edit_options(edit_option, user)
+                            self.student_container.save_edited_data()
+                        elif edit_option == "0":
+                            break
+        else:
+            self.notification = "No students here"
 
     def prepare_classes(self):
         classes = sorted(list(self.student_container.list_of_classes.keys()))
@@ -112,14 +124,20 @@ class MentorController(UserController):
             group_list = self.student_container.get_student_group(group)
             self.show_user_list(group_list)
             ViewMentor.getch()
+        else:
+            self.notification = "No such group"
 
     def create_assignment(self):
         ViewMentor.clear_terminal()
-        self.assignment_model.create_assignment(
-            ViewMentor.choose_group(self.student_container.list_of_classes),
-            ViewMentor.get_user_input("Type assignment title:\n"),
-            ViewMentor.get_user_input("Type assignment description:\n"))
-        self.notification = "Assignmnent created!"
+        group = ViewMentor.choose_group(self.student_container.list_of_classes)
+        if group in self.prepare_classes():
+            ViewMentor.clear_terminal()
+            self.assignment_model.create_assignment(
+                group, ViewMentor.get_user_input("Type assignment title:\n"),
+                ViewMentor.get_user_input("Type assignment description:\n"))
+            self.notification = "Assignmnent created!"
+        else:
+            self.notification = "No such group"
 
     def grade_assignment(self):
         group = ViewMentor.choose_group(self.student_container.list_of_classes)
@@ -137,4 +155,5 @@ class MentorController(UserController):
         self.student_container.remove_student_from_group(user)
         user.change_student_group(new_group)
         self.student_container.add_student_to_group(user, new_group)
+
 
