@@ -78,9 +78,8 @@ class ViewMentor(View):
             ViewMentor.clear_terminal()
             logins = []
             for assignment in assignment_by_title:
-                if not assignment.grade:
-                    logins.append(assignment.login)
-                    print(assignment.login)
+                logins.append(assignment.login)
+                print(assignment.login)
             choose = input("\nChoose login:\n")
             if choose in logins:
                 return choose

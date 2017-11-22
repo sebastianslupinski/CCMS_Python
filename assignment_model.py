@@ -9,11 +9,12 @@ class Assignment:
         self.login = login
         self.description = description
         self.group = group
-        self.answer = ""
-        self.grade = 0
+        self.answer = answer
+        self.grade = grade
 
     def __str__(self):
-        return self.title + " " + self.login + " " + self.group + "\n\n" + self.description + "\n\n" + self.answer
+        return 'Title: ' + self.title + " " + 'Student_login: ' + self.login + " " + 'Group: ' + self.group + "\n\n" \
+               + 'Assignment_description: ' + self.description + "\n\n" + 'Student_answer: ' + self.answer
 
 
 class AssignmentsModel:
@@ -83,3 +84,15 @@ class AssignmentsModel:
                 assignment.grade = grade
                 self.save_to_file(self.assignment_list)
 
+    def get_student_assignments(self, user):
+        student_assignments = []
+        for assignment in self.read_from_file('assignment_data.csv'):
+            if assignment.login == user.login:
+                student_assignments.append(assignment)
+        return student_assignments
+
+    def add_student_answer(self, assignment, answer):
+        for item in self.assignment_list:
+            if assignment == item:
+                assignment.answer = answer
+                self.save_to_file(self.assignment_list)

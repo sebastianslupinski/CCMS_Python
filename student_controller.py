@@ -19,17 +19,21 @@ class StudentController:
 
             user_choice = StudentView.display_student_menu()
             if user_choice == '1':
-                self.view_grades()
+                StudentView.show_assignments(self.assignment_model.get_student_assignments(self.user))
+                StudentView.getch()
             elif user_choice == '2':
-                self.submit_assignment()
+                StudentView.show_assignments(self.assignment_model.get_student_assignments(self.user))
+                title = input('\nChoose assignment title:')
+                assignment_data = (self.user.group, title, self.user.login)
+                answer = StudentView.submit_assignment(self.assignment_model.get_assignment(*assignment_data))
+                self.assignment_model.add_student_answer(self.assignment_model.get_assignment(*assignment_data), answer)
             elif user_choice == '9':
                 return True
             elif user_choice == '0':
                 return False
 
-    @staticmethod
-    def view_grades():
-        StudentView.display_work()
+
+
 
     @staticmethod
     def submit_assignment():
