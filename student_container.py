@@ -37,3 +37,7 @@ class StudentContainer:
         for user in self.student_list:
             if user.login == login:
                 return user
+
+    @staticmethod
+    def save_edited_data():
+        UserDataBase.write_to_csv()
