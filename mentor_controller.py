@@ -87,5 +87,5 @@ class MentorController(UserController):
             self.chose_edit_options(edit_option, user)
 
     def prepare_classes(self):
-        classes = self.student_container.list_of_classes.keys()
+        classes = sorted(list(self.student_container.list_of_classes.keys()))
         return classes

@@ -7,10 +7,9 @@ mentor,D_Starzyk,cracoviapany,Dominik,Starzyk,123456789
 student,ja,fajny,JAJAJAJJAJA,ja,123123123,a
 student,hiihih,fajny,ja,je,123123123,a
 mentor,Michalek,michal,aaa,aaa,193231311
-<<<<<<< 5dfc7a8f60ad528ef4d6658c97ca36534df1491b
 student,jaja,asd,Jacek,Tze,123123123,a
-=======
 mentor,Adamm,Adamm,Adamm,Adamm,123456789
 mentor,misio,misio,misio,misio,123456789
 student,misio1,misio1,misio1,misio1,123456789,b
->>>>>>> remove unaccessary write_to_csv method
+student,seba,seba,seba,seba,123456789,c
+student,seba1,seba1,seba1,seba1,123456789,c

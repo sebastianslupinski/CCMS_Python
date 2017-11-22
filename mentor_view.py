@@ -34,12 +34,17 @@ class ViewMentor(View):
         choosing_group = True
 
         while choosing_group:
-            
+
             cls.clear_terminal()
-            print(classes)
+            cls.display_groups(classes)
             group_choice = ViewMentor.getch()
-            if group_choice in ("a", "b"):
+            if group_choice in classes:
                 return group_choice
 
+    @classmethod
+    def display_groups(cls, classes):
 
-    
+        print("Available classes are: ")
+        for group in classes:
+
+            print(group, end=' ')
