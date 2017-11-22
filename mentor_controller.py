@@ -92,10 +92,15 @@ class MentorController(UserController):
             ViewMentor.custom_print('Wrong login name')
             ViewMentor.getch()
         else:
-            ViewMentor.clear_terminal()
-            edit_option = ViewMentor.select_edit_option()
-            self.chose_edit_options(edit_option, user)
-            self.student_container.save_edited_data()        
+            edit_option_selected = False
+            while not edit_option_selected:
+                ViewMentor.clear_terminal()
+                edit_option = ViewMentor.select_edit_option()
+                if edit_option in ("1", "2", "3", "4", "5"):
+                    self.chose_edit_options(edit_option, user)
+                    self.student_container.save_edited_data()
+                elif edit_option == "0":
+                    break
 
     def prepare_classes(self):
         classes = sorted(list(self.student_container.list_of_classes.keys()))
