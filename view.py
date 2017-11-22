@@ -94,7 +94,7 @@ class View:
 
             if " " in user_input or "," in user_input:
                 continue
-            elif len(user_input) < MIN_LOGIN_LENGHT:
+            elif len(user_input) < MIN_DATA_LENGHT:
                 continue
             else:
                 data_validation = True
