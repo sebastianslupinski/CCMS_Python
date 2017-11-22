@@ -100,7 +100,9 @@ class MentorController(UserController):
             ViewMentor.display_notification("Phone number changed", self.notification_visibility_time)
         elif edit_option == '5':
             new_group = ViewMentor.choose_group_to_add_student(self.prepare_classes())
+            self.student_container.remove_student_from_group(user)
             user.change_student_group(new_group)
+            self.student_container.add_student_to_group(user, new_group)
 
     def edit_student(self):
         student_list = self.student_container.get_student_list()
@@ -113,8 +115,7 @@ class MentorController(UserController):
             ViewMentor.clear_terminal()
             edit_option = ViewMentor.select_edit_option()
             self.chose_edit_options(edit_option, user)
-            self.student_container.save_edited_data()
-        
+            self.student_container.save_edited_data()        
 
     def prepare_classes(self):
         classes = sorted(list(self.student_container.list_of_classes.keys()))

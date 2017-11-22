@@ -38,6 +38,9 @@ class StudentContainer:
             if user.login == login:
                 return user
 
+    def remove_student_from_group(self, user):
+        self.list_of_classes[user.group].remove(user)
+
     @staticmethod
     def save_edited_data():
         UserDataBase.write_to_csv()
