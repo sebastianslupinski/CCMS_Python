@@ -12,17 +12,22 @@ class Assignment:
         self.answer = ""
         self.grade = 0
 
+    def __str__(self):
+        return self.title + " " + self.login + " " + self.group + "\n\n" + self.description + "\n\n" + self.answer
+
 
 class AssignmentsModel:
 
     def __init__(self, student_container):
         self.student_container = student_container
+        self.assignment_list = []
 
     def read_from_file(self, file_name):
         assignment_table = list(csv.reader(open(file_name, 'r'), delimiter=','))
         assignment_objects = []
         for item in assignment_table:
             assignment_objects.append(Assignment(*item))
+        self.assignment_list = assignment_objects
         return assignment_objects
 
     def create_assignment(self, group, title, description):
@@ -49,23 +54,16 @@ class AssignmentsModel:
 
     def get_group_logins(self, group):
         logins = []
-        for student in self.student_container.get_student_group(group):
+        for student in self.student_container.list_of_classes[group]:
             logins.append(student.login)
         return logins
 
-    def get_assignments_by_login(self, login):
-        personal_asssignments = []
-        for assignment in self.get_assignment_list():
-            if login == assignment.login:
-                personal_asssignments.append(assignment)
-        return personal_asssignments
-
-    def get_assignments_by_title(self, title, login):
-        assignments_with_title = []
-        for assignment in self.get_assignments_by_login(login):
-            if title == assignment.title:
-                assignments_with_title.append(assignment)
-        return assignments_with_title
+    def get_assignments_by_title(self, group, title):
+        titles = []
+        for assignment in self.get_assignments_by_group(group):
+            if assignment.title == title:
+                titles.append(assignment)
+        return titles
 
     def get_assignments_by_group(self, group):
         assignment_by_group = []
@@ -74,7 +72,14 @@ class AssignmentsModel:
                 assignment_by_group.append(assignment)
         return assignment_by_group
 
-
-
-
+    def get_assignment(self, group, title, login):
+        for assignment in self.read_from_file('assignment_data.csv'):
+            if assignment.group == group and assignment.title == title and assignment.login == login:
+                return assignment
+    
+    def grade_assignment(self, assignment, grade):
+        for item in self.assignment_list:
+            if assignment == item:
+                assignment.grade = grade
+                self.save_to_file(self.assignment_list)
 
