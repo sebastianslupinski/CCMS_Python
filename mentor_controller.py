@@ -113,6 +113,8 @@ class MentorController(UserController):
             ViewMentor.clear_terminal()
             edit_option = ViewMentor.select_edit_option()
             self.chose_edit_options(edit_option, user)
+            self.student_container.save_edited_data()
+        
 
     def prepare_classes(self):
         classes = sorted(list(self.student_container.list_of_classes.keys()))
