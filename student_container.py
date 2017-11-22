@@ -31,8 +31,7 @@ class StudentContainer:
         return self.student_list
 
     def get_student_group(self, group):
-        if group in self.list_of_classes.keys():
-            return self.list_of_classes[group]
+        return self.list_of_classes[group]
 
     def pick_student_by_login(self, login):
         for user in self.student_list:
