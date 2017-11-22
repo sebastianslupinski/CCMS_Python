@@ -31,15 +31,19 @@ class ViewMentor(View):
     @classmethod
     def choose_group(cls, classes):
 
-        choosing_group = True
+        cls.clear_terminal()
+        cls.display_groups(classes)
+        group_choice = ViewMentor.getch()
+        return group_choice
 
-        while choosing_group:
+    @classmethod
+    def choose_group_to_add_student(cls, classes):
 
-            cls.clear_terminal()
-            cls.display_groups(classes)
-            group_choice = ViewMentor.getch()
-            if group_choice in classes:
-                return group_choice
+        cls.clear_terminal()
+        cls.display_groups(classes)
+        print("If you want to add new group, just type it's name: ")
+        group_choice = ViewMentor.getch()
+        return group_choice
 
     @classmethod
     def display_groups(cls, classes):
@@ -47,4 +51,4 @@ class ViewMentor(View):
         print("Available classes are: ")
         for group in classes:
 
-            print(group, end=' ')
+            print("class name: ", group)
