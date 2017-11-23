@@ -42,5 +42,5 @@ class StudentView(View):
     @staticmethod
     def show_attendance(attendance):
         View.clear_terminal()
-        print('Your attendance is {}%'.format(attendance.get_presence_average()*100))
+        print('Your attendance is {}%'.format(attendance.get_presence_average()))
         View.getch()
