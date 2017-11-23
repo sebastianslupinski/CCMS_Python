@@ -33,7 +33,7 @@ class ManagerController(UserController):
             elif user_choice == '5':
                 student_list = self.student_container.get_student_list()
                 self.show_user_list(student_list)
-                ViewManager.getch()
+                ViewManager.getch() 
             elif user_choice == '9':
                 return True
             elif user_choice == '0':
@@ -56,7 +56,7 @@ class ManagerController(UserController):
         while choosing_group:
 
             groups = ViewManager.input_guided_groups()
-                
+
             for group in groups:
                 if group not in self.student_container.list_of_classes.keys():
                     print("There is no group or groups like this")

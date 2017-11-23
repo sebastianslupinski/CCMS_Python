@@ -51,7 +51,7 @@ class ViewMentor(View):
     @classmethod
     def display_groups(cls, classes):
 
-        print("Available classes are: ")
+        print("Groups you guide are: ")
         for group in classes:
             print("class name: ", group)
 

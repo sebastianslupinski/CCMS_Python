@@ -121,7 +121,7 @@ class MentorController(UserController):
                 self.choose_edit_option(user, edit_option)
 
     def prepare_classes(self):
-        classes = sorted(list(self.student_container.list_of_classes.keys()))
+        classes = sorted(list(self.user.guided_groups))
         return classes
 
     def show_group(self):
@@ -135,7 +135,7 @@ class MentorController(UserController):
 
     def create_assignment(self):
         ViewMentor.clear_terminal()
-        group = ViewMentor.choose_group(self.student_container.list_of_classes)
+        group = ViewMentor.choose_group(self.prepare_classes())
         if group in self.prepare_classes():
             ViewMentor.clear_terminal()
             self.assignment_model.create_assignment(
@@ -146,7 +146,7 @@ class MentorController(UserController):
             self.notification = "No such group"
 
     def grade_assignment(self):
-        group = ViewMentor.choose_group(self.student_container.list_of_classes)
+        group = ViewMentor.choose_group(self.prepare_classes())
         title = ViewMentor.choose_title(self.assignment_model.get_assignments_by_group(group))
         if title:
             login = ViewMentor.choose_login(self.assignment_model.get_assignments_by_title(group, title))
