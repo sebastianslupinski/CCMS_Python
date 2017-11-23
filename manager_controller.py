@@ -13,7 +13,7 @@ class ManagerController(UserController):
     def start(self):
 
         user_controller_is_running = True
-
+        self.notification = "Welcome {}!".format(self.user.name)
         while user_controller_is_running:
 
             ViewManager.clear_terminal()
@@ -95,3 +95,4 @@ class ManagerController(UserController):
         else:
             edit_option = ViewManager.display_edit_option()
             self.chose_edit_options(edit_option, user)
+            self.mentor_container.save_edited_data()

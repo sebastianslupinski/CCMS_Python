@@ -2,9 +2,9 @@ from student_view import StudentView
 from user_database import UserDataBase
 from assignment_model import Assignment
 from assignment_model import AssignmentsModel
+from user_controller import UserController
 
-
-class StudentController:
+class StudentController(UserController):
 
     def __init__(self, student_container, user):
         self.student_container = student_container
@@ -14,9 +14,12 @@ class StudentController:
     def start(self):
 
         user_controller_is_running = True
-
+        self.notification = "Welcome {}!".format(self.user.name)
         while user_controller_is_running:
 
+            StudentView.clear_terminal()
+            StudentView.display_notification(self.notification, self.notification_visibility_time)
+            self.notification = None
             user_choice = StudentView.display_student_menu()
             if user_choice == '1':
                 assaignment = self.preapre_data_for_grade_table(self.assignment_model.get_student_assignments(self.user))

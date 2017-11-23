@@ -15,7 +15,7 @@ class MentorController(UserController):
     def start(self):
 
         user_controller_is_running = True
-
+        self.notification = "Welcome {}!".format(self.user.name)
         while user_controller_is_running:
 
             ViewMentor.clear_terminal()

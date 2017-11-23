@@ -11,9 +11,12 @@ class EmployeeController(UserController):
     def start(self):
 
         user_controller_is_running = True
-
+        self.notification = "Welcome {}!".format(self.user.name)
         while user_controller_is_running:
 
+            EmployeeView.clear_terminal()
+            EmployeeView.display_notification(self.notification, self.notification_visibility_time)
+            self.notification = None
             user_choice = EmployeeView.display_employee_menu()
             if user_choice == '1':
                 student_list = self.student_container.get_student_list()
