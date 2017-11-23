@@ -1,7 +1,7 @@
 from user_models import Mentor
 from manager_view import ViewManager
 from user_controller import UserController
-
+from assignment_model import AssignmentsModel
 
 class ManagerController(UserController):
 
@@ -10,6 +10,7 @@ class ManagerController(UserController):
         self.mentor_container = mentor_container
         self.student_container = student_container
         self.employee_container = employee_container
+        self.assignment_model = AssignmentsModel(student_container)
 
     def start(self):
         user_controller_is_running = True
@@ -36,7 +37,7 @@ class ManagerController(UserController):
                 ViewManager.getch()
             elif user_choice == '6':
                 student_list = self.student_container.get_student_list()
-                self.show_user_list(student_list)
+                self.show_student_list(student_list)
                 ViewManager.getch() 
             elif user_choice == '9':
                 return True
@@ -122,3 +123,17 @@ class ManagerController(UserController):
         users = self.prepare_user_table(mentor_list)
         ViewManager.display_mentor_table(users)
 
+    def prepare_student_table(self, users):
+        data = []
+        for user in users:
+            average_grade = self.assignment_model.get_grade_average(user)
+            if average_grade:
+                data.append((str(user) + " " + str(average_grade)))
+            else:
+                data.append((str(user) + ' X'))
+        return data
+
+    def show_student_list(self, student_list):
+        ViewManager.clear_terminal()
+        users = self.prepare_student_table(student_list)
+        ViewManager.display_student_table(users)

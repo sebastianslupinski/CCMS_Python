@@ -1,6 +1,7 @@
 import student_container
 from user_database import UserDataBase
 from view import View
+from prettytable import PrettyTable
 import string
 
 
@@ -93,3 +94,17 @@ class ViewMentor(View):
             grade = input("\nGrade assignment:\n")
             if grade in ("1", "2", "3", "4", "5"):
                 return grade
+    @staticmethod
+    def display_student_table(users):
+        table = PrettyTable(['Login', 'Name', 'Surname', 'Email', 'Phone_number', 'Grade'])
+        for user in users:
+            user = user.split(" ")
+            user_login = user[0]
+            user_name = user[1]
+            user_surname = user[2]
+            user_email = user[3]
+            user_phone_number = user[4]
+            user_grade = user[5]
+            table.add_row([user_login, user_name, user_surname, user_email, user_phone_number, user_grade])
+        table.align = 'l'
+        print(table)

@@ -31,7 +31,7 @@ class MentorController(UserController):
                 self.add_student()
             elif user_choice == '2':
                 student_list = self.student_container.get_student_list()
-                self.show_user_list(student_list)
+                self.show_student_list(student_list)
                 ViewMentor.getch()
             elif user_choice == '3':
                 self.delete_student()
@@ -171,3 +171,18 @@ class MentorController(UserController):
         self.student_container.remove_student_from_group(user)
         user.change_student_group(new_group)
         self.student_container.add_student_to_group(user, new_group)
+
+    def prepare_student_table(self, users):
+        data = []
+        for user in users:
+            average_grade = self.assignment_model.get_grade_average(user)
+            if average_grade:
+                data.append((str(user) + " " + str(average_grade)))
+            else:
+                data.append((str(user) + ' X'))
+        return data
+
+    def show_student_list(self, student_list):
+        ViewMentor.clear_terminal()
+        users = self.prepare_student_table(student_list)
+        ViewMentor.display_student_table(users)
