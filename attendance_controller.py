@@ -12,7 +12,7 @@ class AttendanceController(UserController):
     def add_new_attendance(self, attendance):
         self.attendance_model.read_attendaces_from_file()
         self.attendance_model.attendance_container.append(attendance)
-        self.attendance_model.read_attendaces_from_file()
+        self.attendance_model.save_attendances_to_file()
 
     def check_attendance(self):
         choose_group = AttendanceView.choose_group(self.student_container.list_of_classes)

@@ -180,7 +180,7 @@ class MentorController(UserController):
         for user in users:
             average_grade = self.assignment_model.get_grade_average(user)
             attendance = self.get_attendance(user)
-            average_attendance = attendance.get_presence_average() * 100
+            average_attendance = attendance.get_presence_average()
             if average_grade and average_attendance:
                 data.append((str(user) + " " + str(average_grade) + ' ' + str(average_attendance) +'%'))
             elif average_grade and not average_attendance:
