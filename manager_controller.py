@@ -121,11 +121,9 @@ class ManagerController(UserController):
     def show_mentor_list(self, mentor_list):
         ViewManager.clear_terminal()
         users = self.prepare_user_table(mentor_list)
-        print(users)
         ViewManager.display_mentor_table(users)
 
     def show_employee_list(self, employee_list):
         ViewManager.clear_terminal()
         users = self.prepare_user_table(employee_list)
-        print(users)
         ViewManager.display_employee_table(users)
