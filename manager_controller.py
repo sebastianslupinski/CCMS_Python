@@ -12,7 +12,6 @@ class ManagerController(UserController):
         self.employee_container = employee_container
 
     def start(self):
-
         user_controller_is_running = True
         self.notification = "Welcome {}!".format(self.user.name)
         while user_controller_is_running:
@@ -57,7 +56,7 @@ class ManagerController(UserController):
     def create_guided_groups(self):
 
         choosing_group = True
-
+        
         while choosing_group:
             ViewManager.display_groups(self.student_container.list_of_classes.keys())
             groups = ViewManager.input_guided_groups()

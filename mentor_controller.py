@@ -69,6 +69,9 @@ class MentorController(UserController):
         self.student_container.add_student(new_student)
         self.student_container.add_student_to_group(new_student, new_student.group)
 
+        if new_student.group not in self.user.guided_groups:
+            self.user.guided_groups.append(new_student.group)
+
     def manage_edit_options(self, edit_option, user):
         ViewMentor.clear_terminal()
         if edit_option == '1':
