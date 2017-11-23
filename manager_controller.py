@@ -88,11 +88,14 @@ class ManagerController(UserController):
 
     def edit_mentor(self):
         mentor_list = self.mentor_container.get_mentor_list()
-        self.show_user_list(mentor_list)
-        user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
-        if not user:
-            ViewManager.custom_print('Wrong login name')
+        if mentor_list:
+            self.show_user_list(mentor_list)
+            user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
+            if not user:
+                ViewManager.display_notification('Wrong login name')
+            else:
+                edit_option = ViewManager.display_edit_option()
+                self.chose_edit_options(edit_option, user)
+                self.mentor_container.save_edited_data()
         else:
-            edit_option = ViewManager.display_edit_option()
-            self.chose_edit_options(edit_option, user)
-            self.mentor_container.save_edited_data()
+            self.notification = "No mentors here"
