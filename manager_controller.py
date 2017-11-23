@@ -51,8 +51,8 @@ class ManagerController(UserController):
 
     def create_mentor(self):
         login = self.create_new_login()
-        password, name, surname, phone_number = ViewManager.input_mentor_info()
-        return Mentor(login, password, name, surname, phone_number)
+        password, name, surname, phone_number, guided_groups = ViewManager.input_mentor_info()
+        return Mentor(login, password, name, surname, phone_number, guided_groups)
 
     def add_mentor(self):
         new_mentor = self.create_mentor()
