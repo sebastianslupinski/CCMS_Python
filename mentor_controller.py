@@ -173,10 +173,22 @@ class MentorController(UserController):
             self.notification = 'No assignments here'
 
     def change_student_group(self, user):
+        old_group = user.group
         new_group = ViewMentor.choose_group_to_add_student(self.prepare_classes())
         self.student_container.remove_student_from_group(user)
         user.change_student_group(new_group)
         self.student_container.add_student_to_group(user, new_group)
+        if self.check_if_group_still_exist(old_group) is False:
+            self.user.guided_groups.remove(old_group)
+        if new_group not in self.user.guided_groups:
+            self.user.guided_groups.append(new_group)
+        self.student_container.save_edited_data()
+
+    def check_if_group_still_exist(self, old_group):
+        for key in self.student_container.list_of_classes:
+            if key == old_group:
+                return True
+        return False
 
     def prepare_student_table(self, users):
         data = []
