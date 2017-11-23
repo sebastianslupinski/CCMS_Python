@@ -25,6 +25,8 @@ class UserDataBase:
                     self.user_list.append(new_user)
                     self.employee_container.employee_list.append(new_user)
                 elif rank == 'mentor':
+                    group = group.split('§')
+                    row[-1] = group
                     new_user = user_models.Mentor(*row[1:])
                     self.user_list.append(new_user)
                     self.mentor_container.mentor_list.append(new_user)
@@ -57,6 +59,10 @@ class UserDataBase:
             user_data = [user.rank, user.login, user.password, user.name, user.surname, user.phone_number]
             if user.rank == "student":
                 user_data.append(user.group)
+            elif user.rank == 'mentor':
+                guided_groups = '§'.join(user.guided_groups)
+                print(guided_groups)
+                user_data.append(guided_groups)
             prepared_users_list.append(user_data)
         return prepared_users_list
 
