@@ -105,7 +105,7 @@ class View:
 
             user_input = input(message)
 
-            if " " in user_input or "," in user_input:
+            if " " in user_input or "|" in user_input:
                 continue
             elif len(user_input) < MIN_DATA_LENGHT:
                 continue
