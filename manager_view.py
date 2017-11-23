@@ -50,3 +50,10 @@ class ViewManager(View):
             table.add_row([user_login, user_name, user_surname, user_email, user_phone_number, user_guided_classes])
         table.align = 'l'
         print(table)
+
+    @classmethod
+    def display_groups(cls, classes):
+
+        print("All avaible classes are: ")
+        for group in classes:
+            print("class name: ", group)

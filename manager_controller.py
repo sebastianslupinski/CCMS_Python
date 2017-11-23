@@ -54,11 +54,11 @@ class ManagerController(UserController):
         choosing_group = True
 
         while choosing_group:
-
+            ViewManager.display_groups(self.student_container.list_of_classes.keys())
             groups = ViewManager.input_guided_groups()
 
             for group in groups:
-                if group not in self.student_container.list_of_classes.keys():
+                if group not in self.student_container.list_of_classes.keys() or len(group) < 1:
                     print("There is no group or groups like this")
                     choosing_group = True
                 else:
