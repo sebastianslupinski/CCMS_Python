@@ -117,5 +117,5 @@ class View:
     @classmethod
     def validate_login(cls):
         cls.clear_terminal()
-        print("You are creating new user, remember you can't use ',' or spaces and phone number must be 9-digits")
+        print("You are creating new user, remember you can't use '|' or spaces and phone number must be 9-digits")
         return cls.valid_data("Please enter new user login: ")

@@ -28,7 +28,7 @@ class ManagerController(UserController):
                 self.delete_mentor()
             elif user_choice == '4':
                 mentor_list = self.mentor_container.get_mentor_list()
-                self.show_user_list(mentor_list)
+                self.show_mentor_list(mentor_list)
                 ViewManager.getch()
             elif user_choice == '5':
                 student_list = self.student_container.get_student_list()
@@ -112,3 +112,9 @@ class ManagerController(UserController):
                     
         else:
             self.notification = "No mentors here"
+
+    def show_mentor_list(self, mentor_list):
+        ViewManager.clear_terminal()
+        users = self.prepare_user_table(mentor_list)
+        print(users)
+        ViewManager.display_mentor_table(users)
