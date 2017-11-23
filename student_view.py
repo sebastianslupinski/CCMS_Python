@@ -18,13 +18,26 @@ class StudentView(View):
         return cls.get_user_input('Choose: ')
 
     @staticmethod
-    def show_assignments(assignments):
+    def show_assignments_grades(assignments):
         View.clear_terminal()
-        table = PrettyTable(['Assaignments', 'Grades'])
+        table = PrettyTable(['Assignments', 'Grades'])
         for row in assignments:
             title = row[0]
             grade = row[1]
             table.add_row([title, grade])
+        table.align = 'l'
+        print(table)
+
+    @staticmethod
+    def show_assignmets(assignments):
+        View.clear_terminal()
+        table = PrettyTable(['Title', 'Description', 'Answer', 'Grade'])
+        for row in assignments:
+            title = row[0]
+            description = row[1]
+            answer = row[2]
+            grade = row[3]
+            table.add_row([title, description, answer, grade])
         table.align = 'l'
         print(table)
 
