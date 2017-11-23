@@ -3,6 +3,7 @@ from mentor_view import ViewMentor
 from user_controller import UserController
 from assignment_model import Assignment
 from assignment_model import AssignmentsModel
+from attendance_controller import AttendanceController
 
 
 class MentorController(UserController):
@@ -11,6 +12,7 @@ class MentorController(UserController):
         self.student_container = student_container
         self.user = user
         self.assignment_model = AssignmentsModel(student_container)
+        self.attendance_controller = AttendanceController(student_container)
 
     def start(self):
 
@@ -39,7 +41,7 @@ class MentorController(UserController):
             elif user_choice == '7':
                 self.grade_assignment()
             elif user_choice == '8':
-                self.check_attendance()                        
+                self.attendance_controller.check_attendance()
             elif user_choice == '9':
                 return True
             elif user_choice == '0':
