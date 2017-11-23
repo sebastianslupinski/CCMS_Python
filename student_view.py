@@ -1,4 +1,5 @@
 from view import View
+from prettytable import PrettyTable
 
 
 class StudentView(View):
@@ -19,9 +20,13 @@ class StudentView(View):
     @staticmethod
     def show_assignments(assignments):
         View.clear_terminal()
-        print('Your assignments: \n')
-        for assignment in assignments:
-            print('Title: ' + assignment.title + '\n' + 'Grade: ' + str(assignment.grade) + '\n')
+        table = PrettyTable(['Assaignments', 'Grades'])
+        for row in assignments:
+            title = row[0]
+            grade = row[1]
+            table.add_row([title, grade])
+        table.align = 'l'
+        print(table)
 
     @staticmethod
     def submit_assignment(assignment):

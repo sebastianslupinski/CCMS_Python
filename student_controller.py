@@ -19,7 +19,8 @@ class StudentController:
 
             user_choice = StudentView.display_student_menu()
             if user_choice == '1':
-                StudentView.show_assignments(self.assignment_model.get_student_assignments(self.user))
+                assaignment = self.preapre_data_for_grade_table(self.assignment_model.get_student_assignments(self.user))
+                StudentView.show_assignments(assaignment)
                 StudentView.getch()
             elif user_choice == '2':
                 StudentView.show_assignments(self.assignment_model.get_student_assignments(self.user))
@@ -32,10 +33,12 @@ class StudentController:
             elif user_choice == '0':
                 return False
 
-
-
+    def preapre_data_for_grade_table(self, assaignemts):
+        data = []
+        for assaignment in assaignemts:
+            data.append([assaignment.title, assaignment.grade])
+        return data
 
     @staticmethod
     def submit_assignment():
         StudentView.display_work()
-
