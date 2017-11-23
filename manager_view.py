@@ -17,9 +17,8 @@ class ViewManager(View):
         name = View.valid_data("Please enter mentor's name: ")
         surname = View.valid_data("Please enter mentors's surname: ")
         phone_number = cls.get_user_phone_number()
-        guided_groups = cls.input_guided_groups()
 
-        return password, name, surname, phone_number, guided_groups
+        return password, name, surname, phone_number
 
     @classmethod
     def input_guided_groups(cls):
@@ -32,4 +31,3 @@ class ViewManager(View):
         edit_commands = ('Change name', 'Change surname', 'Change password', 'Change phone number', 'Go back')
         cls.display_menu(edit_commands)
         return cls.get_user_input('Choose: ')
-

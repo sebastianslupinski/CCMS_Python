@@ -49,9 +49,27 @@ class ManagerController(UserController):
             self.mentor_container.remove_mentor(user)
             self.notification = "Mentor deleted"
 
+    def create_guided_groups(self):
+
+        choosing_group = True
+
+        while choosing_group:
+
+            groups = ViewManager.input_guided_groups()
+                
+            for group in groups:
+                if group not in self.student_container.list_of_classes.keys():
+                    print("There is no group or groups like this")
+                    choosing_group = True
+                else:
+                    choosing_group = False
+
+        return groups
+
     def create_mentor(self):
         login = self.create_new_login()
-        password, name, surname, phone_number, guided_groups = ViewManager.input_mentor_info()
+        password, name, surname, phone_number = ViewManager.input_mentor_info()
+        guided_groups = self.create_guided_groups()
         return Mentor(login, password, name, surname, phone_number, guided_groups)
 
     def add_mentor(self):
