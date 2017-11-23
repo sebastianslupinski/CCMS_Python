@@ -61,7 +61,6 @@ class UserDataBase:
                 user_data.append(user.group)
             elif user.rank == 'mentor':
                 guided_groups = '§'.join(user.guided_groups)
-                print(guided_groups)
                 user_data.append(guided_groups)
             prepared_users_list.append(user_data)
         return prepared_users_list
