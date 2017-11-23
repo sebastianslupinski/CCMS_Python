@@ -26,28 +26,20 @@ class StudentController(UserController):
             self.notification = None
             user_choice = StudentView.display_student_menu()
             if user_choice == '1':
-                assignment = self.preapre_data_for_grade_table(self.assignment_model.get_student_assignments(self.user))
-                StudentView.show_assignments_grades(assignment)
-                StudentView.getch()
+                self.display_grades()
             elif user_choice == '2':
-                assignments = self.prepare_data_for_assignments_table(self.assignment_model.get_student_assignments(self.user))
-                StudentView.show_assignmets(assignments)
-                title = input('\nChoose assignment title: \n')
-                assignment_data = (self.user.group, title, self.user.login)
-                assignment = self.assignment_model.get_assignment(*assignment_data)
-                if assignment:
-                    answer = StudentView.submit_assignment(assignment)
-                    self.assignment_model.add_student_answer(assignment, answer)
-                else:
-                    self.notification = "Incorrect assignment title"
+                self.submit_assignment()
             elif user_choice == '3':
-                average = self.get_attendance()
-                StudentView.show_attendance(average)
+                self.show_attendance()
             elif user_choice == '9':
                 return True
             elif user_choice == '0':
                 return False
 
+    def display_grades(self):
+        assignment = self.preapre_data_for_grade_table(self.assignment_model.get_student_assignments(self.user))
+        StudentView.show_assignments_grades(assignment)
+        StudentView.getch()
 
     def get_attendance(self):
         for attendance in self.attendance_model.read_attendaces_from_file():
@@ -66,4 +58,18 @@ class StudentController(UserController):
             data.append([assignment.title, assignment.description, assignment.answer, assignment.grade])
         return data
 
+    def submit_assignment(self):
+        assignments = self.prepare_data_for_assignments_table(self.assignment_model.get_student_assignments(self.user))
+        StudentView.show_assignmets(assignments)
+        title = input('\nChoose assignment title: \n')
+        assignment_data = (self.user.group, title, self.user.login)
+        assignment = self.assignment_model.get_assignment(*assignment_data)
+        if assignment:
+            answer = StudentView.submit_assignment(assignment)
+            self.assignment_model.add_student_answer(assignment, answer)
+        else:
+            self.notification = "Incorrect assignment title"
 
+    def show_attendance(self):
+        average = self.get_attendance()
+        StudentView.show_attendance(average)

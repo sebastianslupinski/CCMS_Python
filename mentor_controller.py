@@ -153,13 +153,16 @@ class MentorController(UserController):
         ViewMentor.clear_terminal()
         group = ViewMentor.choose_group(self.prepare_classes())
         if group in self.prepare_classes():
-            ViewMentor.clear_terminal()
-            self.assignment_model.create_assignment(
-                group, ViewMentor.get_user_input("Type assignment title:\n"),
-                ViewMentor.get_user_input("Type assignment description:\n"))
-            self.notification = "Assignmnent created!"
+            self.make_assignment(group)
         else:
             self.notification = "No such group"
+
+    def make_assignment(self, group):
+        ViewMentor.clear_terminal()
+        self.assignment_model.create_assignment(
+            group, ViewMentor.get_user_input("Type assignment title:\n"),
+            ViewMentor.get_user_input("Type assignment description:\n"))
+        self.notification = "Assignmnent created!"
 
     def grade_assignment(self):
         group = ViewMentor.choose_group(self.prepare_classes())

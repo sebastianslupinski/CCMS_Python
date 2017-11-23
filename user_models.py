@@ -27,21 +27,18 @@ class User:
         full_info = []
 
         full_info.append("{} {} {} {} {}".format(self.login, self.name, self.surname, self.email, self.phone_number))
-
         return " ".join(full_info)
 
 
 class Manager(User):
 
     def __init__(self, login, password, name, surname, phone_number):
-
         super().__init__(login, password, name, surname, phone_number)
         self.rank = "manager"
 
 class Mentor(User):
 
     def __init__(self, login, password, name, surname, phone_number, guided_groups):
-
         super().__init__(login, password, name, surname, phone_number)
         self.rank = "mentor"
         self.guided_groups = guided_groups
@@ -55,13 +52,11 @@ class Mentor(User):
 
         full_info.append("{} {} {} {} {} {}".format(self.login, self.name, self.surname, 
                                                     self.email, self.phone_number, self.change_groups_list_to_string()))
-
         return " ".join(full_info)
 
 class Employee(User):
 
     def __init__(self, login, password, name, surname, phone_number):
-
         super().__init__(login, password, name, surname, phone_number)
         self.rank = "employee"
 
