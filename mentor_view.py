@@ -96,7 +96,7 @@ class ViewMentor(View):
                 return grade
     @staticmethod
     def display_student_table(users):
-        table = PrettyTable(['Login', 'Name', 'Surname', 'Email', 'Phone_number', 'Grade'])
+        table = PrettyTable(['Login', 'Name', 'Surname', 'Email', 'Phone_number', 'Grade', 'Attendance'])
         for user in users:
             user = user.split(" ")
             user_login = user[0]
@@ -105,6 +105,13 @@ class ViewMentor(View):
             user_email = user[3]
             user_phone_number = user[4]
             user_grade = user[5]
-            table.add_row([user_login, user_name, user_surname, user_email, user_phone_number, user_grade])
+            user_attendance = user[6]
+            table.add_row([user_login, user_name, user_surname, user_email, user_phone_number, user_grade, user_attendance])
         table.align = 'l'
         print(table)
+
+    @staticmethod
+    def show_attendance(attendance):
+        View.clear_terminal()
+        print('Your attendance is {}%'.format(attendance.get_presence_average() * 100))
+        View.getch()

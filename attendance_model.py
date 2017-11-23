@@ -19,8 +19,11 @@ class Attendance:
         self.all_days += 1
 
     def get_presence_average(self):
-        average = round(self.present_days/self.all_days, 2)
-        return average
+        try:
+            average = round(self.present_days/self.all_days, 2)
+            return average
+        except ZeroDivisionError:
+            pass
 
 
 class AttendanceModel:

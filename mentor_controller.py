@@ -176,13 +176,25 @@ class MentorController(UserController):
         data = []
         for user in users:
             average_grade = self.assignment_model.get_grade_average(user)
-            if average_grade:
-                data.append((str(user) + " " + str(average_grade)))
+            attendance = self.get_attendance(user)
+            average_attendance = attendance.get_presence_average() * 100
+            if average_grade and average_attendance:
+                data.append((str(user) + " " + str(average_grade) + ' ' + str(average_attendance) +'%'))
+            elif average_grade and not average_attendance:
+                data.append((str(user) + " " + str(average_grade) + ' X'))
+            elif not average_grade and average_attendance:
+                data.append((str(user) + " X" + ' ' + str(average_attendance)+'%'))
             else:
-                data.append((str(user) + ' X'))
+                data.append((str(user) + ' X' + ' X'))
         return data
+
 
     def show_student_list(self, student_list):
         ViewMentor.clear_terminal()
         users = self.prepare_student_table(student_list)
         ViewMentor.display_student_table(users)
+
+    def get_attendance(self, user):
+        for attendance in self.attendance_model.read_attendaces_from_file():
+            if user.login == attendance.login:
+                return attendance
