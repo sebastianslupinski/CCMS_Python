@@ -21,3 +21,7 @@ class MentorContainer:
         for mentor in self.mentor_list:
             if mentor.login == login:
                 return mentor
+
+    @staticmethod
+    def save_edited_data():
+        UserDataBase.write_to_csv()

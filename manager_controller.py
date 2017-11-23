@@ -13,7 +13,7 @@ class ManagerController(UserController):
     def start(self):
 
         user_controller_is_running = True
-
+        self.notification = "Welcome {}!".format(self.user.name)
         while user_controller_is_running:
 
             ViewManager.clear_terminal()
@@ -33,7 +33,7 @@ class ManagerController(UserController):
             elif user_choice == '5':
                 student_list = self.student_container.get_student_list()
                 self.show_user_list(student_list)
-                ViewManager.getch()
+                ViewManager.getch() 
             elif user_choice == '9':
                 return True
             elif user_choice == '0':
@@ -49,31 +49,66 @@ class ManagerController(UserController):
             self.mentor_container.remove_mentor(user)
             self.notification = "Mentor deleted"
 
+    def create_guided_groups(self):
+
+        choosing_group = True
+
+        while choosing_group:
+
+            groups = ViewManager.input_guided_groups()
+
+            for group in groups:
+                if group not in self.student_container.list_of_classes.keys():
+                    print("There is no group or groups like this")
+                    choosing_group = True
+                else:
+                    choosing_group = False
+
+        return groups
+
     def create_mentor(self):
         login = self.create_new_login()
         password, name, surname, phone_number = ViewManager.input_mentor_info()
-        return Mentor(login, password, name, surname, phone_number)
+        guided_groups = self.create_guided_groups()
+        self.notification = "Mentor added!"
+        return Mentor(login, password, name, surname, phone_number, guided_groups)
 
     def add_mentor(self):
         new_mentor = self.create_mentor()
         self.mentor_container.add_mentor(new_mentor)
 
     def chose_edit_options(self, edit_option, user):
+        ViewManager.clear_terminal()
         if edit_option == '1':
             user.change_attribute_value('name', ViewManager.get_user_input('Input new name: ').capitalize())
+            self.notification = "Name changed"
         elif edit_option == '2':
             user.change_attribute_value('surname', ViewManager.get_user_input('Input new surname: ').capitalize())
+            self.notification = "Surname changed"
         elif edit_option == '3':
             user.change_attribute_value('password', ViewManager.get_user_input('Input new password: '))
+            self.notification = "Password changed"
         elif edit_option == '4':
             user.change_attribute_value('phone_number', ViewManager.get_user_phone_number())
+            self.notification = "Phone number changed"
 
     def edit_mentor(self):
         mentor_list = self.mentor_container.get_mentor_list()
-        self.show_user_list(mentor_list)
-        user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
-        if not user:
-            ViewManager.custom_print('Wrong login name')
+        if mentor_list:
+            self.show_user_list(mentor_list)
+            user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
+            if not user:
+                ViewManager.display_notification('Wrong login name')
+            else:
+                edit_option_selected = False
+                while not edit_option_selected:
+                    ViewManager.display_notification(self.notification, self.notification_visibility_time)
+                    self.notification = None
+                    edit_option = ViewManager.display_edit_option()
+                    if edit_option == "0":
+                        break
+                    self.chose_edit_options(edit_option, user)
+                    self.mentor_container.save_edited_data()
+                    
         else:
-            edit_option = ViewManager.display_edit_option()
-            self.chose_edit_options(edit_option, user)
+            self.notification = "No mentors here"

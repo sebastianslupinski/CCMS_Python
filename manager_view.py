@@ -21,8 +21,16 @@ class ViewManager(View):
         return password, name, surname, phone_number
 
     @classmethod
-    def display_edit_option(cls):
-        edit_commands = ('Change name', 'Change surname', 'Change password', 'Change phone number', 'Go back')
-        cls.display_menu(edit_commands)
-        return cls.get_user_input('Choose: ')
+    def input_guided_groups(cls):
 
+        groups = input("Please enter guided groups separated by ',': ")
+        return groups.split(",")
+
+    @classmethod
+    def display_edit_option(cls):
+        ViewManager.clear_terminal()
+        edit_commands = ('Change name', 'Change surname', 'Change password', 'Change phone number')
+        for option in edit_commands:
+            print(str(edit_commands.index(option) + 1) + "----->" + option)
+        print("\n0----->Back\n")
+        return cls.getch()
