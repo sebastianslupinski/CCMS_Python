@@ -26,8 +26,8 @@ class StudentController(UserController):
             self.notification = None
             user_choice = StudentView.display_student_menu()
             if user_choice == '1':
-                assaignment = self.preapre_data_for_grade_table(self.assignment_model.get_student_assignments(self.user))
-                StudentView.show_assignments_grades(assaignment)
+                assignment = self.preapre_data_for_grade_table(self.assignment_model.get_student_assignments(self.user))
+                StudentView.show_assignments_grades(assignment)
                 StudentView.getch()
             elif user_choice == '2':
                 assignments = self.prepare_data_for_assignments_table(self.assignment_model.get_student_assignments(self.user))
@@ -56,8 +56,8 @@ class StudentController(UserController):
 
     def preapre_data_for_grade_table(self, assaignemts):
         data = []
-        for assaignment in assaignemts:
-            data.append([assaignment.title, assaignment.grade])
+        for assignment in assaignemts:
+            data.append([assignment.title, assignment.grade])
         return data
 
     def prepare_data_for_assignments_table(self, assignemts):
