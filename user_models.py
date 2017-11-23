@@ -41,10 +41,11 @@ class Manager(User):
 
 class Mentor(User):
 
-    def __init__(self, login, password, name, surname, phone_number):
+    def __init__(self, login, password, name, surname, phone_number, guided_groups):
 
         super().__init__(login, password, name, surname, phone_number)
         self.rank = "mentor"
+        self.guided_groups = guided_groups
 
 
 class Employee(User):
