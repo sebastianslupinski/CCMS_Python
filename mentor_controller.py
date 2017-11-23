@@ -67,7 +67,7 @@ class MentorController(UserController):
         self.student_container.add_student(new_student)
         self.student_container.add_student_to_group(new_student, new_student.group)
 
-    def chose_edit_options(self, edit_option, user):
+    def manage_edit_options(self, edit_option, user):
         ViewMentor.clear_terminal()
         if edit_option == '1':
             user.change_attribute_value('name', ViewMentor.valid_data('Input new name: '))
@@ -88,31 +88,37 @@ class MentorController(UserController):
     def edit_student(self):
         student_list = self.student_container.get_student_list()
         if student_list:
-            login_is_correct = False
-            edit_option = None
-            while not login_is_correct:
-                if edit_option == "0":
-                    break
-                ViewMentor.clear_terminal()
-                ViewMentor.display_notification(self.notification, self.notification_visibility_time)
-                self.show_user_list(student_list)
-                user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
-                if not user:
-                    ViewMentor.display_notification('Wrong login name')
-                else:
-                    edit_option_selected = False
-                    while not edit_option_selected:
-                        ViewMentor.display_notification(self.notification, self.notification_visibility_time)
-                        self.notification = None
-                        ViewMentor.clear_terminal()
-                        edit_option = ViewMentor.select_edit_option()
-                        if edit_option in ("1", "2", "3", "4", "5"):
-                            self.chose_edit_options(edit_option, user)
-                            self.student_container.save_edited_data()
-                        elif edit_option == "0":
-                            break
+            self.check_if_login_is_correct(student_list)
         else:
             self.notification = "No students here"
+
+    def choose_edit_option(self, user, edit_option):
+        edit_option_selected = False
+        while not edit_option_selected:
+            ViewMentor.display_notification(self.notification, self.notification_visibility_time)
+            self.notification = None
+            ViewMentor.clear_terminal()
+            edit_option[0] = ViewMentor.select_edit_option()
+            if edit_option[0] in ("1", "2", "3", "4", "5"):
+                self.manage_edit_options(edit_option[0], user)
+                self.student_container.save_edited_data()
+            elif edit_option[0] == "0":
+                break
+
+    def check_if_login_is_correct(self, student_list):
+        login_is_correct = False
+        edit_option = [None]
+        while not login_is_correct:
+            if edit_option[0] == "0":
+                break
+            ViewMentor.clear_terminal()
+            ViewMentor.display_notification(self.notification, self.notification_visibility_time)
+            self.show_user_list(student_list)
+            user = self.student_container.pick_student_by_login(ViewMentor.get_user_input('Input login of student: '))
+            if not user:
+                ViewMentor.display_notification('Wrong login name')
+            else:
+                self.choose_edit_option(user, edit_option)
 
     def prepare_classes(self):
         classes = sorted(list(self.student_container.list_of_classes.keys()))
