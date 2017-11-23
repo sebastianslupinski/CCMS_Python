@@ -70,6 +70,7 @@ class ManagerController(UserController):
         login = self.create_new_login()
         password, name, surname, phone_number = ViewManager.input_mentor_info()
         guided_groups = self.create_guided_groups()
+        self.notification = "Mentor added!"
         return Mentor(login, password, name, surname, phone_number, guided_groups)
 
     def add_mentor(self):
@@ -77,14 +78,19 @@ class ManagerController(UserController):
         self.mentor_container.add_mentor(new_mentor)
 
     def chose_edit_options(self, edit_option, user):
+        ViewManager.clear_terminal()
         if edit_option == '1':
             user.change_attribute_value('name', ViewManager.get_user_input('Input new name: ').capitalize())
+            self.notification = "Name changed"
         elif edit_option == '2':
             user.change_attribute_value('surname', ViewManager.get_user_input('Input new surname: ').capitalize())
+            self.notification = "Surname changed"
         elif edit_option == '3':
             user.change_attribute_value('password', ViewManager.get_user_input('Input new password: '))
+            self.notification = "Password changed"
         elif edit_option == '4':
             user.change_attribute_value('phone_number', ViewManager.get_user_phone_number())
+            self.notification = "Phone number changed"
 
     def edit_mentor(self):
         mentor_list = self.mentor_container.get_mentor_list()
@@ -94,8 +100,15 @@ class ManagerController(UserController):
             if not user:
                 ViewManager.display_notification('Wrong login name')
             else:
-                edit_option = ViewManager.display_edit_option()
-                self.chose_edit_options(edit_option, user)
-                self.mentor_container.save_edited_data()
+                edit_option_selected = False
+                while not edit_option_selected:
+                    ViewManager.display_notification(self.notification, self.notification_visibility_time)
+                    self.notification = None
+                    edit_option = ViewManager.display_edit_option()
+                    if edit_option == "0":
+                        break
+                    self.chose_edit_options(edit_option, user)
+                    self.mentor_container.save_edited_data()
+                    
         else:
             self.notification = "No mentors here"
