@@ -17,6 +17,8 @@ class ManagerController(UserController):
         while user_controller_is_running:
 
             ViewManager.clear_terminal()
+            ViewManager.display_notification(self.notification, self.notification_visibility_time)
+            self.notification = None
             user_choice = ViewManager.display_manager_menu()
             if user_choice == '1':
                 self.add_mentor()
@@ -40,11 +42,12 @@ class ManagerController(UserController):
     def delete_mentor(self):
         mentor_list = self.mentor_container.get_mentor_list()
         self.show_user_list(mentor_list)
-        user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor: '))
+        user = self.mentor_container.pick_mentor_by_login(ViewManager.get_user_input('Input login of mentor to delete: '))
         if not user:
             ViewManager.custom_print('Wrong login name')
         else:
             self.mentor_container.remove_mentor(user)
+            self.notification = "Mentor deleted"
 
     def create_mentor(self):
         login = self.create_new_login()

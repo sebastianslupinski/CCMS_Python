@@ -13,7 +13,7 @@ class Assignment:
         self.grade = grade
 
     def __str__(self):
-        return 'Title: ' + self.title + " " + 'Student_login: ' + self.login + " " + 'Group: ' + self.group + "\n\n" \
+        return 'Title: ' + self.title + "    " + 'Student_login: ' + self.login + "   " + 'Group: ' + self.group + "\n\n" \
                + 'Assignment_description: ' + self.description + "\n\n" + 'Student_answer: ' + self.answer
 
 
