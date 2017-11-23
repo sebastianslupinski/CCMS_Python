@@ -4,6 +4,8 @@ from user_controller import UserController
 from assignment_model import Assignment
 from assignment_model import AssignmentsModel
 from attendance_controller import AttendanceController
+from attendance_model import AttendanceModel
+from attendance_model import Attendance
 
 
 class MentorController(UserController):
@@ -13,6 +15,7 @@ class MentorController(UserController):
         self.user = user
         self.assignment_model = AssignmentsModel(student_container)
         self.attendance_controller = AttendanceController(student_container)
+        self.attendance_model = AttendanceModel(student_container)
 
     def start(self):
 
@@ -61,6 +64,8 @@ class MentorController(UserController):
         login = self.create_new_login()
         password, name, surname, phone_number = ViewMentor.input_student_info()
         group = ViewMentor.choose_group_to_add_student(self.prepare_classes())
+        attendance = Attendance(login, 0, 0, group)
+        self.attendance_controller.add_new_attendance(attendance)
         self.notification = "Student added!"
         return Student(login, password, name, surname, phone_number, group)
 

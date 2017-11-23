@@ -39,6 +39,7 @@ class AttendanceModel:
                            str(attendance.all_days) + '|' +
                            attendance.group + "\n")
 
+
     def read_attendaces_from_file(self, file_name="attendance.csv"):
         attendance_table = list(csv.reader(open(file_name, 'r'), delimiter='|'))
         attendance_objects = []
@@ -54,14 +55,18 @@ class AttendanceModel:
                 group_attendance.append(attendance)
         return group_attendance
 
-    def get_student_data(self, group_attendance):
+    def get_group_data(self, group_attendance):
         student_data = []
         for attendance in group_attendance:
             login = attendance.login
-            for student in self.student_container.student_list:
-                if student.login == login:
-                    student_data.append((student.name, student.surname))
+            student = self.student_container.pick_student_by_login(login)
+            student_data.append((student.name, student.surname))
             return student_data
+
+    def get_student_data(self, student):
+        login = student.login
+        user = self.student_container.pick_student_by_login(login)
+        return user.name, user.surname
 
     def check_attendance(self, group_attendance, check):
         for attendance in group_attendance:
@@ -70,4 +75,3 @@ class AttendanceModel:
             else:
                 attendance.set_absence()
             self.save_attendances_to_file()
-

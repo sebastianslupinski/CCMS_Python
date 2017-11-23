@@ -20,13 +20,12 @@ class AttendanceView(View):
             print("class name: ", group)
 
     @classmethod
-    def display_student_to_check(cls, student_data):
+    def display_student_to_check(cls, student):
         student_not_checked = True
         while student_not_checked:
-            View.clear_terminal()
-            for student in student_data:
-                check = cls.get_user_input("Is {} present? y/n".format(student)).lower()
-                if check in ('y', 'n'):
-                    return check
+            # View.clear_terminal()
+            check = cls.get_user_input("Is {} present? y/n".format(student)).lower()
+            if check in ('y', 'n'):
+                return check
 
 
