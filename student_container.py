@@ -20,9 +20,6 @@ class StudentContainer:
         else:
             self.list_of_classes[group] = [user]
 
-    def edit_student(self):
-        pass
-
     def remove_student(self, user):
         self.student_list.remove(user)
         UserDataBase.remove_user_from_db(user)
