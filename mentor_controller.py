@@ -44,7 +44,8 @@ class MentorController(UserController):
             elif user_choice == '7':
                 self.grade_assignment()
             elif user_choice == '8':
-                self.attendance_controller.check_attendance()
+                mentor_groups = self.prepare_classes()
+                self.attendance_controller.check_attendance(mentor_groups)
             elif user_choice == '9':
                 return True
             elif user_choice == '0':
