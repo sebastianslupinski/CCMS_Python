@@ -37,7 +37,7 @@ class RootController:
     def get_controler(self, user):
         user_rank = user.rank
         if user_rank == "manager":
-            user = ManagerController(self.mentor_container, self.student_container, user)
+            user = ManagerController(self.mentor_container, self.employee_container, self.student_container, user)
         elif user_rank == "mentor":
             user = MentorController(self.student_container, user)
         elif user_rank == "student":

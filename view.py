@@ -31,16 +31,16 @@ class View:
 
     @staticmethod
     def getch():
-        # import sys, tty, termios
-        # fd = sys.stdin.fileno()
-        # old_settings = termios.tcgetattr(fd)
-        # try:
-        #     tty.setraw(sys.stdin.fileno())
-        #     ch = sys.stdin.read(1)
-        # finally:
-        #     termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-        # return ch
-        return input("")
+        import sys, tty, termios
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
+        # return input("")
 
     @staticmethod
     def greet_user():
@@ -117,5 +117,5 @@ class View:
     @classmethod
     def validate_login(cls):
         cls.clear_terminal()
-        print("You are creating new user, remember you can't use ',' or spaces and phone number must be 9-digits")
+        print("You are creating new user, remember you can't use '|' or spaces and phone number must be 9-digits")
         return cls.valid_data("Please enter new user login: ")

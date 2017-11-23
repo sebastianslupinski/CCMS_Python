@@ -5,13 +5,13 @@ from user_controller import UserController
 
 class ManagerController(UserController):
 
-    def __init__(self, mentor_container, student_container, user):
+    def __init__(self, mentor_container, employee_container, student_container, user):
         self.user = user
         self.mentor_container = mentor_container
         self.student_container = student_container
+        self.employee_container = employee_container
 
     def start(self):
-
         user_controller_is_running = True
         self.notification = "Welcome {}!".format(self.user.name)
         while user_controller_is_running:
@@ -28,9 +28,13 @@ class ManagerController(UserController):
                 self.delete_mentor()
             elif user_choice == '4':
                 mentor_list = self.mentor_container.get_mentor_list()
-                self.show_user_list(mentor_list)
+                self.show_mentor_list(mentor_list)
                 ViewManager.getch()
             elif user_choice == '5':
+                employee_list = self.employee_container.get_employee_list()
+                self.show_user_list(employee_list)
+                ViewManager.getch()
+            elif user_choice == '6':
                 student_list = self.student_container.get_student_list()
                 self.show_user_list(student_list)
                 ViewManager.getch() 
@@ -52,13 +56,13 @@ class ManagerController(UserController):
     def create_guided_groups(self):
 
         choosing_group = True
-
+        
         while choosing_group:
-
+            ViewManager.display_groups(self.student_container.list_of_classes.keys())
             groups = ViewManager.input_guided_groups()
 
             for group in groups:
-                if group not in self.student_container.list_of_classes.keys():
+                if group not in self.student_container.list_of_classes.keys() or len(group) < 1:
                     print("There is no group or groups like this")
                     choosing_group = True
                 else:
@@ -112,3 +116,9 @@ class ManagerController(UserController):
                     
         else:
             self.notification = "No mentors here"
+
+    def show_mentor_list(self, mentor_list):
+        ViewManager.clear_terminal()
+        users = self.prepare_user_table(mentor_list)
+        ViewManager.display_mentor_table(users)
+

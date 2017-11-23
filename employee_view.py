@@ -5,6 +5,6 @@ class EmployeeView(View):
 
     @classmethod
     def display_employee_menu(cls):
-        employee_commands = ('Show Student list', 'Go back')
+        employee_commands = ('Show Student list', 'Look pretty')
         cls.display_menu(employee_commands)
-        return cls.get_user_input('Choose: ')
+        return cls.getch()

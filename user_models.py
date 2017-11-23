@@ -38,7 +38,6 @@ class Manager(User):
         super().__init__(login, password, name, surname, phone_number)
         self.rank = "manager"
 
-
 class Mentor(User):
 
     def __init__(self, login, password, name, surname, phone_number, guided_groups):
@@ -47,6 +46,17 @@ class Mentor(User):
         self.rank = "mentor"
         self.guided_groups = guided_groups
 
+    def change_groups_list_to_string(self):
+        return ",".join(self.guided_groups)
+
+    def __str__(self):
+
+        full_info = []
+
+        full_info.append("{} {} {} {} {} {}".format(self.login, self.name, self.surname, 
+                                                    self.email, self.phone_number, self.change_groups_list_to_string()))
+
+        return " ".join(full_info)
 
 class Employee(User):
 

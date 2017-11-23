@@ -1,4 +1,5 @@
 from view import View
+from prettytable import PrettyTable
 
 
 class ViewManager(View):
@@ -6,7 +7,7 @@ class ViewManager(View):
     @classmethod
     def display_manager_menu(cls):
         manager_commands = ('Create new mentor', 'Edit existing mentor', 'Delete mentor', 'Show mentor list',
-                            'Show student list')
+                            'Show employee list', 'Show student list')
         cls.display_menu(manager_commands)
         return cls.getch()
 
@@ -34,3 +35,25 @@ class ViewManager(View):
             print(str(edit_commands.index(option) + 1) + "----->" + option)
         print("\n0----->Back\n")
         return cls.getch()
+
+    @staticmethod
+    def display_mentor_table(users):
+        table = PrettyTable(['Login', 'Name', 'Surname', 'Email', 'Phone_number', 'Guided Classes'])
+        for user in users:
+            user = user.split(" ")
+            user_login = user[0]
+            user_name = user[1] 
+            user_surname = user[2]
+            user_email = user[3]
+            user_phone_number = user[4]
+            user_guided_classes = user[5]
+            table.add_row([user_login, user_name, user_surname, user_email, user_phone_number, user_guided_classes])
+        table.align = 'l'
+        print(table)
+
+    @classmethod
+    def display_groups(cls, classes):
+
+        print("All avaible classes are: ")
+        for group in classes:
+            print("class name: ", group)

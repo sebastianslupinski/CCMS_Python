@@ -21,7 +21,10 @@ class EmployeeController(UserController):
             if user_choice == '1':
                 student_list = self.student_container.get_student_list()
                 self.show_user_list(student_list)
-            elif user_choice == '2' or user_choice == '9':
+                EmployeeView.getch()
+            elif user_choice == '2':
+                self.notification = "{}, you look pretty!".format(self.user.name)
+            elif user_choice == '9':
                 return True
             elif user_choice == '0':
                 return False
