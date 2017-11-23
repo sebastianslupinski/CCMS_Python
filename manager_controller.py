@@ -27,9 +27,11 @@ class ManagerController(UserController):
             elif user_choice == '4':
                 mentor_list = self.mentor_container.get_mentor_list()
                 self.show_user_list(mentor_list)
+                ViewManager.getch()
             elif user_choice == '5':
                 student_list = self.student_container.get_student_list()
                 self.show_user_list(student_list)
+                ViewManager.getch()
             elif user_choice == '9':
                 return True
             elif user_choice == '0':

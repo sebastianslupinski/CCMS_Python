@@ -14,23 +14,6 @@ class UserController():
         users = cls.prepare_user_table(user_list)
         View.display_user_table(users)
 
-    @staticmethod
-    def convert_list(list):
-        users = ''
-        counter = 1
-        for user in list:
-            users += (str(counter) + '.' + user.__str__()) + '\n'
-            counter += 1
-        return users
-
-    # @classmethod
-    # def check_if_login_in_database(cls, login):
-
-    #     if UserDataBase.pick_user_by_login(login) is True:
-    #         return True
-    #     else:
-    #         return False
-
     @classmethod
     def create_new_login(cls):
 
