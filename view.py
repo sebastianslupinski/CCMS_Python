@@ -9,7 +9,9 @@ class View:
     @classmethod
     def get_user_input(cls, message=""):
         if message:
-            return input(message)
+            user_input = input(message)
+            user_input = user_input.replace("|", "")
+            return user_input
         return cls.getch()
 
     @staticmethod

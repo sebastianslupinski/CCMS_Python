@@ -34,10 +34,10 @@ class StudentView(View):
         table.align = 'l'
         print(table)
 
-    @staticmethod
-    def submit_assignment(assignment):
+    @classmethod
+    def submit_assignment(cls, assignment):
         print('Title: ' + assignment.title + '\n\n' + 'Description: ' + assignment.description + '\n\n')
-        return input('Enter your answer below:\n\n')
+        return cls.get_user_input('Enter your answer below:\n\n')
 
     @staticmethod
     def show_attendance(attendance):
