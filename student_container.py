@@ -26,6 +26,7 @@ class StudentContainer:
     def remove_student(self, user):
         self.student_list.remove(user)
         UserDataBase.remove_user_from_db(user)
+        self.remove_student_from_group(user)
 
     def get_student_list(self):
         return self.student_list
@@ -40,6 +41,11 @@ class StudentContainer:
 
     def remove_student_from_group(self, user):
         self.list_of_classes[user.group].remove(user)
+
+        empty_group = []
+
+        if self.list_of_classes[user.group] == empty_group:
+            del self.list_of_classes[user.group]
 
     @staticmethod
     def save_edited_data():

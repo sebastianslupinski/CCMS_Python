@@ -9,9 +9,9 @@ class EmployeeController(UserController):
         self.user = user
 
     def start(self):
-        
+
         user_controller_is_running = True
-        
+
         while user_controller_is_running:
 
             user_choice = EmployeeView.display_employee_menu()
