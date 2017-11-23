@@ -163,5 +163,3 @@ class MentorController(UserController):
         self.student_container.remove_student_from_group(user)
         user.change_student_group(new_group)
         self.student_container.add_student_to_group(user, new_group)
-
-

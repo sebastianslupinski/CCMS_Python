@@ -122,3 +122,4 @@ class ManagerController(UserController):
         ViewManager.clear_terminal()
         users = self.prepare_user_table(mentor_list)
         ViewManager.display_mentor_table(users)
+
