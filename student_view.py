@@ -13,7 +13,7 @@ class StudentView(View):
 
     @classmethod
     def display_student_menu(cls):
-        student_commands = ('Display grades', 'Submit assignment')
+        student_commands = ('Display grades', 'Submit assignment', 'Show attendance')
         cls.display_menu(student_commands)
         return cls.get_user_input('Choose: ')
 
@@ -45,3 +45,9 @@ class StudentView(View):
     def submit_assignment(assignment):
         print('Title: ' + assignment.title + '\n\n' + 'Description: ' + assignment.description + '\n\n')
         return input('Enter your answer below:\n\n')
+
+    @staticmethod
+    def show_attendance(attendance):
+        View.clear_terminal()
+        print('Your attendance is {}%'.format(attendance.get_presence_average()*100))
+        View.getch()
