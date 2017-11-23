@@ -61,6 +61,7 @@ class MentorController(UserController):
             self.student_container.remove_student(user)
             if group not in self.student_container.list_of_classes.keys():
                 self.user.guided_groups.remove(group)
+                self.student_container.save_edited_data()
             self.notification = "Student removed!"
 
     def create_student(self):
