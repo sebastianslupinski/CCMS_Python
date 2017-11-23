@@ -20,7 +20,7 @@ class Attendance:
 
     def get_presence_average(self):
         try:
-            average = round(self.present_days/self.all_days, 2)
+            average = round(self.present_days/self.all_days, 2) * 100
             return average
         except ZeroDivisionError:
             pass
@@ -78,3 +78,10 @@ class AttendanceModel:
             else:
                 attendance.set_absence()
             self.save_attendances_to_file()
+
+    def delete_attendance(self, login):
+        for attendance in self.attendance_container:
+            if attendance.login == login:
+                self.attendance_container.remove(attendance)
+        self.save_attendances_to_file()
+        self.read_attendaces_from_file()

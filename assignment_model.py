@@ -100,10 +100,9 @@ class AssignmentsModel:
     def get_grade_average(self, user):
         grades = []
         for assignment in self.read_from_file('assignment_data.csv'):
-            if user.login ==  assignment.login:
+            if user.login == assignment.login:
                 if assignment.grade != 'None':
                     grades.append(int(assignment.grade))
         if len(grades) > 0:
             average = sum(grades)/len(grades)
             return average
-

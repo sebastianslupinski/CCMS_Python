@@ -58,6 +58,7 @@ class MentorController(UserController):
             ViewMentor.display_notification('Wrong login name')
         else:
             group = user.group
+            self.attendance_model.delete_attendance(user.login)
             self.student_container.remove_student(user)
             if group not in self.student_container.list_of_classes.keys():
                 self.user.guided_groups.remove(group)

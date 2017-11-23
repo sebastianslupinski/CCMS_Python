@@ -21,3 +21,6 @@ class AttendanceController(UserController):
             for student in group_attendance:
                 student_attendance = AttendanceView.display_student_to_check(self.attendance_model.get_student_data(student))
                 self.attendance_model.check_attendance(group_attendance, student_attendance)
+
+    def delete_old_attendance(self, login):
+        self.attendance_model.delete_attendance(login)
