@@ -183,6 +183,8 @@ class MentorController(UserController):
         if new_group not in self.user.guided_groups:
             self.user.guided_groups.append(new_group)
         self.student_container.save_edited_data()
+        attendance = self.get_attendance(user)
+        attendance.group = new_group
 
     def check_if_group_still_exist(self, old_group):
         for key in self.student_container.list_of_classes:
