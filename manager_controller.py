@@ -5,10 +5,11 @@ from user_controller import UserController
 
 class ManagerController(UserController):
 
-    def __init__(self, mentor_container, student_container, user):
+    def __init__(self, mentor_container, employee_container, student_container, user):
         self.user = user
         self.mentor_container = mentor_container
         self.student_container = student_container
+        self.employee_container = employee_container
 
     def start(self):
 
@@ -31,6 +32,10 @@ class ManagerController(UserController):
                 self.show_mentor_list(mentor_list)
                 ViewManager.getch()
             elif user_choice == '5':
+                employee_list = self.employee_container.get_employee_list()
+                self.show_employee_list(employee_list)
+                ViewManager.getch()
+            elif user_choice == '6':
                 student_list = self.student_container.get_student_list()
                 self.show_user_list(student_list)
                 ViewManager.getch() 
@@ -118,3 +123,9 @@ class ManagerController(UserController):
         users = self.prepare_user_table(mentor_list)
         print(users)
         ViewManager.display_mentor_table(users)
+
+    def show_employee_list(self, employee_list):
+        ViewManager.clear_terminal()
+        users = self.prepare_user_table(employee_list)
+        print(users)
+        ViewManager.display_employee_table(users)
