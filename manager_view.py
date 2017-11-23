@@ -51,21 +51,6 @@ class ViewManager(View):
         table.align = 'l'
         print(table)
 
-    @staticmethod
-    def display_employee_table(users):
-        table = PrettyTable(['Login', 'Name', 'Surname', 'Email', 'Phone_number'])
-        for user in users:
-            user = user.split(" ")
-            user_login = user[0]
-            user_name = user[1] 
-            user_surname = user[2]
-            user_email = user[3]
-            user_phone_number = user[4]
-            table.add_row([user_login, user_name, user_surname, user_email, user_phone_number])
-        table.align = 'l'
-        print(table)
-
-
     @classmethod
     def display_groups(cls, classes):
 
