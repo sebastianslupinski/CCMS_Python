@@ -32,10 +32,14 @@ class StudentController(UserController):
             elif user_choice == '2':
                 assignments = self.prepare_data_for_assignments_table(self.assignment_model.get_student_assignments(self.user))
                 StudentView.show_assignmets(assignments)
-                title = input('\nChoose assignment title:')
+                title = input('\nChoose assignment title: \n')
                 assignment_data = (self.user.group, title, self.user.login)
-                answer = StudentView.submit_assignment(self.assignment_model.get_assignment(*assignment_data))
-                self.assignment_model.add_student_answer(self.assignment_model.get_assignment(*assignment_data), answer)
+                assignment = self.assignment_model.get_assignment(*assignment_data)
+                if assignment:
+                    answer = StudentView.submit_assignment(assignment)
+                    self.assignment_model.add_student_answer(assignment, answer)
+                else:
+                    self.notification = "Incorrect assignment title"
             elif user_choice == '3':
                 average = self.get_attendance()
                 StudentView.show_attendance(average)
