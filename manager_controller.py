@@ -77,3 +77,4 @@ class ManagerController(UserController):
         else:
             edit_option = ViewManager.display_edit_option()
             self.chose_edit_options(edit_option, user)
+            self.mentor_container.save_edited_data()
