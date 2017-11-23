@@ -1,5 +1,6 @@
 from employee_view import EmployeeView
 from user_controller import UserController
+import webbrowser
 
 
 class EmployeeController(UserController):
@@ -24,6 +25,9 @@ class EmployeeController(UserController):
                 EmployeeView.getch()
             elif user_choice == '2':
                 self.notification = "{}, you look pretty!".format(self.user.name)
+            elif user_choice == '3':
+                webbrowser.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', new=0, autoraise=True)
+
             elif user_choice == '9':
                 return True
             elif user_choice == '0':
