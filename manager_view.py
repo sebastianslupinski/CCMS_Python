@@ -17,8 +17,15 @@ class ViewManager(View):
         name = View.valid_data("Please enter mentor's name: ")
         surname = View.valid_data("Please enter mentors's surname: ")
         phone_number = cls.get_user_phone_number()
+        guided_groups = cls.input_guided_groups()
 
-        return password, name, surname, phone_number
+        return password, name, surname, phone_number, guided_groups
+
+    @classmethod
+    def input_guided_groups(cls):
+
+        groups = input("Please enter guided groups separated by ',': ")
+        return groups.split(",")
 
     @classmethod
     def display_edit_option(cls):
