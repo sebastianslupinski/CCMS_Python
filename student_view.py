@@ -4,18 +4,11 @@ from prettytable import PrettyTable
 
 class StudentView(View):
 
-    @staticmethod
-    def display_work():
-        print(''' //
-                 (")  Acces will be granted on 23.10.2017
-                 UU\ 
-                <><>''')
-
     @classmethod
     def display_student_menu(cls):
         student_commands = ('Display grades', 'Submit assignment', 'Show attendance')
         cls.display_menu(student_commands)
-        return cls.get_user_input('Choose: ')
+        return cls.getch()
 
     @staticmethod
     def show_assignments_grades(assignments):
