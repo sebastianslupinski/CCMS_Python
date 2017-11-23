@@ -28,6 +28,7 @@ class ViewManager(View):
 
     @classmethod
     def display_edit_option(cls):
+        ViewManager.clear_terminal()
         edit_commands = ('Change name', 'Change surname', 'Change password', 'Change phone number', 'Go back')
         cls.display_menu(edit_commands)
         return cls.get_user_input('Choose: ')
